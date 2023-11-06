@@ -57,7 +57,7 @@
             </div>
             <div class="form-group my-3">
                 <label asp-for="CreateCustomer.DateOfBirth" class="control-label"></label>
-                <input asp-for="CreateCustomer.DateOfBirth.Date" type="date" class="form-control"/>
+                <input asp-for="CreateCustomer.DateOfBirth" type="date" class="form-control"/>
                 <span asp-validation-for="CreateCustomer.DateOfBirth" class="text-danger"></span>
             </div>
             <div class="form-group my-3">
@@ -76,7 +76,10 @@
             <div class="d-flex justify-content-start mt-4">
                     <button type="submit" value="Create" class="btn btn-primary submit px-3">Register</button>
             </div>
-        
+
+                <div class="form-group text-danger">
+                    @ViewData["notification"]
+                </div>
         </form>
         </div>
         

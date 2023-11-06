@@ -23,7 +23,29 @@ public class RegisterPage : PageModel
     // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
     public async Task<IActionResult> OnPostAsync()
     {
-        _accountService.CreateCustomerAccount(CreateCustomer);
-        return RedirectToPage("./Index");
+        
+        try
+        {
+            if(await _accountService.CheckEmail(CreateCustomer.Email) != null)
+            {
+                throw new Exception("Email đã được sử dụng. Vui lòng nhập lại!");
+            }
+
+            if (CreateCustomer.DateOfBirth >= DateTime.Now)
+            {
+                throw new Exception("Ngày sinh không hợp lệ. Vui lòng nhập lại!");
+            }
+
+            else
+            {
+                _accountService.CreateCustomerAccount(CreateCustomer);
+                return RedirectToPage("./Index");
+            }
+        }
+        catch(Exception ex)
+        {
+            ViewData["notification"] = ex.Message.ToString();
+        }
+        return Page();
     }
 }

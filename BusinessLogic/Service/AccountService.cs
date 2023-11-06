@@ -35,9 +35,21 @@ public class AccountService : IAccountService
         _unitOfWork.Save();
     }
 
-    public async Task<Account> Login(string UserName, string Pass)
+    public async Task<Account> Login(string Email, string Pass)
     {
-        var account =  await _unitOfWork.Account.GetAccount(UserName, Pass);
+        var account =  await _unitOfWork.Account.GetAccount(Email, Pass);
+        if (account != null)
+        {
+            return account;
+        }
+        return null;
+    }
+
+
+
+    public async Task<Account> CheckEmail(string email)
+    {
+        var account = await _unitOfWork.Account.GetEmail(email);
         if (account != null)
         {
             return account;
