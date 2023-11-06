@@ -37,6 +37,7 @@ public class Mapper : Profile
                 Id = Guid.NewGuid(),
                 UserName = src.UserName,
                 Password = src.Password,
+                Email = src.Email,
                 CreateDate = DateTime.Now,
                 Phone = src.Phone,
                 Role = Role.CUSTOMER.ToString(),
