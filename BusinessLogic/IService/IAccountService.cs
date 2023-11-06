@@ -7,6 +7,7 @@ public interface IAccountService
 {
     Task CreateStudioAccount(CreateStudio account);
     Task CreateCustomerAccount(CreateCustomer account);
+    Task<Account> CheckEmail(String email);
 
-    Task<Account> Login(String UserName, String Pass);
+    Task<Account> Login(String Email, String Pass);
 }

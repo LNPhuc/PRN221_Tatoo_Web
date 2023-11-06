@@ -15,7 +15,7 @@ public class LoginPage : PageModel
     }
 
     [BindProperty]
-    public string Username { get; set; }
+    public string Email { get; set; }
 
     [BindProperty]
     public string Password { get; set; }
@@ -29,7 +29,7 @@ public class LoginPage : PageModel
     {
         try
         {
-            var account = await _accountService.Login(Username, Password);
+            var account = await _accountService.Login(Email, Password);
             if (account == null)
             {
                 ViewData["notification"] = "Tài khoản không tồn tại";

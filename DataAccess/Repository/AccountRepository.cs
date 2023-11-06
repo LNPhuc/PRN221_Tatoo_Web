@@ -12,9 +12,15 @@ public class AccountRepository : GenericRepository<Account>, IAccountRepository
     {
     }
 
-    public async Task<Account> GetAccount(string UserName, string Pass)
+    public async Task<Account> GetAccount(string Email, string Pass)
     {
-        var account = await _context.Accounts.FirstOrDefaultAsync(a => a.UserName.Equals(UserName) && a.Password.Equals(Pass));
+        var account = await _context.Accounts.FirstOrDefaultAsync(a => a.Email.Equals(Email) && a.Password.Equals(Pass));
+        return account;
+    }
+
+    public async Task<Account> GetEmail(string email)
+    {
+        var account = await _context.Accounts.FirstOrDefaultAsync(a => a.Email.Equals(email));
         return account;
     }
 }
