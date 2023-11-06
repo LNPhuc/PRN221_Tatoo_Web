@@ -27,6 +27,6 @@ public class StudioRegister : PageModel
     public async Task<IActionResult> OnPostAsync()
     {
         _accountService.CreateStudioAccount(CreateStudio);
-        return RedirectToPage("./Index");
+        return RedirectToPage("/LoginPage");
     }
 }

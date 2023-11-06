@@ -24,6 +24,6 @@ public class RegisterPage : PageModel
     public async Task<IActionResult> OnPostAsync()
     {
         _accountService.CreateCustomerAccount(CreateCustomer);
-        return RedirectToPage("./Index");
+        return RedirectToPage("/LoginPage");
     }
 }

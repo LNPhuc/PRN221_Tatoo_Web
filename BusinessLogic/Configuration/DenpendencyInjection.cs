@@ -44,7 +44,10 @@ public static class DenpendencyInjection
         services.AddTransient<IArtistService, ArtistService>();
         services.AddTransient<IArtworkService, ArtworkService>();
         services.AddTransient<IStudioService, StudioService>();
-        
+        services.AddTransient<ICustomerService, CustomerService>();
+        services.AddTransient<ISchedulingService, SchedulingService>();
+        services.AddTransient<IBookingService, BookingService>();
+
         //AUTOMAPPER
         services.AddAutoMapper(typeof(Mapper).Assembly);
         return services;
