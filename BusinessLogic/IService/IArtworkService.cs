@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace BusinessLogic.IService
 {
-public interface IArtworkService
-{
+    public interface IArtworkService
+    {
     
-}
+    }
 }

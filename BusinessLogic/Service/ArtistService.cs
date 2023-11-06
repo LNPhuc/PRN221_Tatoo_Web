@@ -15,7 +15,7 @@ public class ArtistService : IArtistService
 
     public Artist GetArtistById(Guid id)
     {
-        return _unitOfWork.Artist.GetById(id);
+        return _unitOfWork.Artist.GetArtistById(id);
     }
 
     public List<Artist> SearchArtist(string name)

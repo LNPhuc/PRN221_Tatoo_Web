@@ -2,7 +2,7 @@
 @model Presentaion.Pages.Artists.ArtistIndexModel
 @{
     ViewData["Title"] = "ArtistIndex";
-    Layout = "_LayoutLogin";
+    Layout = "_LayoutStudioPage";
 }
 <h1>Artist List</h1>
 <form method="get">
@@ -48,7 +48,7 @@
                 </td>               
                 <td>
                     <a asp-page="./ArtistEdit" asp-route-id="@item.Id">Edit</a> 
-                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> 
+                    <a asp-page="./ArtistDetails" asp-route-id="@item.Id">Details</a> 
                     <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>

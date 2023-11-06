@@ -1,0 +1,38 @@
+﻿@page
+@model Presentaion.Pages.Artists.ArtistDetailsModel
+
+@{
+    ViewData["Title"] = "ArtistDetails";
+    Layout = "_LayoutStudioPage";
+}
+
+<h2>ArtistDetails</h2>
+
+<div>
+    <h4>Artist</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Artist.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Artist.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Artist.Experience)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Artist.Experience)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Artist.Studio)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Artist.Studio.Name)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./ArtistEdit" asp-route-id="@Model.Artist.Id">Edit</a> |
+    <a asp-page="./ArtistIndex">Back to List</a>
+</div>
