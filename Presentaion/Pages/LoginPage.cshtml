@@ -1,0 +1,40 @@
+﻿@page
+@model Presentaion.Pages.Login.LoginPage
+
+@{
+    Layout = "_LayoutStudioPage";
+}
+
+<section id="login" class="mx-auto my-lg-5 my-5">
+    <div class="head">
+        <h1>Login</h1>
+        <span>Welcome Back</span>
+    </div>
+    <div class="row justify-content-center">
+        <div class="login-wrap col-md-10 col-lg-10 col-10">
+            <form method="post">
+            
+               
+                <div class="form-group my-3">
+                    <input type="text" id="Username" name="Username" class="form-control" required>
+                    <span>UserName</span>
+                    <i></i>
+                </div>
+                <div class="form-group mb-3">
+                    <input type="password" id="Password" name="Password" class="form-control" required>
+                    <span>PassWord</span>
+                    <i></i>
+                </div>
+                <div class="links">
+                    <a href="/RegisterPage">Regester</a>
+                </div>
+                <div class="d-flex justify-content-start mt-4 ">
+                    <button type="submit" class="form-control btn btn-primary submit px-3" value="LoginPage">Login</button>
+                </div>
+                @*<input style="align-self: center;" type="submit" value="LoginPage" class="btn btn-primary" >*@
+            
+            </form>
+        </div>
+    </div>
+</section>
+

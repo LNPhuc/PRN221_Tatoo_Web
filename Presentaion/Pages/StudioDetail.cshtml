@@ -1,0 +1,67 @@
+﻿@page
+@model StudioDetail
+
+@{
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+    <title>Shop Item - Start Bootstrap Template</title>
+    <!-- Bootstrap icons-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet"/>
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/detail.css" rel="stylesheet"/>
+</head>
+<body>
+<div>
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="row gx-4 gx-lg-5 align-items-center">
+                <div class="col-md-6">
+                    <img class="card-img-top mb-5 mb-md-0" src="https://www.ipr.edu/wp-content/uploads/2020/02/music-studio.jpg" alt="..."/>
+                </div>
+                <div class="col-md-6">
+                    <h1 class="display-5 fw-bolder">@Html.DisplayFor(model => model.studio.Name)</h1>
+                    <p class="lead">@Html.DisplayFor(model => model.studio.Address)</p>
+                    <p class="lead">@Html.DisplayFor(model => model.studio.StudioPhone)</p>
+                    <p class="lead">@Html.DisplayFor(model => model.studio.StudioEmail)</p>
+                    <div class="d-flex">
+                        <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem"/>
+                        <button class="open-modal" class="btn btn-outline-dark flex-shrink-0" type="button">
+                            <i class="bi-cart-fill me-1"></i>
+                            Booking
+                        </button>
+                        <div class="modal-content hidden-modal">
+                            <div class="modal-header">
+                                <form method="post">
+                                    <h3>Booking Date</h3>
+                                    <div class="inputBox" class="form-group">
+                                        <label asp-for="bookingDate" class="control-label"></label>
+                                        <input asp-for="bookingDate" type="date" class="form-control"/>
+                                        <span asp-validation-for="bookingDate" class="text-danger"></span>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" value="Create" class="btn btn-primary">
+                                    </div>
+                                    <button class="close-modal">&times;</button>
+                                </form>
+
+                            </div>
+                        </div>
+                        <div class="blur-bg hidden-blur"></div>
+                        <script src="js/Detail.js"></script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>

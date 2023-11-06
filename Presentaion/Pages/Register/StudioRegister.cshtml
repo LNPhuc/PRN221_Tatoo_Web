@@ -1,0 +1,66 @@
+@page
+@model Presentaion.Pages.Register.StudioRegister
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Account</h4>
+<hr/>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CreateStudio.UserName" class="control-label"></label>
+                <input asp-for="CreateStudio.UserName" class="form-control"/>
+                <span asp-validation-for="CreateStudio.UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateStudio.Password" class="control-label"></label>
+                <input asp-for="CreateStudio.Password" class="form-control"/>
+                <span asp-validation-for="CreateStudio.Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateStudio.DateOfBirth" class="control-label"></label>
+                <input asp-for="CreateStudio.DateOfBirth" class="form-control"/>
+                <span asp-validation-for="CreateStudio.DateOfBirth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateStudio.StudioEmail" class="control-label"></label>
+                <input asp-for="CreateStudio.StudioEmail" class="form-control"/>
+                <span asp-validation-for="CreateStudio.StudioEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateStudio.StudioPhone" class="control-label"></label>
+                <input asp-for="CreateStudio.StudioPhone" class="form-control"/>
+                <span asp-validation-for="CreateStudio.StudioPhone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateStudio.Name" class="control-label"></label>
+                <input asp-for="CreateStudio.Name" class="form-control"/>
+                <span asp-validation-for="CreateStudio.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreateStudio.Address" class="control-label"></label>
+                <input asp-for="CreateStudio.Address" class="form-control"/>
+                <span asp-validation-for="CreateStudio.Address" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

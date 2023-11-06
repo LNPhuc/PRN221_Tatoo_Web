@@ -1,0 +1,64 @@
+﻿@page
+@model Presentaion.Pages.Studios.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Studio</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+            }
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Studio.Id" />
+            <div class="form-group">
+                <label asp-for="Studio.Name" class="control-label"></label>
+                <input asp-for="Studio.Name" class="form-control" />
+                <span asp-validation-for="Studio.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Studio.Address" class="control-label"></label>
+                <input asp-for="Studio.Address" class="form-control" />
+                <span asp-validation-for="Studio.Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Studio.StudioPhone" class="control-label"></label>
+                <input asp-for="Studio.StudioPhone" class="form-control" />
+                <span asp-validation-for="Studio.StudioPhone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Studio.StudioEmail" class="control-label"></label>
+                <input asp-for="Studio.StudioEmail" class="form-control" />
+                <span asp-validation-for="Studio.StudioEmail" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="Studio.AccountId" class="control-label"></label>
+                <select asp-for="Studio.AccountId" class="form-control" asp-items="ViewBag.AccountId"></select>
+                <span asp-validation-for="Studio.AccountId" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="Studio.Status" class="control-label"></label>
+                <input asp-for="Studio.Status" class="form-control" />
+                <span asp-validation-for="Studio.Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

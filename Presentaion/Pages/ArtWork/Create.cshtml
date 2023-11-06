@@ -1,0 +1,63 @@
+﻿@page
+@model Presentaion.Pages.ArtWork.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>ArtWork</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="ArtWork.Id" class="control-label"></label>
+                <input asp-for="ArtWork.Id" class="form-control" />
+                <span asp-validation-for="ArtWork.Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ArtWork.Title" class="control-label"></label>
+                <input asp-for="ArtWork.Title" class="form-control" />
+                <span asp-validation-for="ArtWork.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ArtWork.Description" class="control-label"></label>
+                <input asp-for="ArtWork.Description" class="form-control" />
+                <span asp-validation-for="ArtWork.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ArtWork.Position" class="control-label"></label>
+                <input asp-for="ArtWork.Position" class="form-control" />
+                <span asp-validation-for="ArtWork.Position" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ArtWork.Size" class="control-label"></label>
+                <input asp-for="ArtWork.Size" class="form-control" />
+                <span asp-validation-for="ArtWork.Size" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ArtWork.Time" class="control-label"></label>
+                <input asp-for="ArtWork.Time" class="form-control" />
+                <span asp-validation-for="ArtWork.Time" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ArtWork.ArtistId" class="control-label"></label>
+                <select asp-for="ArtWork.ArtistId" class ="form-control" asp-items="ViewBag.ArtistId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

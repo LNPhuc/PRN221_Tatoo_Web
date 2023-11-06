@@ -1,0 +1,84 @@
+﻿@page
+@model Presentaion.Pages.Studios.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Studio List</h1>
+
+@*<p>
+    <a asp-page="Create">Create New</a>
+</p>*@
+
+<form method="get">
+    <div class="form-group">
+        <label for="Query">Search name:</label>
+        <input type="text" asp-for="SearchQuery" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">Tìm</button>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Studio[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Studio[0].Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Studio[0].StudioPhone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Studio[0].StudioEmail)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Studio[0].Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Studio[0].Account)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Studio) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudioPhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudioEmail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Account.Id)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<div>
+    <ul class="pagination">
+        @for (var i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="page-item @(i == Model.PageIndex ? "active" : "")">
+                <a asp-page="./index" asp-route-PageIndex="@i" asp-route-id="@Model.NewId" class="page-link">@i</a>
+            </li>
+        }
+    </ul>
+</div>
