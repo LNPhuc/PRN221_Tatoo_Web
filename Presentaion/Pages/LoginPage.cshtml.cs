@@ -1,6 +1,7 @@
 ﻿using BusinessLogic.IService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Data;
 
 namespace Presentaion.Pages.Login;
 
@@ -26,12 +27,24 @@ public class LoginPage : PageModel
 
     public async Task<IActionResult> OnPost()
     {
-        var account = await _accountService.Login(Username, Password);
-        if (account == null)
-        { 
-            ModelState.AddModelError(string.Empty, "Tài khoản không tồn tại");
+        try
+        {
+            var account = await _accountService.Login(Username, Password);
+            if (account == null)
+            {
+                ViewData["notification"] = "Tài khoản không tồn tại";
+                return Page();
+            }
+            else
+            {
+                HttpContext.Session.SetString("AccountID", account.Id.ToString());
+                return RedirectToPage("./Index");
+            }
         }
-        HttpContext.Session.SetString("AccountID", account.Id.ToString());
-        return RedirectToPage("./Index");
+        catch(Exception ex)
+        {
+            ViewData["notification"] = ex.Message.ToString();
+        }
+        return Page();
     }
 }
