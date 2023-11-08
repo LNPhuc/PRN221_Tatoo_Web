@@ -30,6 +30,7 @@ public class ArtistRepository: GenericRepository<Artist>, IArtistRepository
         else
         {
             var artists = _context.Set<Artist>()
+                .Include(c => c.Studio)
                 .Where(s => s.Name.Contains(name))
                 .ToList();
             return artists;

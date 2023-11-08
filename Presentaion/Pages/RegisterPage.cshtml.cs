@@ -39,7 +39,7 @@ public class RegisterPage : PageModel
             else
             {
                 _accountService.CreateCustomerAccount(CreateCustomer);
-                return RedirectToPage("./HomePage");
+                return RedirectToPage("./LoginPage");
             }
         }
         catch(Exception ex)
