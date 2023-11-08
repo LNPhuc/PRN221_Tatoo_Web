@@ -7,4 +7,5 @@ public interface IAccountRepository : IGenericRepository<Account>
 {
     Task<Account> GetAccount(String Email, String Pass);
     Task<Account> GetEmail(String Email);
+    Account GetById(Guid id);
 }

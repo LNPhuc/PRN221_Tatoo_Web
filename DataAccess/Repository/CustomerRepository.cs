@@ -1,12 +1,21 @@
 ﻿using DataAccess.DataAccess;
 using DataAccess.IRepository;
 using DataAccess.Repository.Generic;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repository;
 
 public class CustomerRepository: GenericRepository<Customer>, ICustomerRepository
 {
-    public CustomerRepository(TatooWebContext context) : base(context)
-    {
-    }
+	private readonly TatooWebContext _context;
+	public CustomerRepository(TatooWebContext context) : base(context)
+	{
+		_context = context;
+	}
+	public IEnumerable<Customer> GetAll() => _context.Customers.Include(c => c.Account).ToList();
+
+	public Customer GetCusById(Guid id)
+	{
+		return _context.Set<Customer>().Include(c => c.Account).FirstOrDefault(c => c.AccountId == id);
+	}
 }

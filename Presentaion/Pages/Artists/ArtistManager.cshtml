@@ -1,5 +1,5 @@
 ﻿@page
-@model Presentaion.Pages.Artists.ArtistIndexModel
+@model Presentaion.Pages.Artists.ArtistManagerModel
 @{
     ViewData["Title"] = "ArtistIndex";
     Layout = "_LayoutStudioPage";
@@ -47,9 +47,9 @@
                     @Html.DisplayFor(modelItem => item.Experience)
                 </td>               
                 <td>
-                    @*<a asp-page="./ArtistEdit" asp-route-id="@item.Id">Edit</a> *@
+                    <a asp-page="./ArtistEdit" asp-route-id="@item.Id">Edit</a> 
                     <a asp-page="./ArtistDetails" asp-route-id="@item.Id">Details</a> 
-                    @*<a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>*@
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>
         }
