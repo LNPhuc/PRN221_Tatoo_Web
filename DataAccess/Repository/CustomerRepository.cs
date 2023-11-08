@@ -22,4 +22,10 @@ public class CustomerRepository: GenericRepository<Customer>, ICustomerRepositor
 	{
 		return _context.Customers.FirstOrDefault(c => c.AccountId == guid);
 	}
+
+
+	public Customer GetCusById(Guid id)
+	{
+		return _context.Set<Customer>().Include(c => c.Account).FirstOrDefault(c => c.AccountId == id);
+	}
 }

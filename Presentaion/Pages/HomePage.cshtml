@@ -1,7 +1,17 @@
 ﻿@page
 @model Presentaion.Pages.HomePageModel
+@using Microsoft.AspNetCore.Http
 @{
 	Layout = "_LayoutHome";
+}
+<a asp-page="./Profile/Index">@HttpContext.Session.GetString("AccountName")</a>
+@if (@HttpContext.Session.GetString("AccountRole") == "CUSTOMER")
+{
+	<a asp-page="./Artists/ArtistIndex">Artists</a>
+}
+else if (@HttpContext.Session.GetString("AccountRole") == "STUDIO")
+{
+	<a asp-page="./Artists/ArtistManager">Artists</a>
 }
 <section id="about-section">
 	<!-- About Section -->

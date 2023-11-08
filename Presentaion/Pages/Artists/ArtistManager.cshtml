@@ -1,5 +1,5 @@
 ﻿@page
-@model Presentaion.Pages.Artists.ArtistIndexModel
+@model Presentaion.Pages.Artists.ArtistManagerModel
 @{
     ViewData["Title"] = "ArtistIndex";
     Layout = "_LayoutStudioPage";
@@ -10,9 +10,8 @@
         <label for="Query">Search name:</label>
         <input type="text" asp-for="SearchQuery" class="form-control" />
     </div>
-    <button type="submit" class="btn btn-primary">Search Artist</button>
+    <button type="submit" class="btn btn-primary">Tìm</button>
 </form>
-<a href="./ArtistCreate" class="btn btn-primary">Create New Artist</a>
 <table class="table">
     <thead>
         <tr>
@@ -48,9 +47,9 @@
                     @Html.DisplayFor(modelItem => item.Experience)
                 </td>               
                 <td>
-                    @*<a asp-page="./ArtistEdit" asp-route-id="@item.Id">Edit</a> *@
+                    <a asp-page="./ArtistEdit" asp-route-id="@item.Id">Edit</a> 
                     <a asp-page="./ArtistDetails" asp-route-id="@item.Id">Details</a> 
-                    @*<a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>*@
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>
         }
