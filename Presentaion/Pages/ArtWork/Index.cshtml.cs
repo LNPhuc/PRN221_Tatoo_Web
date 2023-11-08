@@ -13,21 +13,30 @@ namespace Presentaion.Pages.ArtWork
     public class IndexModel : PageModel
     {
         private readonly DataAccess.TatooWebContext _context;
-            
+
         public IndexModel(DataAccess.TatooWebContext context)
         {
             _context = context;
         }
 
-        public IList<DataAccess.DataAccess.ArtWork> ArtWork { get;set; } = default!;
+        public IList<DataAccess.DataAccess.ArtWork> ArtWork { get; set; } = default!;
+        [BindProperty]
+        public string ArtWorkName { get; set; } = default!;
 
         public async Task OnGetAsync()
         {
-            if (_context.ArtWorks != null)
+            if (ArtWork == null)
             {
                 ArtWork = await _context.ArtWorks
                 .Include(a => a.Artist).ToListAsync();
             }
+        }
+
+        public async Task<IActionResult> OnPostAsync(string title)
+        {
+            title = ArtWorkName;
+            ArtWork = await _context.ArtWorks.Include(a => a.Artist).Where(c => c.Title.Equals(title)).ToListAsync();
+            return Page();
         }
     }
 }
