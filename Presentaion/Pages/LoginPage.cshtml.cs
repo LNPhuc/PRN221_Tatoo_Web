@@ -20,10 +20,14 @@ public class LoginPage : PageModel
     [BindProperty]
     public string Password { get; set; }
 
-    public void OnGet()
+    public IActionResult OnGetLogout()
     {
+        HttpContext.Session.Remove("AccountID");
+		HttpContext.Session.Remove("AccountName");
+		HttpContext.Session.Remove("AccountRole");
         // Handle the GET request, if needed
-    }
+        return RedirectToPage("./HomePage");
+	}
 
     public async Task<IActionResult> OnPost()
     {
@@ -40,7 +44,7 @@ public class LoginPage : PageModel
                 HttpContext.Session.SetString("AccountID", account.Id.ToString());
                 HttpContext.Session.SetString("AccountName", account.UserName.ToString());
                 HttpContext.Session.SetString("AccountRole", account.Role.ToString());
-                return RedirectToPage("./Index");
+                return RedirectToPage("Index");
             }
         }
         catch(Exception ex)

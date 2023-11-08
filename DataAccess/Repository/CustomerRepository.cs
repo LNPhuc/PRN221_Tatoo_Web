@@ -28,4 +28,14 @@ public class CustomerRepository: GenericRepository<Customer>, ICustomerRepositor
 	{
 		return _context.Set<Customer>().Include(c => c.Account).FirstOrDefault(c => c.AccountId == id);
 	}
+    public Customer UpdateCustomer(Customer customer)
+    {
+        _context.Set<Customer>().Update(customer);
+        return customer;
+    }
+    public void SaveChanges()
+    {
+
+        _context.SaveChanges();
+    }
 }

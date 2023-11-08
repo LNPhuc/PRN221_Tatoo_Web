@@ -76,7 +76,7 @@
                         </div>
                         <div class="gap-3 d-md-flex justify-content-md-end text-center">
                             @*<button type="button" class="btn btn-danger btn-lg">Delete profile</button>*@
-                            <button asp-page="./Profile/Edit" asp-route-id="@Model.Customer.Id" type="button" class="btn btn-primary btn-lg">Update profile</button>
+                            <a asp-page="./Profile/Edit" asp-route-id="@Model.Customer.Account.Id" type="button" class="btn btn-primary btn-lg">Update profile</a>
                         </div>
 
                         <div class="card">
