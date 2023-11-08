@@ -17,7 +17,7 @@ public class StudioDetail : PageModel
         _bookingService = bookingService;
     }
 
-    public Studio studio { get; set; } = default!;
+    public Studio studio { get; set; }
     [BindProperty] public DateTime bookingDate { get; set; } = default!;
     
     public async Task<IActionResult> OnGetAsync(Guid id)
@@ -26,15 +26,15 @@ public class StudioDetail : PageModel
         return Page();
     }
 
-    public async Task<IActionResult> OnPostAsync()
+    public async Task<IActionResult> OnPostAsync(Guid id)
     {
         var userName = HttpContext.Session.GetString("AccountID");
         if (userName == null)
         {
             return RedirectToPage("LoginPage");
         }
-        Guid id = Guid.Parse(userName);
-        _bookingService.CreateBooking(id, bookingDate, studio.Id);
+        Guid userid = Guid.Parse(userName);
+        await _bookingService.CreateBooking(userid, bookingDate, id);
         return Page();
     }
 }

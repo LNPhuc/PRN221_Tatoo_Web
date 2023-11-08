@@ -4,5 +4,7 @@ namespace BusinessLogic.IService;
 
 public interface IBookingService
 {
-    Task<bool> CreateBooking(Guid id, DateTime? date, Guid studioID);
+	IEnumerable<Booking> GetAll();
+
+	Task<bool> CreateBooking(Guid id, DateTime date, Guid studioID);
 }
