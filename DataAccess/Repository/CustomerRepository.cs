@@ -33,9 +33,9 @@ public class CustomerRepository: GenericRepository<Customer>, ICustomerRepositor
         _context.Set<Customer>().Update(customer);
         return customer;
     }
-    public void SaveChanges()
+    /*public void SaveChanges()
     {
 
         _context.SaveChanges();
-    }
+    }*/
 }

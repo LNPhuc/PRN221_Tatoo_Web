@@ -28,13 +28,27 @@ public class StudioDetail : PageModel
 
     public async Task<IActionResult> OnPostAsync(Guid id)
     {
-        var userName = HttpContext.Session.GetString("AccountID");
-        if (userName == null)
+        try
         {
-            return RedirectToPage("LoginPage");
+            var userName = HttpContext.Session.GetString("AccountID");
+            if (userName == null)
+            {
+                return RedirectToPage("LoginPage");
+            }
+            else if(bookingDate <= DateTime.Now)
+            {
+                throw new Exception("Ngày không hợp lệ. Vui lòng nhập lại!");
+            }
+            else
+            {
+                Guid userid = Guid.Parse(userName);
+                await _bookingService.CreateBooking(userid, bookingDate, id);
+            }          
         }
-        Guid userid = Guid.Parse(userName);
-        await _bookingService.CreateBooking(userid, bookingDate, id);
+        catch (Exception ex)
+        {
+            ViewData["notification"] = ex.Message.ToString();
+        }
         return Page();
     }
 }
