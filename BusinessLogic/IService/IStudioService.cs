@@ -10,4 +10,5 @@ public interface IStudioService
     Studio Update(Guid id, Studio studio);
     Studio Delete(Guid id);
     Studio Create(Studio studio);
+    Studio GetStudioByAccountId(Guid id);
 }

@@ -42,6 +42,11 @@ public class StudioService : IStudioService
         return _unitOfWork.Studio.GetById(id);
     }
 
+    public Studio GetStudioByAccountId(Guid id)
+    {
+        return _unitOfWork.Studio.GetStudioByAccountId(id);
+    }
+
     public Pagination<Studio> Search(string name, int pageIndex, int pageSize)
     {
         var stu = _unitOfWork.Studio.Search(name);

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using BusinessLogic.DTOS.Account;
+using BusinessLogic.DTOS.Artist;
 using DataAccess.DataAccess;
 using DataAccess.DataAccess.Enum;
 
@@ -45,5 +46,10 @@ public class Mapper : Profile
                 Status = Status.ACTIVE.ToString(),
                 DateOfBirth = src.DateOfBirth
             }));
+        CreateMap<CreateArtist, Artist>()
+            .ForMember(c => c.Id, act => act.MapFrom(src => Guid.NewGuid()))
+            .ForMember(c => c.Name, act => act.MapFrom(src => src.Name))
+            .ForMember(c => c.StudioId, act => act.MapFrom(src => src.StudioId))
+            .ForMember(c => c.Experience, act => act.MapFrom(src => src.Experience));
     }
 }
