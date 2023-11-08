@@ -7,4 +7,6 @@ public interface ICustomerRepository : IGenericRepository<Customer>
 {
 	IEnumerable<Customer> GetAll();
 	Customer GetCusById(Guid id);
+	Customer UpdateCustomer(Customer customer);
+	void SaveChanges();
 }

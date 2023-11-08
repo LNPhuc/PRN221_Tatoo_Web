@@ -1,9 +1,7 @@
 ﻿@page
-@model Presentaion.Pages.Artwork.IndexModel
+@model Presentaion.Pages.IndexModel
 @{
 }
-
-
 <!DOCTYPE HTML>
 <html>
 		<head>
@@ -63,37 +61,53 @@
 					<div class="header">	
 						<div class="container">
 								<!-- start-top-nav -->
-								<div class="top-nav">
-									<div class="top-header">
-										<div class="responsive-logo">
-										   <a href="index.html"><img src="/images/logo.png" alt=""/></a>
-										</div>
-									</div>
-									<nav class="nav">
-										<a id="menu-toggle" class="anchor-link" href="#"><img src="/images/nav.png" alt="" /></a>
-										<ul class="nav-list" id="menu">
-											<li><a href="#">Home</a></li>
-											<li><a href="#about" class="scroll">About</a></li>
-											<li><a href="Gallery.html" target="_blank">Gallery</a></li>
-											<!-- logo -->
-											 <li class="logo"><a href="index.html"><img src="/images/logo.png" alt=""/></a></li>
-											<!-- logo -->
-											<li><a href="#faq" class="scroll">Faq</a></li>
-											<li><a href="#find" class="scroll">Find Us</a></li>
-											<li><a href="#contact" class="scroll">Contact</a></li>
-										</ul>
-									</nav>
-									<script type="text/javascript">
-										  $(document).ready(function() {
-										
-											$('#menu-toggle').click(function () {
-											  $('#menu').toggleClass('open');
-											  e.preventDefault();
-											});
-											
-										});
-									</script>
-								</div>
+				<div class="top-nav">
+					<div class="top-header">
+						<div class="responsive-logo">
+							<a href="index.html"><img src="images/logo.png" alt="" /></a>
+						</div>
+					</div>
+					<nav class="nav">
+						<a id="menu-toggle" class="anchor-link" href="#"><img src="images/nav.png" alt="" /></a>
+						<ul class="nav-list" id="menu">
+							<li><p><a asp-page="HomePage">Home</a></p></li>
+							@*<li><a href="Artists/ArtistIndex">Artist</a></li>*@
+							@if (@HttpContext.Session.GetString("AccountRole") == "CUSTOMER")
+							{
+								<li><a asp-page="./Artists/ArtistIndex">Artists</a></li>
+							}
+							else if (@HttpContext.Session.GetString("AccountRole") == "STUDIO")
+							{
+								<li><a asp-page="./Artists/ArtistManager">Artists</a></li>
+							}
+							<li><a href="ArtWork/Index">Art Work</a></li>
+							<!-- logo -->
+							<li class="logo"><a href="index.html"><img src="images/logo.png" alt="" /></a></li>
+							<!-- logo -->
+							<li><a href="Studios/Index">Studio</a></li>
+							<li><a href="#find" class="scroll">Find Us</a></li>
+							@if (@HttpContext.Session.GetString("AccountRole") == "CUSTOMER")
+							{
+								<li><a asp-page="./Profile/Index">@HttpContext.Session.GetString("AccountName")</a></li>
+							}
+							else if (@HttpContext.Session.GetString("AccountRole") == "STUDIO")
+							{
+								<li><a asp-page="./Studios/Index">@HttpContext.Session.GetString("AccountName")</a></li>
+							}
+							<li><a asp-page="HomePage" asp-page-handler="logout">Logout</a></li>
+						</ul>
+					</nav>
+					<script type="text/javascript">
+						$(document).ready(function () {
+
+							$('#menu-toggle').click(function () {
+								$('#menu').toggleClass('open');
+								e.preventDefault();
+							});
+
+						});
+					</script>
+				</div>
 							<!-- End-top-nav -->
 						</div>
 					</div>

@@ -24,5 +24,29 @@ public class CustomerService : ICustomerService
 	{
 		return _unitOfWork.Customer.GetCusById(id);
 	}
+    public Customer UdpateCustomer(Guid id, Customer customer)
+    {
+        var cus = _unitOfWork.Customer.GetById(id);
 
+        if (cus.Account.UserName == customer.Account.UserName &&
+            cus.Account.Password == customer.Account.Password &&
+            cus.FirstName == customer.FirstName &&
+            cus.LastName == customer.LastName &&
+            cus.Account.Email == customer.Account.Email &&
+            cus.Account.Phone == customer.Account.Phone &&
+            cus.Address == customer.Address)
+        {
+            throw new Exception("Nothing change!");
+        }
+        cus.Account.UserName = customer.Account.UserName;
+        cus.Account.Password = customer.Account.Password;
+        cus.FirstName = customer.FirstName;
+        cus.LastName = customer.LastName;
+        cus.Account.Email = customer.Account.Email;
+        cus.Account.Phone = customer.Account.Phone;
+        cus.Address = customer.Address;
+        var update = _unitOfWork.Customer.UpdateCustomer(cus);
+        _unitOfWork.Customer.SaveChanges();
+        return update;
+    }
 }
