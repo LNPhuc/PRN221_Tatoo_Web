@@ -19,9 +19,9 @@ namespace Presentaion.Pages.ArtWork
             _context = context;
         }
 
-      public  DataAccess.DataAccess.ArtWork ArtWork { get; set; } = default!; 
+        public DataAccess.DataAccess.ArtWork ArtWork { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
             if (id == null || _context.ArtWorks == null)
             {
@@ -33,7 +33,7 @@ namespace Presentaion.Pages.ArtWork
             {
                 return NotFound();
             }
-            else 
+            else
             {
                 ArtWork = artwork;
             }
