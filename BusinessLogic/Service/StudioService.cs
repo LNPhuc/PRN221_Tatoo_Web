@@ -60,7 +60,8 @@ public class StudioService : IStudioService
         if(stu.StudioEmail == studio.StudioEmail && 
             stu.StudioPhone == studio.StudioPhone && 
             stu.Name == studio.Name &&
-            stu.Address == studio.Address)
+            stu.Address == studio.Address &&
+            stu.Status == studio.Status) 
         {
             throw new Exception("Nothing change!");
         }
@@ -103,10 +104,11 @@ public class StudioService : IStudioService
             }
         }
         stu.Address = studio.Address;
-        
+        stu.Status = studio.Status;
 
         var update = _unitOfWork.Studio.Update(stu);
         _unitOfWork.Studio.SaveChanges();
+        throw new Exception("Update completed!");
         return update;
 
 
