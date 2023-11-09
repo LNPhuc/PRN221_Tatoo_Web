@@ -30,7 +30,12 @@ public class ArtistService : IArtistService
         return _unitOfWork.Artist.GetArtistById(id);
     }
 
-    public List<Artist> SearchArtist(string name)
+	public List<Artist> GetArtistByStudioId(Guid id)
+	{
+        return _unitOfWork.Artist.GetArtistByStudioId(id);
+	}
+
+	public List<Artist> SearchArtist(string name)
     {
         return _unitOfWork.Artist.SearchArtist(name);
     }

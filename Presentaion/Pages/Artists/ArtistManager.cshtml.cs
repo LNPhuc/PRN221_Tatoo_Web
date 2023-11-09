@@ -11,15 +11,21 @@ namespace Presentaion.Pages.Artists
         [BindProperty(SupportsGet = true)]
         public string SearchQuery { get; set; }
         private readonly IArtistService _artistService;
+        private readonly IStudioService _studioService;
 
-        public ArtistManagerModel(IArtistService artistService)
-        {
-            _artistService = artistService;
-        }
-        public List<Artist> Artists { get; set; } = default;
+		public ArtistManagerModel(IArtistService artistService, IStudioService studioService)
+		{
+			_artistService = artistService;
+			_studioService = studioService;
+		}
+
+		public List<Artist> Artists { get; set; } = default;
         public IActionResult OnGet()
         {
-            Artists = _artistService.SearchArtist(SearchQuery);
+			var accId = HttpContext.Session.GetString("AccountID");
+			Guid id = new Guid(accId);
+            var stu = _studioService.GetStudioByAccountId(id);
+			Artists = _artistService.GetArtistByStudioId(stu.Id);
             return Page();
         }
     }

@@ -31,4 +31,8 @@ public class BookingService : IBookingService
 	}
 	public IEnumerable<Booking> GetAll() => _unitOfWork.Booking.GetAll().ToList();
 
+    public IEnumerable<Booking> GetAllByCusId(Guid cusid)
+    {
+        throw new NotImplementedException();
+    }
 }

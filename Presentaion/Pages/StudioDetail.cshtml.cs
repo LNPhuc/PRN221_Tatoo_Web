@@ -43,6 +43,7 @@ public class StudioDetail : PageModel
             {
                 Guid userid = Guid.Parse(userName);
                 await _bookingService.CreateBooking(userid, bookingDate, id);
+                return RedirectToPage("HomePage");
             }          
         }
         catch (Exception ex)

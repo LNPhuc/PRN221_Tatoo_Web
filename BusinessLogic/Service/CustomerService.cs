@@ -26,7 +26,7 @@ public class CustomerService : ICustomerService
 	}
     public Customer UdpateCustomer(Guid id, Customer customer)
     {
-        var cus = _unitOfWork.Customer.GetById(id);
+        var cus = _unitOfWork.Customer.GetCusById2(id);
 
         if (cus.Account.UserName == customer.Account.UserName &&
             cus.Account.Password == customer.Account.Password &&

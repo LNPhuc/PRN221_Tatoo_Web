@@ -14,7 +14,8 @@ namespace Presentaion.Pages.Profile
         {
             _customerService = customerService;
         }
-        public Customer Customer { get; set; } = default!;
+        [BindProperty]
+        public Customer Customer { get; set; } = default;
         public PageResult OnGet(Guid id)
         {
             try
@@ -35,11 +36,16 @@ namespace Presentaion.Pages.Profile
             try
             {
                 Customer = _customerService.UdpateCustomer(Customer.Id, Customer);
+                if(Customer == null)
+                {
+                    throw new Exception();
+                }
                 return Redirect("/Profile/Index");
             }
             catch (Exception ex)
             {
-                TempData["ErrorMessage"] = ex.Message;
+				ViewData["notification"] = ex.Message.ToString();
+				TempData["ErrorMessage"] = ex.Message;
             }
 
             return Page();
