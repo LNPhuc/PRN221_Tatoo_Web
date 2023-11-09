@@ -51,6 +51,19 @@
     </dl>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.ArtWork?.Id">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+    @{
+        String check = HttpContext.Session.GetString("AccountRole");
+        if(check == "STAFF")
+        {
+            <a asp-page="./Edit" asp-route-id="@Model.ArtWork?.Id">Edit</a>
+            <a asp-page="./Index">Back to List</a>
+        }
+        else
+        {
+            <a asp-page="./Index">Back to List</a>
+        }
+    }
+    
+		
+
 </div>
