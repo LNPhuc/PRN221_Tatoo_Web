@@ -45,7 +45,7 @@ namespace Presentaion.Pages.Artists
             Artist.StudioId = studio.Id;
             _artistService.CreateArtist(Artist);
 
-            return RedirectToPage("./ArtistManager");
+            return RedirectToPage("./ArtistIndex");
         }
     }
 }

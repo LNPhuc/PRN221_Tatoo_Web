@@ -14,12 +14,6 @@ public class ArtistRepository: GenericRepository<Artist>, IArtistRepository
         _context = context;
     }
 
-    public Artist DeleteArtist(Artist artist)
-    {
-        var art = _context.Set<Artist>().Remove(artist);
-        return artist;
-    }
-
     public Artist GetArtistById(Guid id)
     {
         var artist = _context.Set<Artist>().Include(c => c.Studio).FirstOrDefault(c => c.Id == id);

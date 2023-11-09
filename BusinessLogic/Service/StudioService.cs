@@ -1,6 +1,5 @@
 ﻿using BusinessLogic.IService;
 using DataAccess.DataAccess;
-using DataAccess.DataAccess.Enum;
 using DataAccess.IRepository;
 using DataAccess.IRepository.UnitOfWork;
 using DataAccess.Repository;
@@ -32,7 +31,7 @@ public class StudioService : IStudioService
     public Studio Delete(Guid id)
     {
         var stu = _unitOfWork.Studio.GetById(id);
-        stu.Status = Status.INACTIVE.ToString();
+        stu.Status = "0";
         _unitOfWork.Studio.Update(stu);
         _unitOfWork.Studio.SaveChanges();
         return stu;
