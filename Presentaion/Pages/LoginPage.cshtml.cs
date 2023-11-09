@@ -20,13 +20,8 @@ public class LoginPage : PageModel
     [BindProperty]
     public string Password { get; set; }
 
-    public IActionResult OnGetLogout()
+    public void OnGet()
     {
-        HttpContext.Session.Remove("AccountID");
-		HttpContext.Session.Remove("AccountName");
-		HttpContext.Session.Remove("AccountRole");
-        // Handle the GET request, if needed
-        return RedirectToPage("./HomePage");
 	}
 
     public async Task<IActionResult> OnPost()

@@ -79,14 +79,36 @@
 						<a id="menu-toggle" class="anchor-link" href="#"><img src="images/nav.png" alt="" /></a>
 						<ul class="nav-list" id="menu">
 							<li><p><a asp-page="HomePage">Home</a></p></li>
-							<li><a href="Artists/ArtistIndex">Artist</a></li>
+							@*<li><a href="Artists/ArtistIndex">Artist</a></li>*@
+							@if (Context.Session.GetString("AccountRole") == "CUSTOMER")
+							{
+								<li><a asp-page="./Artists/ArtistIndex">Artists</a></li>
+							}
+							else if (Context.Session.GetString("AccountRole") == "STUDIO")
+							{
+								<li><a asp-page="./Artists/ArtistManager">Artists</a></li>
+							}
 							<li><a href="ArtWork/Index">Art Work</a></li>
 							<!-- logo -->
 							<li class="logo"><a href="index.html"><img src="images/logo.png" alt="" /></a></li>
 							<!-- logo -->
 							<li><a href="Studios/Index">Studio</a></li>
 							<li><a href="#find" class="scroll">Find Us</a></li>
-							<li><p><a asp-page="LoginPage">Log In</a></p></li>
+							@if (Context.Session.GetString("AccountName") != null)
+							{
+								@if (Context.Session.GetString("AccountRole") == "CUSTOMER")
+								{
+									<li><a asp-page="./Profile/Index">@Context.Session.GetString("AccountName")</a></li>
+								}
+								else if (Context.Session.GetString("AccountRole") == "STUDIO")
+								{
+									<li><a asp-page="./Studios/Index">@Context.Session.GetString("AccountName")</a></li>
+								}
+								<li><a asp-page="HomePage" asp-page-handler="logout">Logout</a></li>
+							}else
+							{
+								<li><p><a asp-page="LoginPage">Log In</a></p></li>
+							}
 						</ul>
 					</nav>
 					<script type="text/javascript">
