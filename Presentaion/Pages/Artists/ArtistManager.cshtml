@@ -12,6 +12,7 @@
     </div>
     <button type="submit" class="btn btn-primary">Tìm</button>
 </form>
+<a href="./ArtistCreate" class="btn btn-primary">Create New Artist</a>
 <table class="table">
     <thead>
         <tr>
@@ -49,7 +50,7 @@
                 <td>
                     <a asp-page="./ArtistEdit" asp-route-id="@item.Id">Edit</a> 
                     <a asp-page="./ArtistDetails" asp-route-id="@item.Id">Details</a> 
-                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                    <a asp-page="./ArtistDelete" asp-route-id="@item.Id">Delete</a>
                 </td>
             </tr>
         }

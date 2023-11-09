@@ -25,6 +25,14 @@ public class ArtistService : IArtistService
         return ac;
     }
 
+    public Artist DeleteArtist(Guid id)
+    {
+        var stu = _unitOfWork.Artist.GetById(id);
+        _unitOfWork.Artist.DeleteArtist(stu);
+        _unitOfWork.Studio.SaveChanges();
+        return stu;
+    }
+
     public Artist GetArtistById(Guid id)
     {
         return _unitOfWork.Artist.GetArtistById(id);
