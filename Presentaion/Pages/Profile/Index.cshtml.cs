@@ -22,9 +22,9 @@ namespace Presentaion.Pages.Profile
 		public List<Scheduling> Scheduling { get; set; }
 		public void OnGet()
 		{
-			var accId = HttpContext.Session.GetString("AccountID");
-			Guid id = new Guid(accId);
-			Customer = _customerService.GetCusById(id); 
-		}
+            var accId = HttpContext.Session.GetString("AccountID");
+            Guid id = new Guid(accId);
+            Customer = _customerService.GetCusById(id);
+        }
 	}
 }

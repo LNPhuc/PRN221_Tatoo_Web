@@ -32,7 +32,7 @@ public class CustomerService : ICustomerService
             cus.Account.Password == customer.Account.Password &&
             cus.FirstName == customer.FirstName &&
             cus.LastName == customer.LastName &&
-            cus.Account.Email == customer.Account.Email &&
+            /*cus.Account.Email == customer.Account.Email &&*/
             cus.Account.Phone == customer.Account.Phone &&
             cus.Address == customer.Address)
         {
@@ -42,9 +42,14 @@ public class CustomerService : ICustomerService
         cus.Account.Password = customer.Account.Password;
         cus.FirstName = customer.FirstName;
         cus.LastName = customer.LastName;
-        cus.Account.Email = customer.Account.Email;
+        /*cus.Account.Email = customer.Account.Email;*/
         cus.Account.Phone = customer.Account.Phone;
         cus.Address = customer.Address;
+
+        if(customer.Account.UserName == null || customer.Account.Password == null || customer.FirstName == null || customer.LastName == null || customer.Account.Phone == null || customer.Address == null )
+        {
+            throw new Exception("Please Enter Empty Place!");
+        }
         var update = _unitOfWork.Customer.UpdateCustomer(cus);
         _unitOfWork.Customer.SaveChanges();
         return update;
