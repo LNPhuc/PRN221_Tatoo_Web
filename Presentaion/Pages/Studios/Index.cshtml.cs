@@ -32,7 +32,7 @@ namespace Presentaion.Pages.Studios
         public IActionResult OnGet()
         {
 
-            var stu = _studioService.Search(SearchQuery, PageIndex - 1, PageSize);
+			var stu = _studioService.Search(SearchQuery, PageIndex - 1, PageSize);
             TotalPages = stu.TotalPagesCount;
             Studio = stu.Items.ToList();
             return Page();

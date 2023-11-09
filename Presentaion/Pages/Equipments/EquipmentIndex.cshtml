@@ -1,0 +1,58 @@
+﻿@page
+@model Presentaion.Pages.Equipments.EquipmentIndexModel
+
+@{
+    ViewData["Title"] = "EquipmentIndex";
+}
+
+<h2>EquipmentIndex</h2>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Equipment[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Equipment[0].Position)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Equipment[0].Studio)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Equipment) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Position)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Studio.Id)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+<div>
+    <ul class="pagination">
+        @for (var i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="page-item @(i == Model.PageIndex ? "active" : "")">
+                <a asp-page="./EquipmentIndex" asp-route-PageIndex="@i" asp-route-id="@Model.NewId" class="page-link">@i</a>
+            </li>
+        }
+    </ul>
+</div>

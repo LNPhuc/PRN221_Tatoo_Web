@@ -22,10 +22,11 @@ namespace Presentaion.Pages.Studios
 
         public Studio Studio { get; set; } = default!; 
 
-        public IActionResult OnGet(Guid id)
+        public IActionResult OnGet()
         {
-
-            var studio =  _studioService.GetById(id);
+            var accId = HttpContext.Session.GetString("AccountID");
+            Guid id = new Guid(accId);
+            var studio =  _studioService.GetStudioByAccountId(id);
             if (studio == null)
             {
                 return NotFound();

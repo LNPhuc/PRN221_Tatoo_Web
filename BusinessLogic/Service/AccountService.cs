@@ -20,8 +20,12 @@ public class AccountService : IAccountService
         _mapper = mapper;
     }
 
-    
-    public async Task CreateStudioAccount(CreateStudio account)
+	public Account GetById(Guid id)
+	{
+		return _unitOfWork.Account.GetById(id);
+	}
+
+	public async Task CreateStudioAccount(CreateStudio account)
     {
         var company = _mapper.Map<Studio>(account);
         _unitOfWork.Studio.Add(company);

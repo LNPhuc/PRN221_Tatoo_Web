@@ -20,7 +20,16 @@ public class ArtistRepository: GenericRepository<Artist>, IArtistRepository
         return artist;
     }
 
-    public List<Artist> SearchArtist(string name)
+	public List<Artist> GetArtistByStudioId(Guid id)
+	{
+		var artists = _context.Set<Artist>()
+				.Include(c => c.Studio)
+				.Where(s => s.StudioId == id)
+				.ToList();
+		return artists;
+	}
+
+	public List<Artist> SearchArtist(string name)
     {
         if (name == null)
         {
@@ -30,6 +39,7 @@ public class ArtistRepository: GenericRepository<Artist>, IArtistRepository
         else
         {
             var artists = _context.Set<Artist>()
+                .Include(c => c.Studio)
                 .Where(s => s.Name.Contains(name))
                 .ToList();
             return artists;

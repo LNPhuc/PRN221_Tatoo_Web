@@ -11,8 +11,12 @@ public class AccountRepository : GenericRepository<Account>, IAccountRepository
     public AccountRepository(TatooWebContext context) : base(context)
     {
     }
+	public Account GetById(Guid id)
+	{
+		return _context.Set<Account>().Include(c => c.Customers).Include(c => c.Studios).FirstOrDefault(c => c.Id == id);
+	}
 
-    public async Task<Account> GetAccount(string Email, string Pass)
+	public async Task<Account> GetAccount(string Email, string Pass)
     {
         var account = await _context.Accounts.FirstOrDefaultAsync(a => a.Email.Equals(Email) && a.Password.Equals(Pass));
         return account;

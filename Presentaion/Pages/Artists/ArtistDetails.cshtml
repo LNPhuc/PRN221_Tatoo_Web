@@ -35,4 +35,12 @@
 <div>
     <a asp-page="./ArtistEdit" asp-route-id="@Model.Artist.Id">Edit</a> |
     <a asp-page="./ArtistIndex">Back to List</a>
+    @if (@HttpContext.Session.GetString("AccountRole") == "CUSTOMER")
+    {
+        <a asp-page="./ArtistIndex">Back to List</a>
+    }
+    else if (@HttpContext.Session.GetString("AccountRole") == "STAFF")
+    {
+        <a asp-page="./ArtistManager">Back to List</a>
+    }
 </div>

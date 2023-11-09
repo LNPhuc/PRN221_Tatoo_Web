@@ -22,8 +22,7 @@ public class LoginPage : PageModel
 
     public void OnGet()
     {
-        // Handle the GET request, if needed
-    }
+	}
 
     public async Task<IActionResult> OnPost()
     {
@@ -38,6 +37,8 @@ public class LoginPage : PageModel
             else
             {
                 HttpContext.Session.SetString("AccountID", account.Id.ToString());
+                HttpContext.Session.SetString("AccountName", account.UserName.ToString());
+                HttpContext.Session.SetString("AccountRole", account.Role.ToString());
                 return RedirectToPage("./Index");
             }
         }

@@ -19,21 +19,21 @@ namespace Presentaion.Pages.ArtWork
             _context = context;
         }
 
-      public  DataAccess.DataAccess.ArtWork ArtWork { get; set; } = default!; 
+        public DataAccess.DataAccess.ArtWork ArtWork { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(Guid? id)
+        public async Task<IActionResult> OnGetAsync(Guid id)
         {
             if (id == null || _context.ArtWorks == null)
             {
                 return NotFound();
             }
 
-            var artwork = await _context.ArtWorks.FirstOrDefaultAsync(m => m.Id == id);
+            var artwork = await _context.ArtWorks.Include(c => c.Artist).FirstOrDefaultAsync(m => m.Id == id);
             if (artwork == null)
             {
                 return NotFound();
             }
-            else 
+            else
             {
                 ArtWork = artwork;
             }

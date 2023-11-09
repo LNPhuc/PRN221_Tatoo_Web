@@ -7,9 +7,9 @@
 	Layout = "_LayoutStudioPage";
 }
 
-@*<h1>Index</h1>
+<h1>Index</h1>
 
-<p>
+@*<p>
     <a asp-page="Create">Create New</a>
 </p>
 <table class="table">
@@ -55,7 +55,7 @@
                 @Html.DisplayFor(modelItem => item.Time)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Artist.Id)
+                @Html.DisplayFor(modelItem => item.Artist.Name)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
@@ -63,10 +63,9 @@
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
-}
-    </tbody>
+}*@
+	</tbody>
 </table>
-*@
 	<header id="header">
 		<!-- Header Part -->
 		<!-- this is dummy heading for W3-Validation approval you can remove it if you want -->
@@ -76,20 +75,27 @@
 		<div class="">
 			<div class="container">
 				<!-- start-top-nav -->
-				
+
 				<section id="gallery-two-image-section">
 					<!-- Gallery Two Section -->
-					<!-- this is dummy heading for W3-Validation approval you can remove it if you want -->
+
 					<h2 class="w3-validation">For W3 Validation</h2>
-					<!-- this is dummy heading for W3-Validation approval you can remove it if you want -->
+
 
 					<div class="container-fluidgallery wow fadeInDown" data-wow-delay="0.0s" id="gallery">
 						<div class="row">
 							<div class="gallery-title">
 								<a href="#" class="button-one gallery_btn button-type-one button-box">Gallery</a>
 							</div>
+						@*<div>
+								<form method="post">
+								<input type="text" asp-for="ArtWorkName" />
+								<button type="submit">search</button>
+								</form>
+							</div>*@
 							<div class="gallery-two-row-one">
 								<ul class="gallery-grid-one gallery-grid-box">
+
 									<li>
 										<div class="b-link-stripe b-animate-go thickbox">
 											<!-- Gallery image no : 1 -->
@@ -101,18 +107,19 @@
 													   rel="prettyPhoto[pp_gal]">
 														<button class="zooming md-trigger">
 															<img src="/images/zoom.png" alt="" />
-															<a href="Untitled-1.html" target="_blank">Details</a>
+														<a asp-page="./Details" asp-route-id="FA31B0E7-6092-42CD-9433-63CE09BE0ED5">Details</a>
 														</button>
-													</a>
-													<!-- <ul class="popup_links gallery-two-popup-links">
-																				<li><button><i class="link"></i></button></li>
-																				<li><button><i class="info"></i></button></li>
-																				<li><button><i class="like"></i></button></li>
-																			</ul> -->
+													</a> 
+													 <ul class="popup_links gallery-two-popup-links">
+													<li> <a asp-page="./Edit" asp-route-id="FA31B0E7-6092-42CD-9433-63CE09BE0ED5">Edit</a> |</li>
+													@*<li><button><i class="info"></i></button></li>*@
+													<li> <a asp-page="./Delete" asp-route-id="FA31B0E7-6092-42CD-9433-63CE09BE0ED5">Delete</a></li>
+																			</ul> 
 												</div>
 											</div>
 										</div>
 									</li>
+
 									<li>
 										<div class="b-link-stripe b-animate-go thickbox">
 											<!-- Gallery image no : 2 -->
@@ -124,15 +131,15 @@
 													   rel="prettyPhoto[pp_gal]">
 														<button class="zooming md-trigger">
 															<img src="/images/zoom.png" alt="" />
-															<a href="Untitled-1.html" target="_blank">Details</a>
+														<a asp-page="./Details" asp-route-id="6ED79DA2-DB2F-4D6F-BA0C-6EB88DDECBF0">Details</a>
 														</button>
 													</a>
-													<!-- <ul class="popup_links gallery-two-popup-links">
-																				<li><button><i class="link"></i></button></li>
-																				<li><button><i class="info"></i></button></li>
-																				<li><button><i class="like"></i></button></li>
-																			</ul> -->
-												</div>
+												<ul class="popup_links gallery-two-popup-links">
+													<li> <a asp-page="./Edit" asp-route-id="6ED79DA2-DB2F-4D6F-BA0C-6EB88DDECBF0">Edit</a> |</li>
+													@*<li><button><i class="info"></i></button></li>*@
+													<li> <a asp-page="./Delete" asp-route-id="6ED79DA2-DB2F-4D6F-BA0C-6EB88DDECBF0">Delete</a></li>
+												</ul>
+											</div>
 											</div>
 										</div>
 									</li>
@@ -147,14 +154,14 @@
 													   rel="prettyPhoto[pp_gal]">
 														<button class="zooming md-trigger">
 															<img src="/images/zoom.png" alt="" />
-															<a href="Untitled-1.html" target="_blank">Details</a>
+														<a asp-page="./Details" asp-route-id="AB52BFEC-2233-4AB1-9820-80E0548824EA">Details</a>
 														</button>
 													</a>
-													<!-- <ul class="popup_links gallery-two-popup-links">
-																				<li><button><i class="link"></i></button></li>
-																				<li><button><i class="info"></i></button></li>
-																				<li><button><i class="like"></i></button></li>
-																			</ul> -->
+												<ul class="popup_links gallery-two-popup-links">
+													<li> <a asp-page="./Edit" asp-route-id="AB52BFEC-2233-4AB1-9820-80E0548824EA">Edit</a> |</li>
+													@*<li><button><i class="info"></i></button></li>*@
+													<li> <a asp-page="./Delete" asp-route-id="AB52BFEC-2233-4AB1-9820-80E0548824EA">Delete</a></li>
+												</ul>
 												</div>
 											</div>
 										</div>
@@ -179,14 +186,14 @@
 														   rel="prettyPhoto[pp_gal]">
 															<button class="zooming md-trigger">
 																<img src="/images/zoom.png" alt="" />
-																<a href="Untitled-1.html" target="_blank">Details</a>
+															<a asp-page="./Details" asp-route-id="9245FE4A-D402-451C-B9ED-9C1A04247482">Details</a>
 															</button>
 														</a>
-														<!-- <ul class="popup_links gallery-two-popup-links">
-																			<li><button><i class="link"></i></button></li>
-																			<li><button><i class="info"></i></button></li>
-																			<li><button><i class="like"></i></button></li>
-																		</ul> -->
+													<ul class="popup_links gallery-two-popup-links">
+														<li> <a asp-page="./Edit" asp-route-id="9245FE4A-D402-451C-B9ED-9C1A04247482">Edit</a> |</li>
+														@*<li><button><i class="info"></i></button></li>*@
+														<li> <a asp-page="./Delete" asp-route-id="9245FE4A-D402-451C-B9ED-9C1A04247482">Delete</a></li>
+													</ul>
 													</div>
 												</div>
 											</div>
@@ -202,14 +209,14 @@
 														   rel="prettyPhoto[pp_gal]">
 															<button class="zooming md-trigger">
 																<img src="/images/zoom.png" alt="" />
-																<a href="Untitled-1.html" target="_blank">Details</a>
+															<a asp-page="./Details" asp-route-id="FF4FF2AA-9F20-4257-B1D5-AB53F0F59A07">Details</a>
 															</button>
 														</a>
-														<!-- <ul class="popup_links gallery-two-popup-links">
-																			<li><button><i class="link"></i></button></li>
-																			<li><button><i class="info"></i></button></li>
-																			<li><button><i class="like"></i></button></li>
-																		</ul> -->
+													<ul class="popup_links gallery-two-popup-links">
+														<li> <a asp-page="./Edit" asp-route-id="FF4FF2AA-9F20-4257-B1D5-AB53F0F59A07">Edit</a> |</li>
+														@*<li><button><i class="info"></i></button></li>*@
+														<li> <a asp-page="./Delete" asp-route-id="FF4FF2AA-9F20-4257-B1D5-AB53F0F59A07">Delete</a></li>
+													</ul>
 													</div>
 												</div>
 											</div>
@@ -225,14 +232,14 @@
 														   rel="prettyPhoto[pp_gal]">
 															<button class="zooming md-trigger">
 																<img src="/images/zoom.png" alt="" />
-																<a href="Untitled-1.html" target="_blank">Details</a>
+															<a asp-page="./Details" asp-route-id="5FEBDA32-D55D-46A7-9FAE-0CC56D3989EF">Details</a>
 															</button>
 														</a>
-														<!-- <ul class="popup_links gallery-two-popup-links">
-																			<li><button><i class="link"></i></button></li>
-																			<li><button><i class="info"></i></button></li>
-																			<li><button><i class="like"></i></button></li>
-																		</ul> -->
+													<ul class="popup_links gallery-two-popup-links">
+														<li> <a asp-page="./Edit" asp-route-id="5FEBDA32-D55D-46A7-9FAE-0CC56D3989EF">Edit</a> |</li>
+														@*<li><button><i class="info"></i></button></li>*@
+														<li> <a asp-page="./Delete" asp-route-id="5FEBDA32-D55D-46A7-9FAE-0CC56D3989EF">Delete</a></li>
+													</ul>
 													</div>
 												</div>
 											</div>
@@ -248,14 +255,14 @@
 														   rel="prettyPhoto[pp_gal]">
 															<button class="zooming md-trigger">
 																<img src="/images/zoom.png" alt="" />
-																<a href="Untitled-1.html" target="_blank">Details</a>
+															<a asp-page="./Details" asp-route-id="588E1524-25BC-42A7-A55F-EE2AB5F86003">Details</a>
 															</button>
 														</a>
-														<!-- <ul class="popup_links gallery-two-popup-links">
-																			<li><button><i class="link"></i></button></li>
-																			<li><button><i class="info"></i></button></li>
-																			<li><button><i class="like"></i></button></li>
-																		</ul> -->
+													<ul class="popup_links gallery-two-popup-links">
+														<li> <a asp-page="./Edit" asp-route-id="588E1524-25BC-42A7-A55F-EE2AB5F86003">Edit</a> |</li>
+														@*<li><button><i class="info"></i></button></li>*@
+														<li> <a asp-page="./Delete" asp-route-id="588E1524-25BC-42A7-A55F-EE2AB5F86003">Delete</a></li>
+													</ul>
 													</div>
 												</div>
 											</div>
@@ -271,14 +278,14 @@
 														   rel="prettyPhoto[pp_gal]">
 															<button class="zooming md-trigger">
 																<img src="/images/zoom.png" alt="" />
-																<a href="Untitled-1.html" target="_blank">Details</a>
+															<a asp-page="./Details" asp-route-id="A7966134-FF64-4530-95B8-949946A4EBBF">Details</a>
 															</button>
 														</a>
-														<!-- <ul class="popup_links gallery-two-popup-links">
-																			<li><button><i class="link"></i></button></li>
-																			<li><button><i class="info"></i></button></li>
-																			<li><button><i class="like"></i></button></li>
-																		</ul> -->
+													<ul class="popup_links gallery-two-popup-links">
+														<li> <a asp-page="./Edit" asp-route-id="A7966134-FF64-4530-95B8-949946A4EBBF">Edit</a> |</li>
+														@*<li><button><i class="info"></i></button></li>*@
+														<li> <a asp-page="./Delete" asp-route-id="A7966134-FF64-4530-95B8-949946A4EBBF">Delete</a></li>
+													</ul>
 													</div>
 												</div>
 											</div>
@@ -296,14 +303,14 @@
 														   rel="prettyPhoto[pp_gal]">
 															<button class="zooming md-trigger">
 																<img src="/images/zoom.png" alt="" />
-																<a href="Untitled-1.html" target="_blank">Details</a>
+															<a asp-page="./Details" asp-route-id="F6F7DCE8-9AE9-4EC5-AF85-81CB8BC41E3A">Details</a>
 															</button>
 														</a>
-														<!-- <ul class="popup_links gallery-two-popup-links">
-																			<li><button><i class="link"></i></button></li>
-																			<li><button><i class="info"></i></button></li>
-																			<li><button><i class="like"></i></button></li>
-																		</ul> -->
+													<ul class="popup_links gallery-two-popup-links">
+														<li> <a asp-page="./Edit" asp-route-id="F6F7DCE8-9AE9-4EC5-AF85-81CB8BC41E3A">Edit</a> |</li>
+														@*<li><button><i class="info"></i></button></li>*@
+														<li> <a asp-page="./Delete" asp-route-id="F6F7DCE8-9AE9-4EC5-AF85-81CB8BC41E3A">Delete</a></li>
+													</ul>
 													</div>
 												</div>
 											</div>
@@ -330,13 +337,14 @@
 														   rel="prettyPhoto[pp_gal]">
 															<button class="zooming md-trigger">
 																<img src="/images/zoom.png" alt="" />
-															</button>
-														</a>
-														<ul class="popup_links gallery-two-popup-links">
-															<li><button><i class="link"></i></button></li>
-															<li><button><i class="info"></i></button></li>
-															<li><button><i class="like"></i></button></li>
-														</ul>
+															<a asp-page="./Details" asp-route-id="F6F7DCE8-9AE9-4EC5-AF85-81CB8BC41E3A">Details</a>
+														</button>
+													</a>
+													<ul class="popup_links gallery-two-popup-links">
+														<li> <a asp-page="./Edit" asp-route-id="F6F7DCE8-9AE9-4EC5-AF85-81CB8BC41E3A">Edit</a> |</li>
+														@*<li><button><i class="info"></i></button></li>*@
+														<li> <a asp-page="./Delete" asp-route-id="F6F7DCE8-9AE9-4EC5-AF85-81CB8BC41E3A">Delete</a></li>
+													</ul>
 													</div>
 												</div>
 											</div>
@@ -352,13 +360,14 @@
 														   rel="prettyPhoto[pp_gal]">
 															<button class="zooming md-trigger">
 																<img src="/images/zoom.png" alt="" />
-															</button>
-														</a>
-														<ul class="popup_links gallery-two-popup-links">
-															<li><button><i class="link"></i></button></li>
-															<li><button><i class="info"></i></button></li>
-															<li><button><i class="like"></i></button></li>
-														</ul>
+															<a asp-page="./Details" asp-route-id="E9F7E051-503E-436C-93D6-449BD6F464CD">Details</a>
+														</button>
+													</a>
+													<ul class="popup_links gallery-two-popup-links">
+														<li> <a asp-page="./Edit" asp-route-id="E9F7E051-503E-436C-93D6-449BD6F464CD">Edit</a> |</li>
+														@*<li><button><i class="info"></i></button></li>*@
+														<li> <a asp-page="./Delete" asp-route-id="E9F7E051-503E-436C-93D6-449BD6F464CD">Delete</a></li>
+													</ul>
 													</div>
 												</div>
 											</div>
@@ -374,13 +383,14 @@
 														   rel="prettyPhoto[pp_gal]">
 															<button class="zooming md-trigger">
 																<img src="/images/zoom.png" alt="" />
-															</button>
-														</a>
-														<ul class="popup_links gallery-two-popup-links">
-															<li><button><i class="link"></i></button></li>
-															<li><button><i class="info"></i></button></li>
-															<li><button><i class="like"></i></button></li>
-														</ul>
+															<a asp-page="./Details" asp-route-id="E7A6D26F-D3DE-48EA-AACE-3D9674D475C5">Details</a>
+														</button>
+													</a>
+													<ul class="popup_links gallery-two-popup-links">
+														<li> <a asp-page="./Edit" asp-route-id="E7A6D26F-D3DE-48EA-AACE-3D9674D475C5">Edit</a> |</li>
+														@*<li><button><i class="info"></i></button></li>*@
+														<li> <a asp-page="./Delete" asp-route-id="E7A6D26F-D3DE-48EA-AACE-3D9674D475C5">Delete</a></li>
+													</ul>
 													</div>
 												</div>
 											</div>
@@ -396,13 +406,14 @@
 														   rel="prettyPhoto[pp_gal]">
 															<button class="zooming md-trigger">
 																<img src="/images/zoom.png" alt="" />
-															</button>
-														</a>
-														<ul class="popup_links gallery-two-popup-links">
-															<li><button><i class="link"></i></button></li>
-															<li><button><i class="info"></i></button></li>
-															<li><button><i class="like"></i></button></li>
-														</ul>
+															<a asp-page="./Details" asp-route-id="3D11F0AD-94F9-4082-AF9E-AEE9FBE48149">Details</a>
+														</button>
+													</a>
+													<ul class="popup_links gallery-two-popup-links">
+														<li> <a asp-page="./Edit" asp-route-id="3D11F0AD-94F9-4082-AF9E-AEE9FBE48149">Edit</a> |</li>
+														@*<li><button><i class="info"></i></button></li>*@
+														<li> <a asp-page="./Delete" asp-route-id="3D11F0AD-94F9-4082-AF9E-AEE9FBE48149">Delete</a></li>
+													</ul>
 													</div>
 												</div>
 											</div>
@@ -418,13 +429,14 @@
 														   rel="prettyPhoto[pp_gal]">
 															<button class="zooming md-trigger">
 																<img src="/images/zoom.png" alt="" />
-															</button>
-														</a>
-														<ul class="popup_links gallery-two-popup-links">
-															<li><button><i class="link"></i></button></li>
-															<li><button><i class="info"></i></button></li>
-															<li><button><i class="like"></i></button></li>
-														</ul>
+															<a asp-page="./Details" asp-route-id="64069751-EAC0-49AF-B0CE-6B59FA189DA7">Details</a>
+														</button>
+													</a>
+													<ul class="popup_links gallery-two-popup-links">
+														<li> <a asp-page="./Edit" asp-route-id="64069751-EAC0-49AF-B0CE-6B59FA189DA7">Edit</a> |</li>
+														@*<li><button><i class="info"></i></button></li>*@
+														<li> <a asp-page="./Delete" asp-route-id="64069751-EAC0-49AF-B0CE-6B59FA189DA7">Delete</a></li>
+													</ul>
 													</div>
 												</div>
 											</div>
@@ -442,13 +454,14 @@
 														   rel="prettyPhoto[pp_gal]">
 															<button class="zooming md-trigger">
 																<img src="/images/zoom.png" alt="" />
-															</button>
-														</a>
-														<ul class="popup_links gallery-two-popup-links">
-															<li><button><i class="link"></i></button></li>
-															<li><button><i class="info"></i></button></li>
-															<li><button><i class="like"></i></button></li>
-														</ul>
+															<a asp-page="./Details" asp-route-id="5C07DF52-0C5D-4A11-BAA9-EA3B34CF4B7B">Details</a>
+														</button>
+													</a>
+													<ul class="popup_links gallery-two-popup-links">
+														<li> <a asp-page="./Edit" asp-route-id="5C07DF52-0C5D-4A11-BAA9-EA3B34CF4B7B">Edit</a> |</li>
+														@*<li><button><i class="info"></i></button></li>*@
+														<li> <a asp-page="./Delete" asp-route-id="5C07DF52-0C5D-4A11-BAA9-EA3B34CF4B7B">Delete</a></li>
+													</ul>
 													</div>
 												</div>
 											</div>
@@ -464,13 +477,14 @@
 														   rel="prettyPhoto[pp_gal]">
 															<button class="zooming md-trigger">
 																<img src="/images/zoom.png" alt="" />
-															</button>
-														</a>
-														<ul class="popup_links gallery-two-popup-links">
-															<li><button><i class="link"></i></button></li>
-															<li><button><i class="info"></i></button></li>
-															<li><button><i class="like"></i></button></li>
-														</ul>
+															<a asp-page="./Details" asp-route-id="74281B12-6ED3-4D58-8487-90BA50A00A68">Details</a>
+														</button>
+													</a>
+													<ul class="popup_links gallery-two-popup-links">
+														<li> <a asp-page="./Edit" asp-route-id="74281B12-6ED3-4D58-8487-90BA50A00A68">Edit</a> |</li>
+														@*<li><button><i class="info"></i></button></li>*@
+														<li> <a asp-page="./Delete" asp-route-id="74281B12-6ED3-4D58-8487-90BA50A00A68">Delete</a></li>
+													</ul>
 													</div>
 												</div>
 											</div>
@@ -497,13 +511,14 @@
 														   rel="prettyPhoto[pp_gal]">
 															<button class="zooming md-trigger">
 																<img src="/images/zoom.png" alt="" />
-															</button>
-														</a>
-														<ul class="popup_links gallery-two-popup-links">
-															<li><button><i class="link"></i></button></li>
-															<li><button><i class="info"></i></button></li>
-															<li><button><i class="like"></i></button></li>
-														</ul>
+															<a asp-page="./Details" asp-route-id="5C07DF52-0C5D-4A11-BAA9-EA3B34CF4B7B">Details</a>
+														</button>
+													</a>
+													<ul class="popup_links gallery-two-popup-links">
+														<li> <a asp-page="./Edit" asp-route-id="5C07DF52-0C5D-4A11-BAA9-EA3B34CF4B7B">Edit</a> |</li>
+														@*<li><button><i class="info"></i></button></li>*@
+														<li> <a asp-page="./Delete" asp-route-id="5C07DF52-0C5D-4A11-BAA9-EA3B34CF4B7B">Delete</a></li>
+													</ul>
 													</div>
 												</div>
 											</div>
@@ -519,13 +534,14 @@
 														   rel="prettyPhoto[pp_gal]">
 															<button class="zooming md-trigger">
 																<img src="/images/zoom.png" alt="" />
-															</button>
-														</a>
-														<ul class="popup_links gallery-two-popup-links">
-															<li><button><i class="link"></i></button></li>
-															<li><button><i class="info"></i></button></li>
-															<li><button><i class="like"></i></button></li>
-														</ul>
+															<a asp-page="./Details" asp-route-id="74281B12-6ED3-4D58-8487-90BA50A00A68">Details</a>
+														</button>
+													</a>
+													<ul class="popup_links gallery-two-popup-links">
+														<li> <a asp-page="./Edit" asp-route-id="74281B12-6ED3-4D58-8487-90BA50A00A68">Edit</a> |</li>
+														@*<li><button><i class="info"></i></button></li>*@
+														<li> <a asp-page="./Delete" asp-route-id="74281B12-6ED3-4D58-8487-90BA50A00A68">Delete</a></li>
+													</ul>
 													</div>
 												</div>
 											</div>
@@ -541,13 +557,14 @@
 														   rel="prettyPhoto[pp_gal]">
 															<button class="zooming md-trigger">
 																<img src="/images/zoom.png" alt="" />
-															</button>
-														</a>
-														<ul class="popup_links gallery-two-popup-links">
-															<li><button><i class="link"></i></button></li>
-															<li><button><i class="info"></i></button></li>
-															<li><button><i class="like"></i></button></li>
-														</ul>
+															<a asp-page="./Details" asp-route-id="D3CF4B1B-E119-4E74-BC46-E0C0C2BC57B9">Details</a>
+														</button>
+													</a>
+													<ul class="popup_links gallery-two-popup-links">
+														<li> <a asp-page="./Edit" asp-route-id="D3CF4B1B-E119-4E74-BC46-E0C0C2BC57B9">Edit</a> |</li>
+														@*<li><button><i class="info"></i></button></li>*@
+														<li> <a asp-page="./Delete" asp-route-id="D3CF4B1B-E119-4E74-BC46-E0C0C2BC57B9">Delete</a></li>
+													</ul>
 													</div>
 												</div>
 											</div>
@@ -563,13 +580,14 @@
 														   rel="prettyPhoto[pp_gal]">
 															<button class="zooming md-trigger">
 																<img src="/images/zoom.png" alt="" />
-															</button>
-														</a>
-														<ul class="popup_links gallery-two-popup-links">
-															<li><button><i class="link"></i></button></li>
-															<li><button><i class="info"></i></button></li>
-															<li><button><i class="like"></i></button></li>
-														</ul>
+															<a asp-page="./Details" asp-route-id="D19D210B-B2B2-41EA-BF9C-DCDD0A46DFF5">Details</a>
+														</button>
+													</a>
+													<ul class="popup_links gallery-two-popup-links">
+														<li> <a asp-page="./Edit" asp-route-id="D19D210B-B2B2-41EA-BF9C-DCDD0A46DFF5">Edit</a> |</li>
+														@*<li><button><i class="info"></i></button></li>*@
+														<li> <a asp-page="./Delete" asp-route-id="D19D210B-B2B2-41EA-BF9C-DCDD0A46DFF5">Delete</a></li>
+													</ul>
 													</div>
 												</div>
 											</div>
@@ -585,13 +603,14 @@
 														   rel="prettyPhoto[pp_gal]">
 															<button class="zooming md-trigger">
 																<img src="/images/zoom.png" alt="" />
-															</button>
-														</a>
-														<ul class="popup_links gallery-two-popup-links">
-															<li><button><i class="link"></i></button></li>
-															<li><button><i class="info"></i></button></li>
-															<li><button><i class="like"></i></button></li>
-														</ul>
+															<a asp-page="./Details" asp-route-id="9328AF14-1A24-4781-BFC4-D79D1ECDD2D1">Details</a>
+														</button>
+													</a>
+													<ul class="popup_links gallery-two-popup-links">
+														<li> <a asp-page="./Edit" asp-route-id="9328AF14-1A24-4781-BFC4-D79D1ECDD2D1">Edit</a> |</li>
+														@*<li><button><i class="info"></i></button></li>*@
+														<li> <a asp-page="./Delete" asp-route-id="9328AF14-1A24-4781-BFC4-D79D1ECDD2D1">Delete</a></li>
+													</ul>
 													</div>
 												</div>
 											</div>

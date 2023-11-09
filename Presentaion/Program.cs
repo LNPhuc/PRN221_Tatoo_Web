@@ -24,7 +24,7 @@ builder.Services.AddSession(options =>
 
 builder.Services.AddRazorPages().AddRazorPagesOptions(options =>
 {
-    options.Conventions.AddPageRoute("/Index", "");
+    options.Conventions.AddPageRoute("/Index", "/");
 });
 var app = builder.Build();
 
@@ -45,11 +45,11 @@ app.UseAuthorization();
 app.MapRazorPages();
 app.UseEndpoints(endpoints =>
 {
-	endpoints.MapRazorPages();
-	endpoints.MapGet("/", c =>
-	{
-		c.Response.Redirect("/HomePage");
-		return Task.CompletedTask;
-	});
+    endpoints.MapRazorPages();
+    endpoints.MapGet("/", c =>
+    {
+        c.Response.Redirect("/HomePage");
+        return Task.CompletedTask;
+    });
 });
 app.Run();
