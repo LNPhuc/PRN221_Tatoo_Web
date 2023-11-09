@@ -28,7 +28,7 @@ namespace Presentaion.Pages.ArtWork
                 return NotFound();
             }
 
-            var artwork = await _context.ArtWorks.FirstOrDefaultAsync(m => m.Id == id);
+            var artwork = await _context.ArtWorks.Include(c => c.Artist).FirstOrDefaultAsync(m => m.Id == id);
             if (artwork == null)
             {
                 return NotFound();
