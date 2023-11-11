@@ -20,7 +20,7 @@ public class StudioDetail : PageModel
     public Studio studio { get; set; }
     [BindProperty] public DateTime bookingDate { get; set; } = default!;
     
-    public async Task<IActionResult> OnGetAsync(Guid id)
+    public IActionResult OnGet(Guid id)
     {
         studio = _studioService.GetById(id);
         return Page();
@@ -50,6 +50,6 @@ public class StudioDetail : PageModel
         {
             ViewData["notification"] = ex.Message.ToString();
         }
-        return Page();
+        return OnGet(id);
     }
 }
