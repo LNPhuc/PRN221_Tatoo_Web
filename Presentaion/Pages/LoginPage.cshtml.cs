@@ -39,6 +39,8 @@ public class LoginPage : PageModel
                 HttpContext.Session.SetString("AccountID", account.Id.ToString());
                 HttpContext.Session.SetString("AccountName", account.UserName.ToString());
                 HttpContext.Session.SetString("AccountRole", account.Role.ToString());
+
+
                 return RedirectToPage("./Index");
             }
         }
