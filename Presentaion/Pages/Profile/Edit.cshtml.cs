@@ -31,7 +31,7 @@ namespace Presentaion.Pages.Profile
             }
             try
             {
-                Customer = _customerService.GetCusById(accountId);
+                Customer = _customerService.GetCusByAccountId(accountId);
                 return Page();
             }
             catch (Exception ex)

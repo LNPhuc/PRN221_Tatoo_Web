@@ -19,7 +19,13 @@ public class VipMemberRepository: GenericRepository<VipMember>, IVipMemberReposi
 		return list;
 	}
 
-	public Pagination<VipMember> ToPagination(IEnumerable<VipMember> list, int pageIndex, int pageSize)
+    public VipMember RegisterVipMember(VipMember vp)
+    {
+        _context.VipMembers.Add(vp);
+		return vp;
+    }
+
+    public Pagination<VipMember> ToPagination(IEnumerable<VipMember> list, int pageIndex, int pageSize)
 	{
 		var result = new Pagination<VipMember>
 		{

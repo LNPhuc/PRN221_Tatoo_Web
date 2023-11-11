@@ -8,4 +8,5 @@ public interface IVipMemberRepository : IGenericRepository<VipMember>
 {
 	IEnumerable<VipMember> GetVipByName(string name, Guid id);
 	Pagination<VipMember> ToPagination(IEnumerable<VipMember> list, int pageIndex, int pageSize);
+	VipMember RegisterVipMember(VipMember vp);
 }

@@ -1,0 +1,49 @@
+﻿@page
+@model Presentaion.Pages.VipMembers.RegisterVipMemberModel
+
+@{
+    ViewData["Title"] = "RegisterVipMember";
+    Layout = "_LayoutStudioPage";
+}
+
+<h2>RegisterVipMember</h2>
+
+<h4>VipMember</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<div class="form-group">
+                <label asp-for="VipMember.Id" class="control-label"></label>
+                <input asp-for="VipMember.Id" class="form-control" />
+                <span asp-validation-for="VipMember.Id" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label class="control-label">Customer Name</label>
+                <input asp-for="Customer.LastName" class="form-control" readonly="true" />
+            </div>
+            <div class="form-group">
+                <label asp-for="StudioId" class="control-label"></label>
+                <input asp-for="StudioId" class="form-control" readonly="true"/>
+
+                <span asp-validation-for="StudioId" class="text-danger"></span>
+
+                @*<select asp-for="StudioId" class="form-control" asp-items="ViewBag.StudioId"></select>*@
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+
+        </form>
+        @ViewData["notification"]
+    </div>
+</div>
+
+<div>
+    <a asp-page="/Studios/Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
