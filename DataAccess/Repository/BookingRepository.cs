@@ -14,7 +14,17 @@ public class BookingRepository: GenericRepository<Booking>, IBookingRepository
     {
         /*_context = context;*/
     }
-
+    public Booking CheckBookingStatusByCusId(Guid cusid, Guid StuId)
+    {
+        var booking = _context.Set<Booking>()
+                .Include(c => c.Studio)
+                .FirstOrDefault(c => c.Customer.Id == cusid && c.Studio.Id == StuId && c.Status == BookingStatus.Done.ToString());
+        if (booking is null)
+        {
+            return null;
+        }
+        return booking;
+    }
     public IEnumerable<Booking> GetAllByCusId(Guid cusid)
     {
         var lisbooking = _context.Set<Booking>()

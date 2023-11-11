@@ -19,6 +19,16 @@ public class VipMemberRepository: GenericRepository<VipMember>, IVipMemberReposi
 		return list;
 	}
 
+    public bool IsVip(Guid cusid, Guid stuid)
+    {
+		var vipmem = _context.Set<VipMember>().FirstOrDefault(c => c.CustomerId == cusid && c.StudioId == stuid);
+		if(vipmem == null)
+		{
+			return false;
+		}
+		return true;
+    }
+
     public VipMember RegisterVipMember(VipMember vp)
     {
         _context.VipMembers.Add(vp);

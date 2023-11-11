@@ -31,12 +31,20 @@ namespace Presentaion.Pages.VipMembers
 
         public IActionResult OnGet(Guid id)
         {
-            StudioId = id;
+
             var accId = HttpContext.Session.GetString("AccountID");
-            Guid accountid = Guid.Parse(accId);
-            var customer = _customerService.GetCusByAccountId(accountid);
-            Customer = customer;
-            return Page();
+            if (accId == null)
+            {
+                return RedirectToPage("../LoginPage");
+            }
+            else
+            {
+                StudioId = id;
+                Guid accountid = Guid.Parse(accId);
+                var customer = _customerService.GetCusByAccountId(accountid);
+                Customer = customer;
+                return Page();
+            }          
         }
 
         [BindProperty]
@@ -66,14 +74,19 @@ namespace Presentaion.Pages.VipMembers
                         StudioId = StudioId,
                         CustomerId = Customer.Id,
                     };
-
-                    var newvip = _vipmemberService.RegisterVip(customer.Id, VipMember);
+                    bool isVip = _vipmemberService.IsVip(customer.Id, StudioId);
+                    if (isVip == true)
+                    {
+                        throw new Exception("You are already V.I.P in this studio");
+                    }
+                    var newvip = _vipmemberService.RegisterVip(customer.Id, StudioId,VipMember);
                     if (newvip == null)
                     {
                         throw new Exception("You are not allowed to register");
                     }
                     else
                     {
+                        ViewData["SuccessMessage"] = "Đăng kí thành công";
                         return Page();
                     }
                 }

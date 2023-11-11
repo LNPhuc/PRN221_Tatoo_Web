@@ -13,13 +13,22 @@ public class VipmemberService : IVipmemberService
         _unitOfWork = unitOfWork;
     }
 
-    public VipMember RegisterVip(Guid id, VipMember member)
+    public bool IsVip(Guid cusid, Guid studioId)
     {
-        _unitOfWork.Booking.GetAllByCusId(id);
-        var add = _unitOfWork.VipMember.RegisterVipMember(member);
-        _unitOfWork.Save();
-        return add;
+        bool checkvip = _unitOfWork.VipMember.IsVip(cusid, studioId);
+        return checkvip;
+    }
 
+    public VipMember RegisterVip(Guid id, Guid StudioId, VipMember member)
+    {
+        var isallow = _unitOfWork.Booking.CheckBookingStatusByCusId(id, StudioId);
+        if (isallow != null)
+        {
+            var add = _unitOfWork.VipMember.RegisterVipMember(member);
+            _unitOfWork.Save();
+            return add;
+        }
+        return null;
 
     }
 
