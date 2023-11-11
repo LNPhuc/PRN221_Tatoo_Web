@@ -4,7 +4,6 @@
     Layout = "~/Pages/Shared/_LayoutStudioPage.cshtml";
 }
 
-
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -27,10 +26,10 @@
     <!-- ============================================================== --
 
          end navbar -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- left sidebar -->
-        <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- left sidebar -->
+    <!-- ============================================================== -->
     <div class="nav-left-sidebar sidebar-dark">
         <div class="menu-list">
             <nav class="navbar navbar-expand-lg navbar-light">
@@ -96,7 +95,7 @@
                             <div id="submenu-5" class="collapse submenu" style="">
                                 <ul class="nav flex-column">
                                     <li class="nav-item">
-                                        <a class="nav-link" href="SchedulePage/ScheduleView">Schedule</a>
+                                        <a class="nav-link" href="ScheduleView">Schedule</a>
                                     </li>
                                 </ul>
                             </div>
@@ -107,126 +106,183 @@
             </nav>
         </div>
     </div>
-        <!-- ============================================================== -->
-        <!-- end left sidebar -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- wrapper  -->
-        <!-- ============================================================== -->
-        <div class="dashboard-wrapper">
-            <div class="container-fluid  dashboard-content">
+    <!-- ============================================================== -->
+    <!-- end left sidebar -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- wrapper  -->
+    <!-- ============================================================== -->
+    <div class="dashboard-wrapper">
+        <div class="container-fluid  dashboard-content">
+            <!-- ============================================================== -->
+            <!-- pageheader -->
+            <!-- ============================================================== -->
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="page-header">
+                        <h2 class="pageheader-title">Schedule</h2>
+                        <p class="pageheader-text">Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit amet vestibulum mi. Morbi lobortis pulvinar quam.</p>
+                        <div class="page-breadcrumb">
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
+                                    <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Schedule View</a></li>
+                                </ol>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- end pageheader -->
+            <!-- ============================================================== -->
+            <div class="row">
                 <!-- ============================================================== -->
-                <!-- pageheader -->
+                <!-- basic table  -->
                 <!-- ============================================================== -->
-                <div class="row">
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                        <div class="page-header">
-                            <h2 class="pageheader-title">Schedule</h2>
-                            <p class="pageheader-text">Proin placerat ante duiullam scelerisque a velit ac porta, fusce sit amet vestibulum mi. Morbi lobortis pulvinar quam.</p>
-                            <div class="page-breadcrumb">
-                                <nav aria-label="breadcrumb">
-                                    <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
-                                        <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Schedule View</a></li>
-                                    </ol>
-                                </nav>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="card">
+                        <h5 class="card-header">Booking List</h5>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered first">
+                                    <thead>
+                                        <tr>
+                                            <th>Customer Name</th>
+                                            <th>Phone</th>
+                                            <th>Description</th>
+                                            <th>Status</th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @for (int i = 0; i < Model.Bookings.Count; i++)
+                                        {
+                                            <tr>
+                                                <td>@Model.Customers[i].FirstName</td>
+                                                <td>@Model.Accounts[i].Phone</td>
+                                                <td>@Model.Bookings[i].Description</td>
+                                                @if (Model.Bookings[i].Status == "DONE")
+                                                {
+                                                    <td style="color: green">DONE</td>
+                                                }
+                                                else if (Model.Bookings[i].Status == "ONPROCESS")
+                                                {
+                                                    <td style="color: orangered">ONPROCESS</td>
+                                                }
+                                                else if (Model.Bookings[i].Status == "CANCEL")
+                                                {
+                                                    <td style="color: red">Cancel</td>
+                                                }
+                                                else
+                                                {
+                                                    <td style="color: red"></td>
+                                                }
+                                                @if (Model.Bookings[i].Status != "CANCEL" && Model.Bookings[i].Status != "DONE" && Model.Bookings[i].Status != "NULL")
+                                                {
+                                                    <td style="text-align:center">
+                                                        <a asp-page="./ScheduleCreate" class="btn btn-rounded btn-primary" asp-route-id="@Model.Bookings[i].Id">Create</a>
+                                                    </td>
+                                                    <td style="text-align:center">
+                                                        <a asp-page-handler="bookingcancel" class="btn btn-rounded btn-danger" asp-route-id="@Model.Bookings[i].Id">Cancel</a>
+                                                    </td>
+                                                    <td style="text-align:center">
+                                                        <a asp-page-handler="bookingdone" class="btn btn-rounded btn-success" asp-route-id="@Model.Bookings[i].Id">Done</a>
+                                                    </td>
+                                                }
+                                                else
+                                                {
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                }
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="row">
                 <!-- ============================================================== -->
-                <!-- end pageheader -->
+                <!-- basic table  -->
                 <!-- ============================================================== -->
-                <div class="row">
-                    <!-- ============================================================== -->
-                    <!-- basic table  -->
-                    <!-- ============================================================== -->
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-                        <div class="card">
-                            <h5 class="card-header">Basic Table</h5>
-                            <div class="card-body">
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-bordered first">
-                                        <thead>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                    <div class="card">
+                        <h5 class="card-header">Schedule List</h5>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-bordered first">
+                                    <thead>
+                                        <tr>
+                                            <th>Booking ID</th>
+                                            <th>Date</th>
+                                            <th>Start Time</th>
+                                            <th>End Time</th>
+                                            <th>Status</th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model.Schedulings)
+                                        {
                                             <tr>
-                                                <th>Customer</th>
-                                                <th>Phone</th>
-                                                <th>Booking Date</th>
-                                                <th>Status</th>
-                                                <th></th>
-                                                <th></th>
-                                                <th></th>
+                                                <td>@item.BookingId</td>
+                                                <td>@item.Date</td>
+                                                <td>@item.StartTime</td>
+                                                <td>@item.EndTime</td>
+                                                @if (item.Status == "DONE")
+                                                {
+                                                    <td style="color: green">DONE</td>
+                                                }
+                                                else if (item.Status == "ONPROCESS")
+                                                {
+                                                    <td style="color: orangered">ONPROCESS</td>
+                                                }
+                                                else if (item.Status == "CANCEL")
+                                                {
+                                                    <td style="color: red">CANCEL</td>
+                                                }
+                                                else
+                                                {
+                                                    <td style="color: red"></td>
+                                                }
+                                                @if (item.Status != "CANCEL" && item.Status != "DONE" && item.Status != "NULL")
+                                                {
+                                                    <td style="text-align:center">
+                                                        <a asp-page="./ScheduleUpdate" class="btn btn-rounded btn-primary" asp-route-id="@item.Id">Update</a>
+                                                    </td>
+                                                    <td style="text-align:center">
+                                                        <a asp-page-handler="cancel" class="btn btn-rounded btn-danger" asp-route-id="@item.Id">Cancel</a>
+                                                    </td>
+                                                    <td style="text-align:center">
+                                                        <a asp-page-handler="done" class="btn btn-rounded btn-success" asp-route-id="@item.Id">Done</a>
+                                                    </td>
+                                                }
+                                                else
+                                                {
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td></td>
+                                                }
                                             </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Nguyễn Trung Kiên</td>
-                                                <td>0971949674</td>
-                                                <td>31/10/2023</td>
-                                                <td style="color: yellow">OnCall</td>
-                                                <td style="text-align:center">
-                                                    <a href="ScheduleCreate" class="btn btn-rounded btn-primary">Create</a>
-                                                </td>
-                                                <td style="text-align:center">
-                                                    <a href="ScheduleUpdate" class="btn btn-rounded btn-brand">Update</a>
-                                                </td>
-                                                <td style="text-align:center">
-                                                    <a href="#" class="btn btn-rounded btn-danger">Cancel</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Nguyễn Trung Kiên</td>
-                                                <td>0971949674</td>
-                                                <td>31/10/2023</td>
-                                                <td style="color: green">Finish</td>
-                                                <td style="text-align:center">
-                                                    <a href="ScheduleCreate" class="btn btn-rounded btn-primary">Create</a>
-                                                </td>
-                                                <td style="text-align:center">
-                                                <a href="ScheduleUpdate" class="btn btn-rounded btn-brand">Update</a>
-                                                </td>
-                                                <td style="text-align:center">
-                                                    <a href="#" class="btn btn-rounded btn-danger">Cancel</a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>Nguyễn Trung Kiên</td>
-                                                <td>0971949674</td>
-                                                <td>31/10/2023</td>
-                                                <td style="color: red">Cancel</td>
-                                                <td style="text-align:center">
-                                                    <a href="ScheduleCreate" class="btn btn-rounded btn-primary">Create</a>
-                                                </td>
-                                                <td style="text-align:center">
-                                                    <a href="ScheduleUpdate" class="btn btn-rounded btn-brand">Update</a>
-                                                </td>
-                                                <td style="text-align:center">
-                                                    <a href="#" class="btn btn-rounded btn-danger">Cancel</a>
-                                                </td>
-                                            </tr>                                            
-                                        </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Position</th>
-                                                <th>Office</th>
-                                                <th>Age</th>
-                                                <th>Start date</th>
-                                                <th>Salary</th>
-                                            </tr>
-                                        </tfoot>
-                                    </table>
-                                </div>
+                                        }
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
-                    <!-- ============================================================== -->
-                    <!-- end basic table  -->
-                    <!-- ============================================================== -->
-                </div>               
-            </div>   
-        </div>  
-        <!-- ============================================================== -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ============================================================== -->
     <!-- end main wrapper -->
     <!-- ============================================================== -->
     <!-- Optional JavaScript -->
