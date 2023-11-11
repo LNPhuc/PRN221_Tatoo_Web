@@ -23,23 +23,22 @@ namespace Presentaion.Pages.Profile
             {
                 return RedirectToPage("/LoginPage");
             }
-
             Guid accountId = Guid.Parse(accId);
-            if(id != accountId)
+            Customer = _customerService.GetCusById(id);
+
+
+
+            if (Customer.AccountId != accountId)
             {
                 return RedirectToPage("/LoginPage");
-            }
-            try
-            {
-                Customer = _customerService.GetCusById(accountId);
-                return Page();
-            }
-            catch (Exception ex)
-            {
-                TempData["ErrorMessage"] = ex.Message;
-                return Page();
 
             }
+            else
+            {
+                return Page();
+            }
+
+
         }
         public IActionResult OnPost()
         {

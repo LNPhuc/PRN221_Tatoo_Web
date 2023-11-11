@@ -1,4 +1,5 @@
 ﻿using BusinessLogic.IService;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Data;
@@ -40,9 +41,9 @@ public class LoginPage : PageModel
                 HttpContext.Session.SetString("AccountName", account.UserName);
                 HttpContext.Session.SetString("AccountRole", account.Role);
 
-
                 return RedirectToPage("./Index");
             }
+            
         }
         catch(Exception ex)
         {
