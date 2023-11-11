@@ -28,29 +28,26 @@ namespace Presentaion.Pages.Studios
 
         public IActionResult OnGet(Guid id)
         {
+            
+
             var accId = HttpContext.Session.GetString("AccountID");
             if (accId == null)
             {
                 return RedirectToPage("/LoginPage");
             }
-            
-
 
             Guid accountId = Guid.Parse(accId);
-            /*if (id != accountId)
+            Studio = _studioService.GetById(id);
+
+
+            if(Studio.AccountId !=  accountId)
             {
                 return RedirectToPage("/LoginPage");
-            }*/
-            try
-            {
-                Studio = _studioService.GetById(id);
-                return Page();
-            }
-            catch (Exception ex)
-            {
-                TempData["ErrorMessage"] = ex.Message;
-                return Page();
 
+            }
+            else
+            {
+                return Page();
             }
 
             
