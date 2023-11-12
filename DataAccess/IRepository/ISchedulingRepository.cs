@@ -15,4 +15,7 @@ public interface ISchedulingRepository : IGenericRepository<Scheduling>
     Account GetAccountByID(Guid id);
     Booking GetBookingByID(Guid id);
     void UpdateBooking(Booking booking);
+    List<Booking> GetBookingByStudio(Guid id);
+
+    List<Scheduling> GetSchedulingByStudio(Guid id);
 }
