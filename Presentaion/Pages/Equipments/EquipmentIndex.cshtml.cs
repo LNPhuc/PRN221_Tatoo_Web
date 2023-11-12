@@ -14,20 +14,26 @@ namespace Presentaion.Pages.Equipments
 {
     public class EquipmentIndexModel : PageModel
     {
-		[BindProperty(SupportsGet = true)]
-		public string SearchQuery { get; set; }
-		private readonly IEquipmentService _equipmentservice;
-		[BindProperty(SupportsGet = true)] public int PageIndex { get; set; } = 1;
-		public int TotalPages { get; set; }
-		public int PageSize { get; set; } = 10;
+        [BindProperty(SupportsGet = true)]
+        public string SearchQuery { get; set; }
+        private readonly IEquipmentService _equipmentservice;
+        private readonly IStudioService _studioService;
+
+        public EquipmentIndexModel(IEquipmentService equipmentservice, IStudioService studioService)
+        {
+            _equipmentservice = equipmentservice;
+            _studioService = studioService;
+        }
+
         [BindProperty] public string? NewId { get; set; }
-        public IList<Equipment> Equipment { get;set; }
+        public List<Equipment> Equipment { get;set; }
 
         public IActionResult OnGet()
         {
-			var stu = _equipmentservice.Search(SearchQuery, PageIndex - 1, PageSize);
-			TotalPages = stu.TotalPagesCount;
-			Equipment = stu.Items.ToList();
+            var accid = HttpContext.Session.GetString("AccountID");
+            Guid id = Guid.Parse(accid);
+            var stu = _studioService.GetStudioByAccountId(id);
+            Equipment = _equipmentservice.Search(SearchQuery,stu.Id);
 			return Page();
         }
     }

@@ -12,9 +12,10 @@ public class EquipmentService : IEquipmentService
 	{
 		_unitOfWork = unitOfWork;
 	}
-	public Pagination<Equipment> Search(string name, int pageIndex, int pageSize)
+	public List<Equipment> Search(string name, Guid stuid)
 	{
-		var stu = _unitOfWork.Equipment.Search(name);
-		return _unitOfWork.Equipment.ToPagination(stu, pageIndex, pageSize);
-	}
+		var stu = _unitOfWork.Equipment.Search(name, stuid);
+		return stu;
+
+    }
 }
