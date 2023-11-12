@@ -26,8 +26,8 @@ namespace Presentaion.Pages.SchedulePage
         public IList<Account> Accounts { get; set; } = default;
         public IActionResult OnGet()
         {
-            string userName = HttpContext.Session.GetString("AccountID");
-            if (userName == null)
+            string userName = HttpContext.Session.GetString("AccountRole");
+            if (userName == null || userName != "Staff")
             {
                 return RedirectToPage("/LoginPage");
             }
