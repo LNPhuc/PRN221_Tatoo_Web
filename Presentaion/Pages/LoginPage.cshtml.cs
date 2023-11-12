@@ -34,8 +34,15 @@ public class LoginPage : PageModel
             {
                 ViewData["notification"] = "Tài khoản không tồn tại";
                 return Page();
+            }else if (account.Status.ToString() == "INACTIVE")
+            {
+                ViewData["notification"] = "Tài khoản đã khóa";
+                return Page();
             }
-            else
+            else if (account.Role.ToString() == "ADMIN")
+            {
+                return RedirectToPage("./Admin/Admin");
+            }else
             {
                 HttpContext.Session.SetString("AccountID", account.Id.ToString());
                 HttpContext.Session.SetString("AccountName", account.UserName);
