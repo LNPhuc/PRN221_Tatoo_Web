@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Net.Mime;
+using AutoMapper;
 using BusinessLogic.DTOS.Account;
 using BusinessLogic.IService;
 using DataAccess.DataAccess;
@@ -28,6 +29,8 @@ public class AccountService : IAccountService
 	public async Task CreateStudioAccount(CreateStudio account)
     {
         var company = _mapper.Map<Studio>(account);
+        var image = new Image(Guid.NewGuid(), account.Image, company.Id.ToString());
+        _unitOfWork.Image.Add(image);
         _unitOfWork.Studio.Add(company);
         _unitOfWork.Save();
     }

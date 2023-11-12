@@ -2,6 +2,7 @@
 using BusinessLogic.DTOS;
 using BusinessLogic.DTOS.Account;
 using BusinessLogic.DTOS.Artist;
+using BusinessLogic.DTOS.Studio;
 using DataAccess.DataAccess;
 using DataAccess.DataAccess.Enum;
 
@@ -63,5 +64,11 @@ public class Mapper : Profile
             .ForMember(c => c.Name, act => act.MapFrom(src => src.Name))
             .ForMember(c => c.StudioId, act => act.MapFrom(src => src.StudioId))
             .ForMember(c => c.Experience, act => act.MapFrom(src => src.Experience));
+		
+		CreateMap<Studio, StudioItem>()
+			.ForMember(c=> c.Id, act =>act.MapFrom(src => src.Id))
+			.ForMember(c => c.Name, act => act.MapFrom(src => src.Name))
+			.ForMember(c => c.Address, act => act.MapFrom(src => src.Address))
+			.ForMember(c => c.Image, act => act.MapFrom(src => ""));
     }
 }

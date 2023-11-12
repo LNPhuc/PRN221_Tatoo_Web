@@ -18,4 +18,5 @@ public interface IStudioRepository : IGenericRepository<Studio>
     Boolean IsChange(Studio stu1, Studio stu2);
     Pagination<Studio> ToPagination(IEnumerable<Studio> list, int pageIndex, int pageSize);
     Studio GetStudioByAccountId(Guid accountId);
+    
 }
