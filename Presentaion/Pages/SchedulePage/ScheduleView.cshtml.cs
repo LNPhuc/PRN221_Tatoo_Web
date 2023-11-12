@@ -31,7 +31,7 @@ namespace Presentaion.Pages.SchedulePage
             //id = Guid.Parse("C3F6CF3C-D089-4D12-BD78-2989B622B737");
             studioID = id;
             string userName = HttpContext.Session.GetString("AccountRole");
-            if (userName == null || userName != "STAFF")
+            if (userName == null || userName != "STAFF" || studioID == Guid.Empty)
             {
                 return RedirectToPage("/LoginPage");
             }
