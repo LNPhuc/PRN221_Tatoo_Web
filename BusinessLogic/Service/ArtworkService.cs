@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccess.DataAccess;
 
 namespace BusinessLogic.Service
 {
@@ -22,6 +23,11 @@ namespace BusinessLogic.Service
         public async Task GetAllArtWork()
         {
 
+        }
+
+        public List<ArtWork> List(Guid Art)
+        {
+            return _unitOfWork.ArtWork.List(Art);
         }
     }
 }

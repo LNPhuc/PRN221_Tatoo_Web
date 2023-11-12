@@ -68,6 +68,8 @@ public class Mapper : Profile
 		CreateMap<Studio, StudioItem>()
 			.ForMember(c=> c.Id, act =>act.MapFrom(src => src.Id))
 			.ForMember(c => c.Name, act => act.MapFrom(src => src.Name))
+			.ForMember(c=> c.Phone, act =>act.MapFrom(src => src.StudioPhone))
+			.ForMember(c => c.Artist, act => act.MapFrom(src => src.Artists.Count))
 			.ForMember(c => c.Address, act => act.MapFrom(src => src.Address))
 			.ForMember(c => c.Image, act => act.MapFrom(src => ""));
     }

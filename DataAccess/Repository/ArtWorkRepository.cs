@@ -9,4 +9,9 @@ public class ArtWorkRepository: GenericRepository<ArtWork>, IArtWorkRepository
     public ArtWorkRepository(TatooWebContext context) : base(context)
     {
     }
+
+    public List<ArtWork> List(Guid Artist)
+    {
+        return _context.ArtWorks.Where(src => src.ArtistId == Artist).ToList();
+    }
 }

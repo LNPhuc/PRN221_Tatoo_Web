@@ -10,19 +10,33 @@ public class StudioDetail : PageModel
 {
     private readonly IStudioService _studioService;
     private readonly IBookingService _bookingService;
+    private readonly IArtworkService _artworkService;
 
-    public StudioDetail(IStudioService studioService, IBookingService bookingService)
+    public StudioDetail(IStudioService studioService, IBookingService bookingService, IArtworkService artworkService)
     {
         _studioService = studioService;
         _bookingService = bookingService;
+        _artworkService = artworkService;
     }
 
     public Studio studio { get; set; }
+    public List<DataAccess.DataAccess.ArtWork> ArtWorks { get; set; }   = default!;
     [BindProperty] public String Date { get; set; } = default!;
     
     public IActionResult OnGet(Guid id)
     {
         studio = _studioService.GetById(id);
+        if (studio.Artists != null)
+        {
+            foreach (var a in studio.Artists)
+            {
+                var w = _artworkService.List(a.Id);
+                foreach (var image in w)
+                {
+                    ArtWorks.Add(image);
+                }
+            }  
+        }
         return Page();
     }
 
