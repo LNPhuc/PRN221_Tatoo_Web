@@ -15,11 +15,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Pages\ArtWork\Create.cshtml" />
-    <None Include="Pages\ArtWork\Delete.cshtml" />
-    <None Include="Pages\ArtWork\Details.cshtml" />
-    <None Include="Pages\ArtWork\Edit.cshtml" />
-    <None Include="Pages\ArtWork\Index.cshtml" />
+    <None Include="Pages\ArtWorks\Delete.cshtml" />
+    <None Include="Pages\ArtWorks\Details.cshtml" />
+    <None Include="Pages\ArtWorks\Edit.cshtml" />
+    <None Include="Pages\ArtWorks\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

@@ -5,5 +5,7 @@ namespace DataAccess.IRepository;
 
 public interface IArtWorkRepository : IGenericRepository<ArtWork>
 {
-    
+    ArtWork CreateArtWork(ArtWork artWork);
+    ArtWork EditArtWork(ArtWork artWork);
+    ArtWork GetArtWorkByID(Guid id);
 }
