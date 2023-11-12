@@ -1,4 +1,5 @@
 ﻿
+using DataAccess.DataAccess;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,9 @@ namespace BusinessLogic.IService
 {
     public interface IArtworkService
     {
-    
+        ArtWork CreateArtWork(ArtWork artwork);
+        ArtWork UpdateArtWork(ArtWork artwork);
+        ArtWork GetArtWorkByID(Guid id);
+        ArtWork DeleteArtWork(ArtWork artWork);
     }
 }

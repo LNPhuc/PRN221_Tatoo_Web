@@ -7,28 +7,29 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using DataAccess;
 using DataAccess.DataAccess;
+using BusinessLogic.IService;
 
 namespace Presentaion.Pages.ArtWork
 {
     public class DetailsModel : PageModel
     {
-        private readonly DataAccess.TatooWebContext _context;
+       private readonly IArtworkService _artworkService;
 
-        public DetailsModel(DataAccess.TatooWebContext context)
+        public DetailsModel(IArtworkService artworkService)
         {
-            _context = context;
+            _artworkService = artworkService;
         }
 
         public DataAccess.DataAccess.ArtWork ArtWork { get; set; } = default!;
 
-        public async Task<IActionResult> OnGetAsync(Guid id)
+        public IActionResult OnGet(Guid id)
         {
-            if (id == null || _context.ArtWorks == null)
+            if (id == null)
             {
                 return NotFound();
             }
 
-            var artwork = await _context.ArtWorks.Include(c => c.Artist).FirstOrDefaultAsync(m => m.Id == id);
+            var artwork = _artworkService.GetArtWorkByID(id);
             if (artwork == null)
             {
                 return NotFound();
