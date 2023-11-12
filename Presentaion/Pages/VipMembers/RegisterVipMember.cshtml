@@ -20,17 +20,25 @@
                 <span asp-validation-for="VipMember.Id" class="text-danger"></span>
             </div>*@
             <div class="form-group">
-                <label class="control-label">Customer Name</label>
+                <label class="control-label">Customer LastName</label>
                 <input asp-for="Customer.LastName" class="form-control" readonly="true" />
+            </div><div class="form-group">
+                <label class="control-label">Customer FirstName</label>
+                <input asp-for="Customer.FirstName" class="form-control" readonly="true" />
             </div>
             <div class="form-group">
-                <label asp-for="StudioId" class="control-label"></label>
-                <input asp-for="StudioId" class="form-control" readonly="true"/>
-
-                <span asp-validation-for="StudioId" class="text-danger"></span>
-
-                @*<select asp-for="StudioId" class="form-control" asp-items="ViewBag.StudioId"></select>*@
+                <label class="control-label">Studio ID</label>
+                <input asp-for="StudioId" class="form-control" readonly="true" />
             </div>
+
+            <div class="form-group">
+                <label class="control-label">Studio Name</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" readonly="true" value="@Model.Studio.Name" />
+                </div>
+            </div>
+
+           
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />
             </div>

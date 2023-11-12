@@ -16,18 +16,19 @@ namespace Presentaion.Pages.VipMembers
     {
         private readonly IVipmemberService _vipmemberService;
         private readonly ICustomerService _customerService;
-
-        public RegisterVipMemberModel(IVipmemberService vipmemberService, ICustomerService customerService)
+        private readonly IStudioService _studioService;
+        public RegisterVipMemberModel(IVipmemberService vipmemberService, ICustomerService customerService, IStudioService studioService)
         {
             _vipmemberService = vipmemberService;
             _customerService = customerService;
+            _studioService = studioService;
         }
         [BindProperty(SupportsGet = true)]
         public Guid StudioId { get; set; }
         [BindProperty]
         public Customer Customer { get; set; }
-
-        public string Name { get; set; }
+        [BindProperty]
+        public Studio Studio { get; set; }
 
         public IActionResult OnGet(Guid id)
         {
@@ -43,6 +44,8 @@ namespace Presentaion.Pages.VipMembers
                 Guid accountid = Guid.Parse(accId);
                 var customer = _customerService.GetCusByAccountId(accountid);
                 Customer = customer;
+                //var studio = _studioService.GetStudioByAccountId(accountid);
+                Studio = _studioService.GetById(StudioId);
                 return Page();
             }          
         }
