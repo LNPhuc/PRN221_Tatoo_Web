@@ -8,28 +8,30 @@ using Microsoft.EntityFrameworkCore;
 using DataAccess;
 using DataAccess.DataAccess;
 using BusinessLogic.IService;
+using BusinessLogic.Service;
 
-namespace Presentaion.Pages.ArtWork
+namespace Presentaion.Pages.ArtWorks
 {
-    public class IndexModel : PageModel
+    public class ArtworkManagerModel : PageModel
     {
         private readonly IArtworkService _artworkService;
-
-        public IndexModel(IArtworkService artworkService)
+        private readonly IStudioService _studioService;
+        public ArtworkManagerModel(IArtworkService artworkService, IStudioService studioService)
         {
             _artworkService = artworkService;
+            _studioService = studioService;
         }
-
         public List<DataAccess.DataAccess.ArtWork> ArtWork { get; set; } = default!;
         [BindProperty]
         public string ArtWorkName { get; set; } = default!;
 
         public IActionResult OnGet()
         {
-            ArtWork = _artworkService.getAllartwork();
+            var accId = HttpContext.Session.GetString("AccountID");
+            Guid id = new Guid(accId);
+            var stu = _studioService.GetStudioByAccountId(id);
+            ArtWork = _artworkService.getAllawByStuId(stu.Id);
             return Page();
         }
-
-
     }
 }

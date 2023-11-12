@@ -8,13 +8,14 @@ namespace Presentaion.Pages.SchedulePage
     public class ScheduleViewModel : PageModel
     {
         private readonly ISchedulingService m_schedulingService;
-
+        private readonly IStudioService m_studioService;
         private readonly IBookingService m_bookingService;
 
-        public ScheduleViewModel(ISchedulingService schedulingService, IBookingService bookingService)
+        public ScheduleViewModel(ISchedulingService schedulingService, IBookingService bookingService, IStudioService studioService)
         {
             m_schedulingService = schedulingService;
             m_bookingService = bookingService;
+            m_studioService = studioService;
         }
 
         public IList<Customer> Customers { get; set; } = default!;
@@ -26,12 +27,14 @@ namespace Presentaion.Pages.SchedulePage
         public IList<Account> Accounts { get; set; } = default;
         [BindProperty]
         public Guid studioID { get; set; }
-        public IActionResult OnGet(Guid id)
+        public IActionResult OnGet()
         {
-            //id = Guid.Parse("C3F6CF3C-D089-4D12-BD78-2989B622B737");
-            studioID = id;
+            var accId = HttpContext.Session.GetString("AccountID");
+            Guid id = Guid.Parse(accId);
+            var stuid = m_studioService.GetStudioByAccountId(id);
+            studioID = stuid.Id;
             string userName = HttpContext.Session.GetString("AccountRole");
-            if (userName == null || userName != "STAFF" || studioID == Guid.Empty)
+            if (userName == null)
             {
                 return RedirectToPage("/LoginPage");
             }

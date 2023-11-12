@@ -51,5 +51,15 @@ namespace BusinessLogic.Service
             _unitOfWork.Save();
             return null;
         }
+
+        public List<ArtWork> getAllartwork()
+        {
+            return _unitOfWork.ArtWork.getAllArtwork();
+        }
+
+        public List<ArtWork> getAllawByStuId(Guid stuid)
+        {
+            return _unitOfWork.ArtWork.getAllArtworkByStuId(stuid);
+        }
     }
 }

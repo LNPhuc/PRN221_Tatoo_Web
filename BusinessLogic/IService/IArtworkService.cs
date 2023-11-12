@@ -10,6 +10,8 @@ namespace BusinessLogic.IService
 {
     public interface IArtworkService
     {
+        List<ArtWork> getAllartwork();
+        List<ArtWork> getAllawByStuId(Guid stuid);
         ArtWork CreateArtWork(ArtWork artwork);
         ArtWork UpdateArtWork(ArtWork artwork);
         ArtWork GetArtWorkByID(Guid id);
