@@ -1,0 +1,67 @@
+﻿@page
+@model Presentaion.Pages.ArtWorks.ArtworkManagerModel
+
+@{
+    ViewData["Title"] = "ArtworkManager";
+    Layout = "_LayoutStudioPage";
+}
+
+<h2>ArtworkManager</h2>
+
+<p>
+    <a asp-page="ArtWorkCreate">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ArtWork[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArtWork[0].Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArtWork[0].Position)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArtWork[0].Size)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArtWork[0].Time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArtWork[0].Artist)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.ArtWork) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Position)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Size)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Artist.Id)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

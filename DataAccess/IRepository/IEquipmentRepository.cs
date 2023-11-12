@@ -6,7 +6,7 @@ namespace DataAccess.IRepository;
 
 public interface IEquipmentRepository : IGenericRepository<Equipment>
 {
-	List<Equipment> Search(String name);
+	List<Equipment> Search(String name, Guid stuid);
 	Pagination<Equipment> ToPagination(IEnumerable<Equipment> list, int pageIndex, int pageSize);
 
 }

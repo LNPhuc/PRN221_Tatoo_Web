@@ -23,7 +23,7 @@ namespace Presentaion.Pages.Artists
         public IActionResult OnGet()
         {
 			var accId = HttpContext.Session.GetString("AccountID");
-			Guid id = new Guid(accId);
+			Guid id = Guid.Parse(accId);
             var stu = _studioService.GetStudioByAccountId(id);
 			Artists = _artistService.GetArtistByStudioId(stu.Id);
             return Page();

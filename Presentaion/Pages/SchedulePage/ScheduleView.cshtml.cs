@@ -8,13 +8,14 @@ namespace Presentaion.Pages.SchedulePage
     public class ScheduleViewModel : PageModel
     {
         private readonly ISchedulingService m_schedulingService;
-
+        private readonly IStudioService m_studioService;
         private readonly IBookingService m_bookingService;
 
-        public ScheduleViewModel(ISchedulingService schedulingService, IBookingService bookingService)
+        public ScheduleViewModel(ISchedulingService schedulingService, IBookingService bookingService, IStudioService studioService)
         {
             m_schedulingService = schedulingService;
             m_bookingService = bookingService;
+            m_studioService = studioService;
         }
 
         public IList<Customer> Customers { get; set; } = default!;

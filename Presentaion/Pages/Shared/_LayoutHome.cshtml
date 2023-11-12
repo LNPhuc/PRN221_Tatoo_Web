@@ -80,22 +80,20 @@
 						<ul class="nav-list" id="menu">
 	
 														
-							@if (Context.Session.GetString("AccountRole") == "CUSTOMER")
+							@if (Context.Session.GetString("AccountRole") == "STAFF")
 							{
-								<li><p><a asp-page="HomePage">Home</a></p></li>
-								<li><a asp-page="./Artists/ArtistIndex">Artists</a></li>
-							}
-							else if (Context.Session.GetString("AccountRole") == "STAFF")
-							{
+								
 								<li><p><a asp-page="./SchedulePage/ScheduleView">Dashboard</a></p></li>
-								<li><a asp-page="./Artists/ArtistManager">Artists</a></li>
+								<li><a asp-page="ArtWorks/ArtworkManager">Art Work</a></li>
+								<li><a asp-page="Artists/ArtistManager">Artists</a></li>
 							}
 							else
 							{
 								<li><p><a asp-page="HomePage">Home</a></p></li>
-								<li><a href="Artists/ArtistIndex">Artist</a></li>
+								<li><a asp-page="ArtWorks/Index">Art Work</a></li>
+								<li><a asp-page="Artists/ArtistIndex">Artist</a></li>
 							}
-							<li><a href="ArtWork/Index">Art Work</a></li>
+							
 							<!-- logo -->
 							<li class="logo"><a href="index.html"><img src="images/logo.png" alt="" /></a></li>
 							<!-- logo -->
