@@ -18,7 +18,7 @@ public class StudioDetail : PageModel
     }
 
     public Studio studio { get; set; }
-    [BindProperty] public DateTime bookingDate { get; set; } = default!;
+    [BindProperty] public String Date { get; set; } = default!;
     
     public IActionResult OnGet(Guid id)
     {
@@ -31,6 +31,8 @@ public class StudioDetail : PageModel
         try
         {
             var userName = HttpContext.Session.GetString("AccountID");
+            DateTime.TryParse(Date, out DateTime dateValue);
+            DateTime bookingDate = dateValue;
             if (userName == null)
             {
                 return RedirectToPage("LoginPage");

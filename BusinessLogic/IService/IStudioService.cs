@@ -1,4 +1,5 @@
-﻿using DataAccess.DataAccess;
+﻿using BusinessLogic.DTOS.Studio;
+using DataAccess.DataAccess;
 using DataAccessObject.Utils;
 
 namespace BusinessLogic.IService;
@@ -11,4 +12,6 @@ public interface IStudioService
     Studio Delete(Guid id);
     Studio Create(Studio studio);
     Studio GetStudioByAccountId(Guid id);
+
+    List<StudioItem> GetAllItem(string name);
 }

@@ -38,8 +38,8 @@ public class LoginPage : PageModel
             else
             {
                 HttpContext.Session.SetString("AccountID", account.Id.ToString());
-                HttpContext.Session.SetString("AccountName", account.UserName.ToString());
-                HttpContext.Session.SetString("AccountRole", account.Role.ToString());
+                HttpContext.Session.SetString("AccountName", account.UserName);
+                HttpContext.Session.SetString("AccountRole", account.Role);
 
                 return RedirectToPage("./Index");
             }

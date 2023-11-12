@@ -1,4 +1,6 @@
-﻿using BusinessLogic.IService;
+﻿using AutoMapper;
+using BusinessLogic.DTOS.Studio;
+using BusinessLogic.IService;
 using DataAccess.DataAccess;
 using DataAccess.IRepository;
 using DataAccess.IRepository.UnitOfWork;
@@ -10,9 +12,11 @@ namespace BusinessLogic.Service;
 public class StudioService : IStudioService
 {
     private readonly IUnitOfWork _unitOfWork;
-    public StudioService(IUnitOfWork unitOfWork)
+    private readonly IMapper _mapper;
+    public StudioService(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
+        _mapper = mapper;
     }
 
     public Studio? Create(Studio studio)
@@ -45,6 +49,18 @@ public class StudioService : IStudioService
     public Studio GetStudioByAccountId(Guid id)
     {
         return _unitOfWork.Studio.GetStudioByAccountId(id);
+    }
+
+    public List<StudioItem> GetAllItem(String name)
+    {
+        var studios = _unitOfWork.Studio.Search(name);
+        var item = _mapper.Map<List<StudioItem>>(studios);
+        foreach (var i in item)
+        {
+            String id = i.Id.ToString();
+            i.Image = _unitOfWork.Image.url(id);
+        }
+        return item;
     }
 
     public Pagination<Studio> Search(string name, int pageIndex, int pageSize)
