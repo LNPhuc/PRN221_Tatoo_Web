@@ -24,7 +24,7 @@ namespace Presentaion.Pages.Profile
                 return RedirectToPage("/LoginPage");
             }
             Guid accountId = Guid.Parse(accId);
-            Customer = _customerService.GetCusById(id);
+            Customer = _customerService.GetCusByAccountId(id);
 
 
 

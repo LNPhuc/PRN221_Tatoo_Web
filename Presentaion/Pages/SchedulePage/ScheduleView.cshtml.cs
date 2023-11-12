@@ -27,7 +27,7 @@ namespace Presentaion.Pages.SchedulePage
         public IActionResult OnGet()
         {
             string userName = HttpContext.Session.GetString("AccountRole");
-            if (userName == null || userName != "Staff")
+            if (userName == null || userName != "STAFF")
             {
                 return RedirectToPage("/LoginPage");
             }
