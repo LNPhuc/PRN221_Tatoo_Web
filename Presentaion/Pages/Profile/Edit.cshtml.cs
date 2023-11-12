@@ -35,6 +35,7 @@ namespace Presentaion.Pages.Profile
             }
             else
             {
+                Customer = _customerService.GetCusByAccountId(accountId);
                 return Page();
             }
 

@@ -96,8 +96,18 @@
 							<!-- logo -->
 							<li class="logo"><a href="index.html"><img src="images/logo.png" alt="" /></a></li>
 							<!-- logo -->
-							<li><a href="Studios/Index">Studio</a></li>
-							<li><a href="#find" class="scroll">Find Us</a></li>
+								@if (Context.Session.GetString("AccountRole") == "STAFF")
+								{
+									<li><a href="Equipments/EquipmentIndex">Equipments</a></li>
+									<li><a href="VipMembers/VipMemberIndex">Vip Members</a></li>
+								}
+								else 
+								{
+									<li><a href="Studios/Index">Studio</a></li>	
+									<li><a href="#find" class="scroll">Find Us</a></li>
+								}
+							
+							
 							@if (Context.Session.GetString("AccountName") != null)
 							{
 								@if (Context.Session.GetString("AccountRole") == "CUSTOMER")
