@@ -29,4 +29,8 @@ public class SchedulingService : ISchedulingService
 
     public Booking GetBookingByID(Guid id) => _unitOfWork.Schedule.GetBookingByID(id);
     public void UpdateBooking(Booking booking) => _unitOfWork.Schedule.UpdateBooking(booking);
+
+    public List<Booking> GetBookingByStudio(Guid id) => _unitOfWork.Schedule.GetBookingByStudio(id);
+
+    public List<Scheduling> GetSchedulingByStudio(Guid id) => _unitOfWork.Schedule.GetSchedulingByStudio(id);
 }

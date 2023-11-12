@@ -24,39 +24,21 @@ namespace Presentaion.Pages.SchedulePage
         public IList<Booking> Bookings { get; set; } = default!;
 
         public IList<Account> Accounts { get; set; } = default;
-        public IActionResult OnGet()
+        [BindProperty]
+        public Guid studioID { get; set; }
+        public IActionResult OnGet(Guid id)
         {
+            //id = Guid.Parse("C3F6CF3C-D089-4D12-BD78-2989B622B737");
+            studioID = id;
             string userName = HttpContext.Session.GetString("AccountRole");
             if (userName == null || userName != "STAFF")
             {
                 return RedirectToPage("/LoginPage");
             }
-            if (m_bookingService.GetAll() != null)
-            {
-                List<Customer> listGetCus = new List<Customer>();
-                List<Account> listGetAcc = new List<Account>();
-
-                Bookings = m_bookingService.GetAll().ToList();
-                if (Bookings.Count > 0)
-                {
-                    foreach (var booking in Bookings)
-                    {
-                        Customer customer = m_schedulingService.GetCustomerByID(((Guid)booking.CustomerId));
-                        listGetCus.Add(customer);
-                        Account account = m_schedulingService.GetAccountByID((Guid)customer.AccountId);
-                        listGetAcc.Add(account);
-                    }
-                    Customers = listGetCus.ToList();
-                    Accounts = listGetAcc.ToList();
-                }
-            }
-            if (m_schedulingService.GetAll() != null)
-            {
-                Schedulings = m_schedulingService.GetAll().ToList();
-            }
+            ShowDataOnTable(studioID);
             return Page();
         }
-        public IActionResult OnGetBookingCancel(Guid id)
+        public IActionResult OnGetBookingCancel(Guid id, Guid studioid)
         {
             Booking curBooking = new Booking();
             curBooking = m_schedulingService.GetBookingByID(id);
@@ -64,98 +46,32 @@ namespace Presentaion.Pages.SchedulePage
             m_schedulingService.UpdateBooking(curBooking);
             m_schedulingService.SaveChanges();
 
-            if (m_bookingService.GetAll() != null)
-            {
-                List<Customer> listGetCus = new List<Customer>();
-                List<Account> listGetAcc = new List<Account>();
-
-                Bookings = m_bookingService.GetAll().ToList();
-                if (Bookings.Count > 0)
-                {
-                    foreach (var booking in Bookings)
-                    {
-                        Customer customer = m_schedulingService.GetCustomerByID(((Guid)booking.CustomerId));
-                        listGetCus.Add(customer);
-                        Account account = m_schedulingService.GetAccountByID((Guid)customer.AccountId);
-                        listGetAcc.Add(account);
-                    }
-                    Customers = listGetCus.ToList();
-                    Accounts = listGetAcc.ToList();
-                }
-            }
-            if (m_schedulingService.GetAll() != null)
-            {
-                Schedulings = m_schedulingService.GetAll().ToList();
-            }
+            ShowDataOnTable(studioid);
             return Page();
         }
-        public IActionResult OnGetBookingDone(Guid id)
+        public IActionResult OnGetBookingDone(Guid id, Guid studioid)
         {
             Booking curBooking = new Booking();
             curBooking = m_schedulingService.GetBookingByID(id);
             curBooking.Status = "DONE";
             m_schedulingService.UpdateBooking(curBooking);
             m_schedulingService.SaveChanges();
-
-            if (m_bookingService.GetAll() != null)
-            {
-                List<Customer> listGetCus = new List<Customer>();
-                List<Account> listGetAcc = new List<Account>();
-
-                Bookings = m_bookingService.GetAll().ToList();
-                if (Bookings.Count > 0)
-                {
-                    foreach (var booking in Bookings)
-                    {
-                        Customer customer = m_schedulingService.GetCustomerByID(((Guid)booking.CustomerId));
-                        listGetCus.Add(customer);
-                        Account account = m_schedulingService.GetAccountByID((Guid)customer.AccountId);
-                        listGetAcc.Add(account);
-                    }
-                    Customers = listGetCus.ToList();
-                    Accounts = listGetAcc.ToList();
-                }
-            }
-            if (m_schedulingService.GetAll() != null)
-            {
-                Schedulings = m_schedulingService.GetAll().ToList();
-            }
+            ShowDataOnTable(studioid);
             return Page();
         }
-        public IActionResult OnGetCancel(Guid id)
+        public IActionResult OnGetCancel(Guid id, Guid studioid)
         {
             Scheduling scheduling = new Scheduling();
             scheduling = m_schedulingService.GetById(id);
             scheduling.Status = "CANCEL";
             m_schedulingService.Update(scheduling);
             m_schedulingService.SaveChanges();
+            ShowDataOnTable(studioid);
 
-            if (m_bookingService.GetAll() != null)
-            {
-                List<Customer> listGetCus = new List<Customer>();
-                List<Account> listGetAcc = new List<Account>();
 
-                Bookings = m_bookingService.GetAll().ToList();
-                if (Bookings.Count > 0)
-                {
-                    foreach (var booking in Bookings)
-                    {
-                        Customer customer = m_schedulingService.GetCustomerByID(((Guid)booking.CustomerId));
-                        listGetCus.Add(customer);
-                        Account account = m_schedulingService.GetAccountByID((Guid)customer.AccountId);
-                        listGetAcc.Add(account);
-                    }
-                    Customers = listGetCus.ToList();
-                    Accounts = listGetAcc.ToList();
-                }
-            }
-            if (m_schedulingService.GetAll() != null)
-            {
-                Schedulings = m_schedulingService.GetAll().ToList();
-            }
             return Page();
         }
-        public IActionResult OnGetDone(Guid id)
+        public IActionResult OnGetDone(Guid id, Guid studioid)
         {
             Scheduling scheduling = new Scheduling();
             scheduling = m_schedulingService.GetById(id);
@@ -163,12 +79,18 @@ namespace Presentaion.Pages.SchedulePage
             m_schedulingService.Update(scheduling);
             m_schedulingService.SaveChanges();
 
-            if (m_bookingService.GetAll() != null)
+            ShowDataOnTable(studioid);
+            return Page();
+        }
+
+        public void ShowDataOnTable(Guid id)
+        {
+            if (m_schedulingService.GetBookingByStudio(id) != null)
             {
                 List<Customer> listGetCus = new List<Customer>();
                 List<Account> listGetAcc = new List<Account>();
 
-                Bookings = m_bookingService.GetAll().ToList();
+                Bookings = m_schedulingService.GetBookingByStudio(id);
                 if (Bookings.Count > 0)
                 {
                     foreach (var booking in Bookings)
@@ -182,11 +104,10 @@ namespace Presentaion.Pages.SchedulePage
                     Accounts = listGetAcc.ToList();
                 }
             }
-            if (m_schedulingService.GetAll() != null)
+            if (m_schedulingService.GetSchedulingByStudio(id) != null)
             {
-                Schedulings = m_schedulingService.GetAll().ToList();
+                Schedulings = m_schedulingService.GetSchedulingByStudio(id);
             }
-            return Page();
         }
     }
 }

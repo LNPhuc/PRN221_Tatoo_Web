@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repository;
 
-public class SchedulingRepository: GenericRepository<Scheduling>, ISchedulingRepository
+public class SchedulingRepository : GenericRepository<Scheduling>, ISchedulingRepository
 {
     private readonly TatooWebContext _context;
     public SchedulingRepository(TatooWebContext context) : base(context)
@@ -60,5 +60,13 @@ public class SchedulingRepository: GenericRepository<Scheduling>, ISchedulingRep
     public void UpdateBooking(Booking booking)
     {
         _context.Set<Booking>().Update(booking);
+    }
+    public List<Booking> GetBookingByStudio(Guid id)
+    {
+        return _context.Bookings.Where(b => b.StudioId == id).ToList();
+    }
+    public List<Scheduling> GetSchedulingByStudio(Guid id)
+    {
+        return _context.Schedulings.Include(s => s.Booking).Where(b => b.Booking.StudioId == id).ToList();
     }
 }
