@@ -12,4 +12,5 @@ public interface IArtWorkRepository : IGenericRepository<ArtWork>
     ArtWork GetArtWorkByID(Guid id);
     ArtWork DeleteArtWork(ArtWork artWork);
     
+    List<ArtWork> List(Guid Artist);
 }

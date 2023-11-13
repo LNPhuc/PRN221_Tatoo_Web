@@ -54,4 +54,9 @@ public class ArtWorkRepository: GenericRepository<ArtWork>, IArtWorkRepository
 
 
     }
+
+    public List<ArtWork> List(Guid Artist)
+    {
+        return _context.ArtWorks.Where(src => src.ArtistId == Artist).ToList();
+    }
 }

@@ -29,7 +29,7 @@ public class StudioRepository: GenericRepository<Studio>, IStudioRepository
 
     public Studio GetById(Guid id)
     {
-        return _context.Set<Studio>().FirstOrDefault(c => c.Id == id);
+        return _context.Set<Studio>().Include(Art => Art.Artists).FirstOrDefault(c => c.Id == id);
     }
 
     public bool IsChange(Studio stu1, Studio stu2)
@@ -93,13 +93,13 @@ public class StudioRepository: GenericRepository<Studio>, IStudioRepository
         
         if (name == null)
         {
-            var studios = _context.Set<Studio>().ToList();
+            var studios = _context.Set<Studio>().Include(art => art.Artists).ToList();
             return studios;
         }
         else
         {
             var studios = _context.Set<Studio>()
-                .Where(s => s.Name.Contains(name))
+                .Where(s => s.Name.Contains(name)).Include(art => art.Artists)
                 .ToList();
             return studios;
         }

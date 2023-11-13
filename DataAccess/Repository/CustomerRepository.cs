@@ -26,7 +26,7 @@ public class CustomerRepository: GenericRepository<Customer>, ICustomerRepositor
 
 	public Customer GetCusById(Guid id)
 	{
-		return _context.Set<Customer>().Include(c => c.Account).FirstOrDefault(c => c.AccountId == id);
+		return _context.Set<Customer>().Include(c => c.Account).Include(c => c.Bookings).FirstOrDefault(c => c.AccountId == id);
 	}public Customer GetCusById2(Guid id)
 	{
 		return _context.Set<Customer>().Include(c => c.Account).FirstOrDefault(c => c.Id == id);
