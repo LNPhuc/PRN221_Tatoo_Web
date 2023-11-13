@@ -35,7 +35,11 @@
                                 </div>
                                 <div class="card">
                                     <div class="card-body">
-                                        <form method="post">                                            
+                                        <form method="post">                    
+                                            <div class="form-group">
+                                                <label class="control-label">Artish</label>
+                                                <select name="artishId" asp-items="Model.ArtistOptions"></select>
+                                            </div>
                                             <div class="form-group">
                                                 <label asp-for="schedule.Date" class="control-label"></label>
                                                 <input asp-for="schedule.Date" class="form-control" />

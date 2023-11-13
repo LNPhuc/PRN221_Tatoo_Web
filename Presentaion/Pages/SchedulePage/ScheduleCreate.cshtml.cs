@@ -2,6 +2,8 @@ using BusinessLogic.IService;
 using DataAccess.DataAccess;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using SQLitePCL;
 using System.Globalization;
 
 namespace Presentaion.Pages.SchedulePage
@@ -16,17 +18,27 @@ namespace Presentaion.Pages.SchedulePage
         }
         [BindProperty]
         public Scheduling schedule { get; set; } = default!;
+
+        public List<SelectListItem> ArtistOptions { get; set; }
         [BindProperty]
         public Guid bookingID { get; set; }
-        public IActionResult OnGet(Guid id)
+        public IActionResult OnGet(Guid id, Guid studioId)
         {
-            if (id == Guid.Empty)
+            if (id == Guid.Empty || studioId == Guid.Empty)
             {
                 return RedirectToPage("./ScheduleView");
             }
             else
             {
                 bookingID = id;
+                var artishList = _schedulingService.GetAllArtishByStudio(studioId).ToList();
+                List<SelectListItem> selectList = new List<SelectListItem>();
+                foreach (var artist in artishList) 
+                {
+                    SelectListItem selectListItem = new SelectListItem{Value = artist.Id.ToString(), Text = artist.Name};
+                    selectList.Add(selectListItem);
+                }
+                ArtistOptions = selectList;
                 return Page();
             }
         }
@@ -40,6 +52,7 @@ namespace Presentaion.Pages.SchedulePage
             {
                 string startTime = Request.Form["StartTime"].ToString();
                 string endTime = Request.Form["EndTime"].ToString();
+                string artishId = Request.Form["artishId"].ToString();                
                 if (schedule.Date < DateTime.Now || string.IsNullOrEmpty(schedule.Date.ToString()))
                 {
                     if (schedule.Date < DateTime.Now)
@@ -61,6 +74,9 @@ namespace Presentaion.Pages.SchedulePage
                 else
                 {
                     Guid id = Guid.NewGuid();
+                    var getBooking = _schedulingService.GetBookingByID((Guid)schedule.BookingId);
+                    getBooking.ArtistId = Guid.Parse(artishId);
+                    _schedulingService.UpdateBooking(getBooking);
                     schedule.Id = id;
                     schedule.BookingId = bookingid;                    
                     schedule.StartTime = TimeSpan.ParseExact(startTime, @"hh\:mm", CultureInfo.InvariantCulture);                    

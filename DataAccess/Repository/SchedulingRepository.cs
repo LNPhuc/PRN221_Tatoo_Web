@@ -56,7 +56,10 @@ public class SchedulingRepository : GenericRepository<Scheduling>, ISchedulingRe
     {
         return _context.Set<Booking>().FirstOrDefault(b => b.Id == id);
     }
-
+    public Artist GetArtistById(Guid id)
+    {
+        return _context.Set<Artist>().FirstOrDefault(a => a.Id == id);
+    }
     public void UpdateBooking(Booking booking)
     {
         _context.Set<Booking>().Update(booking);
@@ -68,5 +71,11 @@ public class SchedulingRepository : GenericRepository<Scheduling>, ISchedulingRe
     public List<Scheduling> GetSchedulingByStudio(Guid id)
     {
         return _context.Schedulings.Include(s => s.Booking).Where(b => b.Booking.StudioId == id).ToList();
+    }
+
+    public List<Artist> GetAllArtishByStudio(Guid id)
+    {
+        return _context.Artists.Where(s => s.StudioId == id).ToList();
+
     }
 }

@@ -2,6 +2,7 @@ using BusinessLogic.IService;
 using DataAccess.DataAccess;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Globalization;
 
 namespace Presentaion.Pages.SchedulePage
@@ -16,9 +17,11 @@ namespace Presentaion.Pages.SchedulePage
         }
         [BindProperty]
         public Scheduling schedule { get; set; } = default!;
-        public IActionResult OnGet(Guid id)
+
+        public List<SelectListItem> ArtistOptions { get; set; }
+        public IActionResult OnGet(Guid id, Guid studioId)
         {
-            if (id == Guid.Empty)
+            if (id == Guid.Empty || studioId == Guid.Empty)
             {
                 return RedirectToPage("./ScheduleView");
             }
@@ -29,6 +32,14 @@ namespace Presentaion.Pages.SchedulePage
                 {
                     schedule = getschedule;
                 }
+                var artishList = _schedulingService.GetAllArtishByStudio(studioId).ToList();
+                List<SelectListItem> selectList = new List<SelectListItem>();
+                foreach (var artist in artishList)
+                {
+                    SelectListItem selectListItem = new SelectListItem { Value = artist.Id.ToString(), Text = artist.Name };
+                    selectList.Add(selectListItem);
+                }
+                ArtistOptions = selectList;
                 return Page();
             }
         }
@@ -42,6 +53,7 @@ namespace Presentaion.Pages.SchedulePage
             {
                 string startTime = Request.Form["StartTime"].ToString();
                 string endTime = Request.Form["EndTime"].ToString();
+                string artishId = Request.Form["artishId"].ToString();
                 if (schedule.Date < DateTime.Now || string.IsNullOrEmpty(schedule.Date.ToString()))
                 {
                     if (schedule.Date < DateTime.Now)
@@ -62,6 +74,9 @@ namespace Presentaion.Pages.SchedulePage
                 } else
                 {                
                     Scheduling curSchedule = _schedulingService.GetById(id);
+                    var getBooking = _schedulingService.GetBookingByID((Guid)curSchedule.BookingId);
+                    getBooking.ArtistId = Guid.Parse(artishId);
+                    _schedulingService.UpdateBooking(getBooking);
                     //curSchedule.Id = id;
                     curSchedule.Date = schedule.Date;                    
                     curSchedule.StartTime = TimeSpan.ParseExact(startTime, @"hh\:mm", CultureInfo.InvariantCulture);                    

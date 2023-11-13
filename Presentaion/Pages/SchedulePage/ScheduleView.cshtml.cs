@@ -25,17 +25,20 @@ namespace Presentaion.Pages.SchedulePage
         public IList<Booking> Bookings { get; set; } = default!;
 
         public IList<Account> Accounts { get; set; } = default;
+        public IList<Artist> Artishs { get; set; } = default;
         [BindProperty]
         public Guid studioID { get; set; }
         public IActionResult OnGet()
         {
-            Guid userId = Guid.Parse(HttpContext.Session.GetString("AccountID"));
-            var studio = m_studioService.GetStudioByAccountId(userId);
-            studioID = studio.Id;
-            if (userId == null || studio.Account.Role != "STAFF" || studioID == Guid.Empty)
-            {
-                return RedirectToPage("/LoginPage");
-            }
+
+            //Guid userId = Guid.Parse(HttpContext.Session.GetString("AccountID"));
+            //var studio = m_studioService.GetStudioByAccountId(userId);
+            //studioID = studio.Id;
+            //if (userId == null || studio.Account.Role != "STAFF" || studioID == Guid.Empty)
+            //{
+            //    return RedirectToPage("/LoginPage");
+            //}
+            studioID = Guid.Parse("C3F6CF3C-D089-4D12-BD78-2989B622B737");
             ShowDataOnTable(studioID);
             return Page();
         }
@@ -90,6 +93,7 @@ namespace Presentaion.Pages.SchedulePage
             {
                 List<Customer> listGetCus = new List<Customer>();
                 List<Account> listGetAcc = new List<Account>();
+                List<Artist> ListGetArtish = new List<Artist>();
 
                 Bookings = m_schedulingService.GetBookingByStudio(id);
                 if (Bookings.Count > 0)
@@ -100,13 +104,24 @@ namespace Presentaion.Pages.SchedulePage
                         listGetCus.Add(customer);
                         Account account = m_schedulingService.GetAccountByID((Guid)customer.AccountId);
                         listGetAcc.Add(account);
+                        if (booking.ArtistId != null) 
+                        { 
+                            Artist artish = m_schedulingService.GetArtistById(((Guid)booking.ArtistId));
+                            ListGetArtish.Add(artish);
+                        }
+                        else
+                        {
+                            Artist artish = new Artist { };
+                            ListGetArtish.Add(artish);
+                        }                        
                     }
-                    Customers = listGetCus.ToList();
-                    Accounts = listGetAcc.ToList();
+                    Customers = listGetCus;
+                    Accounts = listGetAcc;
+                    Artishs = ListGetArtish;
                 }
             }
             if (m_schedulingService.GetSchedulingByStudio(id) != null)
-                {
+            {
                 Schedulings = m_schedulingService.GetSchedulingByStudio(id);
             }
         }
