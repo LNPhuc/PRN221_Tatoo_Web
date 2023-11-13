@@ -48,6 +48,7 @@ public static class DenpendencyInjection
         services.AddTransient<ISchedulingService, SchedulingService>();
         services.AddTransient<IBookingService, BookingService>();
         services.AddTransient<IVipmemberService, VipmemberService>();
+        services.AddTransient<IEquipmentService, EquipmentService>();
 
         //AUTOMAPPER
         services.AddAutoMapper(typeof(Mapper).Assembly);

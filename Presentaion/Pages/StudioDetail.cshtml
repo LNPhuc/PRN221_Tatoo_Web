@@ -36,9 +36,15 @@
                     <p class="lead">@Html.DisplayFor(model => model.studio.StudioPhone)</p>
                     <p class="lead">@Html.DisplayFor(model => model.studio.StudioEmail)</p>
                     <div class="d-flex">
-                            <a asp-page="VipMembers/RegisterVipMember" asp-route-id="@Model.studio.Id"> Register Vip member</a>
-                           
-                                @*RegisterVipMember*@
+                            
+                            @{
+                                String check = HttpContext.Session.GetString("AccountRole");
+                                if (check == "CUSTOMER")
+                                {
+                                    <a asp-page="VipMembers/RegisterVipMember" asp-route-id="@Model.studio.Id"> Register Vip member</a>
+                                }
+                                
+                            }
                         <button class="open-modal" class="btn btn-outline-dark flex-shrink-0" type="button">
                             <i class="bi-cart-fill me-1"></i>
                             Booking

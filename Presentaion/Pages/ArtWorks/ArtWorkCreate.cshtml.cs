@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using DataAccess;
 using DataAccess.DataAccess;
 using BusinessLogic.IService;
+using BusinessLogic.DTOS.Artwork;
 
 namespace Presentaion.Pages.ArtWorks
 {
