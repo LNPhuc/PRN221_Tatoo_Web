@@ -27,16 +27,14 @@ namespace Presentaion.Pages.SchedulePage
         public IList<Account> Accounts { get; set; } = default;
         [BindProperty]
         public Guid studioID { get; set; }
-        public IActionResult OnGet()
+        public IActionResult OnGet(Guid id)
         {
-            var accId = HttpContext.Session.GetString("AccountID");
-            Guid id = Guid.Parse(accId);
-            var stuid = m_studioService.GetStudioByAccountId(id);
-            studioID = stuid.Id;
+            id = Guid.Parse("C3F6CF3C-D089-4D12-BD78-2989B622B737");
+            studioID = id;
             string userName = HttpContext.Session.GetString("AccountRole");
-            if (userName == null)
+            if (userName == null || userName != "STAFF" || studioID == Guid.Empty)
             {
-                return RedirectToPage("/LoginPage");
+                //return RedirectToPage("/LoginPage");
             }
             ShowDataOnTable(studioID);
             return Page();
@@ -108,7 +106,7 @@ namespace Presentaion.Pages.SchedulePage
                 }
             }
             if (m_schedulingService.GetSchedulingByStudio(id) != null)
-            {
+                {
                 Schedulings = m_schedulingService.GetSchedulingByStudio(id);
             }
         }
