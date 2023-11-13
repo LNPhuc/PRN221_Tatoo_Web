@@ -56,7 +56,17 @@
 </div>
 
 <div>
-    <a asp-page="ArtworkManager">Back to List</a>
+    @{
+        String check = HttpContext.Session.GetString("AccountRole");
+        if (check == "STAFF")
+        {
+            <a asp-page="./ArtworkManager">Back to List</a>
+        }
+        else
+        {
+            <a asp-page="./Index">Back to List</a>
+        }
+    }
 </div>
 
 @section Scripts {
