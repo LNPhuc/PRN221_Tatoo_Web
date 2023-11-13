@@ -14,6 +14,7 @@ namespace BusinessLogic.DTOS.Artwork
 		public string? Position { get; set; }
 		public string? Size { get; set; }
 		public TimeSpan? Time { get; set; }
-		public Image? image { get; set; }
+		public Guid? ArtistId { get; set; }
+		/*public Image? image { get; set; }*/
 	}
 }

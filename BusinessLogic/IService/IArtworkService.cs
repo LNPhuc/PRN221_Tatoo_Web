@@ -1,4 +1,5 @@
 ﻿
+using BusinessLogic.DTOS.Artwork;
 using DataAccess.DataAccess;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,10 @@ namespace BusinessLogic.IService
     {
         List<ArtWork> getAllartwork();
         List<ArtWork> getAllawByStuId(Guid stuid);
-        ArtWork CreateArtWork(ArtWork artwork);
+        ArtWork CreateArtWork(CreateArtwork artwork);
         ArtWork UpdateArtWork(ArtWork artwork);
         ArtWork GetArtWorkByID(Guid id);
         ArtWork DeleteArtWork(ArtWork artWork);
+        
     }
 }

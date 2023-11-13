@@ -9,20 +9,26 @@ using Microsoft.EntityFrameworkCore;
 using DataAccess;
 using DataAccess.DataAccess;
 using BusinessLogic.IService;
+using BusinessLogic.Service;
 
 namespace Presentaion.Pages.ArtWork
 {
     public class EditModel : PageModel
     {
-       private readonly IArtworkService _artworkService;
+        private readonly IArtworkService _artworkService;
+        private readonly IStudioService _studioService;
+        private readonly IArtistService _artistService;
 
-        public EditModel(IArtworkService artworkService)
+        public EditModel(IArtworkService artworkService, IStudioService studioService, IArtistService artistService)
         {
             _artworkService = artworkService;
+            _studioService = studioService;
+            _artistService = artistService;
         }
 
         [BindProperty]
         public DataAccess.DataAccess.ArtWork ArtWork { get; set; } = default!;
+        public List<Artist> Artists { get; set; }
 
         public IActionResult OnGet(Guid id)
         {
@@ -31,8 +37,13 @@ namespace Presentaion.Pages.ArtWork
             {
                 return NotFound();
             }
-            ArtWork = artWork;
-            ViewData["ArtistId"] = ArtWork.Id;
+            /* ArtWork = artWork;
+             ViewData["ArtistId"] = ArtWork.Id;*/
+            var userName = HttpContext.Session.GetString("AccountID");
+            Guid usernamid = Guid.Parse(userName);
+            var studio = _studioService.GetStudioByAccountId(usernamid);
+            Artists = _artistService.GetArtistByStudioId(studio.Id);
+            ViewData["ArtistId"] = new SelectList(Artists, "Id", "Id");
             return Page();
         }
 
@@ -54,7 +65,7 @@ namespace Presentaion.Pages.ArtWork
                               
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./ArtworkManager");
         }
       
     }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BusinessLogic.DTOS.Artwork;
 using BusinessLogic.IService;
 using DataAccess.DataAccess;
 using DataAccess.IRepository.UnitOfWork;
@@ -24,12 +25,12 @@ namespace BusinessLogic.Service
         {
 
         }
-        public ArtWork CreateArtWork(ArtWork artWork)
+        public ArtWork CreateArtWork(CreateArtwork artWork)
         {
             var art = _mapper.Map<ArtWork>(artWork);
             _unitOfWork.ArtWork.Add(art);
             _unitOfWork.Save();
-            return artWork;
+            return art;
         }
 
         public ArtWork UpdateArtWork(ArtWork artwork)

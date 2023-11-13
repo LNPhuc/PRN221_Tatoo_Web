@@ -8,26 +8,40 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using DataAccess;
 using DataAccess.DataAccess;
 using BusinessLogic.IService;
+using BusinessLogic.Service;
+using BusinessLogic.DTOS.Artwork;
+using Microsoft.EntityFrameworkCore;
 
 namespace Presentaion.Pages.ArtWorks
 {
     public class ArtWorkCreateModel : PageModel
     {
        private readonly IArtworkService _artworkService;
+       private readonly IStudioService _studioService;
+       private readonly IArtistService _artistService;
 
-        public ArtWorkCreateModel(IArtworkService artworkService)
+        public ArtWorkCreateModel(IArtworkService artworkService , IStudioService studioService , IArtistService artistService)
         {
             _artworkService = artworkService;
+            _studioService = studioService;
+            _artistService = artistService;
         }
+        
 
         public IActionResult OnGet()
         {
-       
+            var userName = HttpContext.Session.GetString("AccountID");
+            Guid usernamid = Guid.Parse(userName);
+            var studio = _studioService.GetStudioByAccountId(usernamid);
+            Artists = _artistService.GetArtistByStudioId(studio.Id);
+            ViewData["ArtistId"] = new SelectList(Artists, "Id", "Id");
             return Page();
         }
 
         [BindProperty]
-        public DataAccess.DataAccess.ArtWork ArtWork { get; set; }
+        public CreateArtwork ArtWork { get; set; }
+        public List<Artist> Artists { get; set; }
+        public Artist Artist { get; set; }  
 
         // To protect from overposting attacks, see https://aka.ms/RazorPagesCRUD
         public IActionResult OnPost()
@@ -36,18 +50,17 @@ namespace Presentaion.Pages.ArtWorks
             {
                 return Page();
             }
-           /* var userName = HttpContext.Session.GetString("AccountID");
-            Guid usernamid = Guid.Parse(userName);
-            var studio = _studioService.GetStudioByAccountId(usernamid);
-            Artist.StudioId = studio.Id;
-            */
+            
+            /*ArtWork.ArtistId =*/
+
+            
 
 
             _artworkService.CreateArtWork(ArtWork);
-            
-          
 
-            return RedirectToPage("./Index");
+
+
+            return RedirectToPage("./ArtworkManager");
         }
     }
 }
