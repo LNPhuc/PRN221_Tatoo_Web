@@ -22,11 +22,19 @@ namespace Presentaion.Pages.Artists
 		public List<Artist> Artists { get; set; } = default;
         public IActionResult OnGet()
         {
-			var accId = HttpContext.Session.GetString("AccountID");
-			Guid id = Guid.Parse(accId);
-            var stu = _studioService.GetStudioByAccountId(id);
-			Artists = _artistService.GetArtistByStudioId(stu.Id);
-            return Page();
+            try
+            {
+                var accId = HttpContext.Session.GetString("AccountID");
+                Guid id = Guid.Parse(accId);
+                var stu = _studioService.GetStudioByAccountId(id);
+                Artists = _artistService.GetArtistByStudioId(stu.Id);
+                return Page();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToPage("/LoginPage");
+            }
+			
         }
     }
 }

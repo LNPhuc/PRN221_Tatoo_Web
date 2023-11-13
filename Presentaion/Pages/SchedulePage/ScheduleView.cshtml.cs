@@ -31,14 +31,14 @@ namespace Presentaion.Pages.SchedulePage
         public IActionResult OnGet()
         {
 
-            //Guid userId = Guid.Parse(HttpContext.Session.GetString("AccountID"));
-            //var studio = m_studioService.GetStudioByAccountId(userId);
-            //studioID = studio.Id;
-            //if (userId == null || studio.Account.Role != "STAFF" || studioID == Guid.Empty)
-            //{
-            //    return RedirectToPage("/LoginPage");
-            //}
-            studioID = Guid.Parse("C3F6CF3C-D089-4D12-BD78-2989B622B737");
+            Guid userId = Guid.Parse(HttpContext.Session.GetString("AccountID"));
+            var studio = m_studioService.GetStudioByAccountId(userId);
+            studioID = studio.Id;
+            if (userId == null || studio.Account.Role != "STAFF" || studioID == Guid.Empty)
+            {
+                return RedirectToPage("/LoginPage");
+            }
+            //studioID = Guid.Parse("C3F6CF3C-D089-4D12-BD78-2989B622B737");
             ShowDataOnTable(studioID);
             return Page();
         }

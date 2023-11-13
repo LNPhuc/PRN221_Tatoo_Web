@@ -24,7 +24,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.VipMember[0].Studio)
             </th>
-            <th></th>
+            @*<th></th>*@
         </tr>
     </thead>
     <tbody>
@@ -42,11 +42,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Studio.Name)
             </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+            @*<td>
+               
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
+            </td>*@
         </tr>
 }
     </tbody>

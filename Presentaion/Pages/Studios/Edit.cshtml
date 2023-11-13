@@ -46,7 +46,7 @@
             </div>*@
             <div class="form-group">
                 <label asp-for="Studio.Status" class="control-label"></label>
-                <input asp-for="Studio.Status" class="form-control" />
+                <input asp-for="Studio.Status" class="form-control" readonly="true"/>
                 <span asp-validation-for="Studio.Status" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -57,7 +57,7 @@
 </div>
 
 <div>
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="./Details">Back</a>
 </div>
 
 @section Scripts {

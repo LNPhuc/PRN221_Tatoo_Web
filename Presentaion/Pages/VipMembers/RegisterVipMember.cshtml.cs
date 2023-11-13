@@ -85,11 +85,11 @@ namespace Presentaion.Pages.VipMembers
                     var newvip = _vipmemberService.RegisterVip(customer.Id, StudioId,VipMember);
                     if (newvip == null)
                     {
-                        throw new Exception("You are not allowed to register");
+                        throw new Exception("You have to participate at this studio at least once to register");
                     }
                     else
                     {
-                        ViewData["SuccessMessage"] = "Đăng kí thành công";
+                        TempData["SuccessMessage"] = "Đăng kí thành công";
                         return Page();
                     }
                 }

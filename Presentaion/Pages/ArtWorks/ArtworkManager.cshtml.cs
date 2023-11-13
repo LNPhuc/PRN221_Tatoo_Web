@@ -27,11 +27,18 @@ namespace Presentaion.Pages.ArtWorks
 
         public IActionResult OnGet()
         {
-            var accId = HttpContext.Session.GetString("AccountID");
-            Guid id = new Guid(accId);
-            var stu = _studioService.GetStudioByAccountId(id);
-            ArtWork = _artworkService.getAllawByStuId(stu.Id);
-            return Page();
+            try
+            {
+                var accId = HttpContext.Session.GetString("AccountID");
+                Guid id = new Guid(accId);
+                var stu = _studioService.GetStudioByAccountId(id);
+                ArtWork = _artworkService.getAllawByStuId(stu.Id);
+                return Page();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToPage("/LoginPage");
+            }
         }
     }
 }

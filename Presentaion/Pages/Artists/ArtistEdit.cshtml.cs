@@ -47,7 +47,7 @@ namespace Presentaion.Pages.Artists
             try
             {
                 Artist= _artistService.UdpateArtist(Artist.Id, Artist);
-                return Redirect("/Artists/ArtistIndex");
+                return Redirect("/Artists/ArtistManager");
             }
             catch (Exception ex)
             {

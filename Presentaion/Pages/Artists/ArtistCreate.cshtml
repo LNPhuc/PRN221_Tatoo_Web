@@ -33,7 +33,14 @@
 </div>
 
 <div>
-    <a href="./ArtistIndex">Back to List</a>
+    @if (@HttpContext.Session.GetString("AccountRole") == "CUSTOMER")
+    {
+        <a asp-page="./ArtistIndex">Back to List</a>
+    }
+    else if (@HttpContext.Session.GetString("AccountRole") == "STAFF")
+    {
+        <a asp-page="./ArtistManager">Back to List</a>
+    }
 </div>
 
 @section Scripts {

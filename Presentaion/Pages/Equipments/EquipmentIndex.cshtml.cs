@@ -30,11 +30,19 @@ namespace Presentaion.Pages.Equipments
 
         public IActionResult OnGet()
         {
-            var accid = HttpContext.Session.GetString("AccountID");
-            Guid id = Guid.Parse(accid);
-            var stu = _studioService.GetStudioByAccountId(id);
-            Equipment = _equipmentservice.Search(SearchQuery,stu.Id);
-			return Page();
+            try
+            {
+                var accid = HttpContext.Session.GetString("AccountID");
+                Guid id = Guid.Parse(accid);
+                var stu = _studioService.GetStudioByAccountId(id);
+                Equipment = _equipmentservice.Search(SearchQuery, stu.Id);
+                return Page();
+            }
+            catch (Exception ex)
+            {
+                return RedirectToPage("/LoginPage");
+            }
+            
         }
     }
 }
