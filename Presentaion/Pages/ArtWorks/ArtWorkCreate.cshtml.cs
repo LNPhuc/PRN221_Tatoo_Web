@@ -34,12 +34,13 @@ namespace Presentaion.Pages.ArtWorks
             Guid usernamid = Guid.Parse(userName);
             var studio = _studioService.GetStudioByAccountId(usernamid);
             Artists = _artistService.GetArtistByStudioId(studio.Id);
-            ViewData["ArtistId"] = new SelectList(Artists, "Id", "Id");
+            ViewData["ArtistName"] = new SelectList(Artists, "Id", "Name");
             return Page();
         }
 
         [BindProperty]
         public CreateArtwork ArtWork { get; set; }
+        
         public List<Artist> Artists { get; set; }
         public Artist Artist { get; set; }  
 

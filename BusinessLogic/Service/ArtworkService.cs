@@ -33,11 +33,25 @@ namespace BusinessLogic.Service
             return art;
         }
 
-        public ArtWork UpdateArtWork(ArtWork artwork)
+        public ArtWork UpdateArtWork(Guid id ,ArtWork artwork)
         {
-            _unitOfWork.ArtWork.EditArtWork(artwork);
+            var aw =_unitOfWork.ArtWork.GetArtWorkByID(id);
+            if (aw.Title == artwork.Title &&
+                aw.Position == artwork.Position &&
+                aw.Size == artwork.Size && 
+                aw.Time == artwork.Time &&
+                aw.ArtistId == artwork.ArtistId)
+            {
+                throw new Exception("Nothing change!");
+            }
+            aw.Title = artwork.Title;
+            aw.Position = artwork.Position;
+            aw.Size = artwork.Size;
+            aw.Time = artwork.Time;
+            aw.ArtistId = artwork.ArtistId;
+            var update = _unitOfWork.ArtWork.EditArtWork(aw);
             _unitOfWork.Save();
-            return artwork;
+            return update;
         }
 
         public ArtWork GetArtWorkByID(Guid id)

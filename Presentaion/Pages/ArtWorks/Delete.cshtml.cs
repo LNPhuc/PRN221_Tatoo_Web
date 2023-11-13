@@ -50,7 +50,7 @@ namespace Presentaion.Pages.ArtWork
               _artworkService.DeleteArtWork(ArtWork);
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./ArtworkManager");
         }
     }
 }

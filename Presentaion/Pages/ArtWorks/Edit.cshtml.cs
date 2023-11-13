@@ -28,45 +28,67 @@ namespace Presentaion.Pages.ArtWork
 
         [BindProperty]
         public DataAccess.DataAccess.ArtWork ArtWork { get; set; } = default!;
+        [BindProperty]
         public List<Artist> Artists { get; set; }
 
         public IActionResult OnGet(Guid id)
         {
-            var artWork = _artworkService.GetArtWorkByID(id);
-            if (artWork == null)
-            {
-                return NotFound();
-            }
-            /* ArtWork = artWork;
-             ViewData["ArtistId"] = ArtWork.Id;*/
+
             var userName = HttpContext.Session.GetString("AccountID");
             Guid usernamid = Guid.Parse(userName);
             var studio = _studioService.GetStudioByAccountId(usernamid);
             Artists = _artistService.GetArtistByStudioId(studio.Id);
-            ViewData["ArtistId"] = new SelectList(Artists, "Id", "Id");
-            return Page();
+            ViewData["ArtistId"] = new SelectList(Artists, "Id", "Name");
+            try
+            {
+                var artWork = _artworkService.GetArtWorkByID(id);
+                if (artWork == null)
+                {
+                    return NotFound();
+                }
+                ArtWork = artWork;
+                /*ViewData["ArtistId"] = ArtWork.Id;*/
+                return Page();
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = ex.Message;
+                return Page();
+
+            }
+
+
         }
+
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
         public IActionResult OnPost()
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }         
+
+            var userName = HttpContext.Session.GetString("AccountID");
+            Guid usernamid = Guid.Parse(userName);
+            var studio = _studioService.GetStudioByAccountId(usernamid);
+            Artists = _artistService.GetArtistByStudioId(studio.Id);
+            ViewData["ArtistId"] = new SelectList(Artists, "Id", "Name");
+
             try
             {
-               _artworkService.UpdateArtWork(ArtWork);
+                //ViewData["ArtistId"] = new SelectList(Artists, "Id", "Id");
+
+                _artworkService.UpdateArtWork(ArtWork.Id, ArtWork);
+                return RedirectToPage("./ArtworkManager");
             }
             catch (Exception ex)
             {
-                
-                              
+                TempData["ErrorMessage"] = ex.Message;
+                //ViewData["ArtistId"] = new SelectList(Artists, "Id", "Id");
+
+
             }
 
-            return RedirectToPage("./ArtworkManager");
+            return Page();
         }
-      
+
     }
 }

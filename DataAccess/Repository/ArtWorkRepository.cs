@@ -25,7 +25,7 @@ public class ArtWorkRepository: GenericRepository<ArtWork>, IArtWorkRepository
     }
 
     public ArtWork EditArtWork(ArtWork artWork)
-    {
+    {      
         _context.ArtWorks.Update(artWork);
         return artWork;
     }

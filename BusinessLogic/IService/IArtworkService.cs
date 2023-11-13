@@ -14,7 +14,7 @@ namespace BusinessLogic.IService
         List<ArtWork> getAllartwork();
         List<ArtWork> getAllawByStuId(Guid stuid);
         ArtWork CreateArtWork(CreateArtwork artwork);
-        ArtWork UpdateArtWork(ArtWork artwork);
+        ArtWork UpdateArtWork(Guid id ,ArtWork artwork);
         ArtWork GetArtWorkByID(Guid id);
         ArtWork DeleteArtWork(ArtWork artWork);
         
