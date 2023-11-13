@@ -16,27 +16,38 @@ namespace Presentaion.Pages.Profile
         }
         [BindProperty]
         public Customer Customer { get; set; } = default;
-        public PageResult OnGet(Guid id)
+        public IActionResult OnGet(Guid id)
         {
-            try
+            var accId = HttpContext.Session.GetString("AccountID");
+            if (accId == null)
             {
-                Customer = _customerService.GetCusById(id);
-                return Page();
+                return RedirectToPage("/LoginPage");
             }
-            catch (Exception ex)
+            Guid accountId = Guid.Parse(accId);
+            Customer = _customerService.GetCusByAccountId(id);
+
+
+
+            if (Customer.AccountId != accountId)
             {
-                TempData["ErrorMessage"] = ex.Message;
-                return Page();
+                return RedirectToPage("/LoginPage");
 
             }
+            else
+            {
+                Customer = _customerService.GetCusByAccountId(accountId);
+                return Page();
+            }
+
+
         }
         public IActionResult OnPost()
         {
-
+            
             try
             {
                 Customer = _customerService.UdpateCustomer(Customer.Id, Customer);
-                if(Customer == null)
+                if (Customer == null)
                 {
                     throw new Exception();
                 }

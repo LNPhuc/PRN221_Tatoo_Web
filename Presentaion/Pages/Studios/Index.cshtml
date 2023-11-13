@@ -63,16 +63,15 @@
             <td>
                     @{
                         String check = HttpContext.Session.GetString("AccountRole");
-                        if(check== "STAFF")
+                        if(check== "ADMIN")
                         {
                             <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> 
                             <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
                            
                         }
-                        else
+                        else if (item.Status != "INACTIVE")
                         {
-                            <a asp-page="../StudioDetail" asp-route-id="@item.Id">CreateBooking</a>
-
+                            <a asp-page="../StudioDetail" asp-route-id="@item.Id">Details Studio</a>
                         }
                     }
                 
@@ -93,3 +92,4 @@
         }
     </ul>
 </div>
+

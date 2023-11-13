@@ -8,4 +8,5 @@ public interface IBookingService
 	IEnumerable<Booking> GetAllByCusId(Guid id);
 
 	Task<bool> CreateBooking(Guid id, DateTime date, Guid studioID);
+	/*Booking GetBookingByCusId(Guid id);*/
 }

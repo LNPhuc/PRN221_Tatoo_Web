@@ -7,36 +7,29 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using DataAccess;
 using DataAccess.DataAccess;
+using BusinessLogic.IService;
 
 namespace Presentaion.Pages.ArtWork
 {
     public class IndexModel : PageModel
     {
-        private readonly DataAccess.TatooWebContext _context;
+        private readonly IArtworkService _artworkService;
 
-        public IndexModel(DataAccess.TatooWebContext context)
+        public IndexModel(IArtworkService artworkService)
         {
-            _context = context;
+            _artworkService = artworkService;
         }
 
-        public IList<DataAccess.DataAccess.ArtWork> ArtWork { get; set; } = default!;
+        public List<DataAccess.DataAccess.ArtWork> ArtWork { get; set; } = default!;
         [BindProperty]
         public string ArtWorkName { get; set; } = default!;
 
-        public async Task OnGetAsync()
+        public IActionResult OnGet()
         {
-            if (ArtWork == null)
-            {
-                ArtWork = await _context.ArtWorks
-                .Include(a => a.Artist).ToListAsync();
-            }
-        }
-
-        public async Task<IActionResult> OnPostAsync(string title)
-        {
-            title = ArtWorkName;
-            ArtWork = await _context.ArtWorks.Include(a => a.Artist).Where(c => c.Title.Equals(title)).ToListAsync();
+            ArtWork = _artworkService.getAllartwork();
             return Page();
         }
+
+
     }
 }

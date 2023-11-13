@@ -78,26 +78,37 @@
 					<nav class="nav">
 						<a id="menu-toggle" class="anchor-link" href="#"><img src="images/nav.png" alt="" /></a>
 						<ul class="nav-list" id="menu">
-							<li><p><a asp-page="HomePage">Home</a></p></li>
-							
-							@if (Context.Session.GetString("AccountRole") == "CUSTOMER")
+	
+														
+							@if (Context.Session.GetString("AccountRole") == "STAFF")
 							{
-								<li><a asp-page="./Artists/ArtistIndex">Artists</a></li>
-							}
-							else if (Context.Session.GetString("AccountRole") == "STAFF")
-							{
-								<li><a asp-page="./Artists/ArtistManager">Artists</a></li>
+								
+								<li><p><a asp-page="./SchedulePage/ScheduleView">Dashboard</a></p></li>
+								<li><a asp-page="ArtWorks/ArtworkManager">Art Work</a></li>
+								<li><a asp-page="Artists/ArtistManager">Artists</a></li>
 							}
 							else
 							{
-								<li><a href="Artists/ArtistIndex">Artist</a></li>
+								<li><p><a asp-page="HomePage">Home</a></p></li>
+								<li><a asp-page="ArtWorks/Index">Art Work</a></li>
+								<li><a asp-page="Artists/ArtistIndex">Artist</a></li>
 							}
-							<li><a href="ArtWork/Index">Art Work</a></li>
+							
 							<!-- logo -->
 							<li class="logo"><a href="index.html"><img src="images/logo.png" alt="" /></a></li>
 							<!-- logo -->
-							<li><a href="Studios/Index">Studio</a></li>
-							<li><a href="#find" class="scroll">Find Us</a></li>
+								@if (Context.Session.GetString("AccountRole") == "STAFF")
+								{
+									<li><a href="Equipments/EquipmentIndex">Equipments</a></li>
+									<li><a href="VipMembers/VipMemberIndex">Vip Members</a></li>
+								}
+								else 
+								{
+									<li><a href="Studios/Index">Studio</a></li>	
+									<li><a href="#find" class="scroll">Find Us</a></li>
+								}
+							
+							
 							@if (Context.Session.GetString("AccountName") != null)
 							{
 								@if (Context.Session.GetString("AccountRole") == "CUSTOMER")

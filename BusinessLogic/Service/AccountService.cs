@@ -1,7 +1,9 @@
-﻿using AutoMapper;
+﻿using System.Net.Mime;
+using AutoMapper;
 using BusinessLogic.DTOS.Account;
 using BusinessLogic.IService;
 using DataAccess.DataAccess;
+using DataAccess.DataAccess.Enum;
 using DataAccess.IRepository;
 using DataAccess.IRepository.UnitOfWork;
 
@@ -24,10 +26,13 @@ public class AccountService : IAccountService
 	{
 		return _unitOfWork.Account.GetById(id);
 	}
+    public IEnumerable<Account> GetAll() => _unitOfWork.Account.GetAll().ToList();
 
-	public async Task CreateStudioAccount(CreateStudio account)
+    public async Task CreateStudioAccount(CreateStudio account)
     {
         var company = _mapper.Map<Studio>(account);
+        var image = new Image(Guid.NewGuid(), account.Image, company.Id.ToString());
+        _unitOfWork.Image.Add(image);
         _unitOfWork.Studio.Add(company);
         _unitOfWork.Save();
     }
@@ -49,8 +54,6 @@ public class AccountService : IAccountService
         return null;
     }
 
-
-
     public async Task<Account> CheckEmail(string email)
     {
         var account = await _unitOfWork.Account.GetEmail(email);
@@ -60,4 +63,34 @@ public class AccountService : IAccountService
         }
         return null;
     }
+
+    public async Task<Account> CheckStatus(string status)
+    {
+        var account = await _unitOfWork.Account.GetStatus(status);
+        if (account != null)
+        {
+            return account;
+        }
+        return null;
+    }
+
+    public Account DisableAccount(Guid id)
+    {
+        var acc = _unitOfWork.Account.GetById(id);
+
+        acc.Status = Status.INACTIVE.ToString();
+        var update = _unitOfWork.Account.UpdateAccount(acc);
+        _unitOfWork.Account.SaveChanges();
+        return update;
+    }
+    public Account ActivateAccount(Guid id)
+    {
+        var acc = _unitOfWork.Account.GetById(id);
+
+        acc.Status = Status.ACTIVE.ToString();
+        var update = _unitOfWork.Account.UpdateAccount(acc);
+        _unitOfWork.Account.SaveChanges();
+        return update;
+    }
+
 }

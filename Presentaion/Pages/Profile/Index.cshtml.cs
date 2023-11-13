@@ -24,7 +24,7 @@ namespace Presentaion.Pages.Profile
 		{
             var accId = HttpContext.Session.GetString("AccountID");
             Guid id = new Guid(accId);
-            Customer = _customerService.GetCusById(id);
+            Customer = _customerService.GetCusByAccountId(id);
         }
 	}
 }

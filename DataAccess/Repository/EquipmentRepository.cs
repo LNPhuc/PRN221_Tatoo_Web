@@ -2,6 +2,7 @@
 using DataAccess.IRepository;
 using DataAccess.Repository.Generic;
 using DataAccessObject.Utils;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repository;
 
@@ -14,18 +15,18 @@ public class EquipmentRepository: GenericRepository<Equipment>, IEquipmentReposi
 		_context = context;
     }
 
-	public List<Equipment> Search(string name)
+	public List<Equipment> Search(string name, Guid stuid)
 	{
 		if (name == null)
 		{
-			var equipment = _context.Set<Equipment>().ToList();
+			var equipment = _context.Set<Equipment>().Include(c => c.Studio).Where(c => c.Studio.Id == stuid).ToList();
 			return equipment;
 		}
 		else
 		{
 			var equipment = _context.Set<Equipment>()
-				.Where(s => s.Name.Contains(name))
-				.ToList();
+				.Include(c => c.Studio)
+				.Where(s => s.Name.Contains(name) && s.Studio.Id == stuid).ToList();
 			return equipment;
 		}
 	}

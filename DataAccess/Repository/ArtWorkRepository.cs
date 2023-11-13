@@ -30,6 +30,18 @@ public class ArtWorkRepository: GenericRepository<ArtWork>, IArtWorkRepository
         return artWork;
     }
 
+    public List<ArtWork> getAllArtwork()
+    {
+        var list = _context.Set<ArtWork>().Include(c => c.Artist).ToList();
+        return list;
+    }
+
+    public List<ArtWork> getAllArtworkByStuId(Guid stuid)
+    {
+        var list = _context.Set<ArtWork>().Include(c => c.Artist).Where(c => c.Artist.StudioId == stuid).ToList();
+        return list;
+    }
+
     public ArtWork GetArtWorkByID(Guid id)
     {
         if (id == null || _context.ArtWorks == null)

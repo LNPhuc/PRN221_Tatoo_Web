@@ -20,7 +20,7 @@ public class CustomerService : ICustomerService
 
 	public IEnumerable<Customer> GetAll() => _unitOfWork.Customer.GetAll().ToList();
 
-	public Customer GetCusById(Guid id)
+	public Customer GetCusByAccountId(Guid id)
 	{
 		return _unitOfWork.Customer.GetCusById(id);
 	}

@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using DataAccess;
 using DataAccess.DataAccess;
 using BusinessLogic.IService;
+using BusinessLogic.Service;
+using System.Data;
 
 namespace Presentaion.Pages.Studios
 {
@@ -26,9 +28,29 @@ namespace Presentaion.Pages.Studios
 
         public IActionResult OnGet(Guid id)
         {
+            
 
+            var accId = HttpContext.Session.GetString("AccountID");
+            if (accId == null)
+            {
+                return RedirectToPage("/LoginPage");
+            }
+
+            Guid accountId = Guid.Parse(accId);
             Studio = _studioService.GetById(id);
-            return Page();
+
+
+            if(Studio.AccountId !=  accountId)
+            {
+                return RedirectToPage("/LoginPage");
+
+            }
+            else
+            {
+                return Page();
+            }
+
+            
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
