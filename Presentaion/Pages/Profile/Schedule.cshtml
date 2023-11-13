@@ -1,0 +1,45 @@
+@page
+@model ScheduleModel
+
+@{
+    ViewData["Title"] = "Schedule";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>Schedule</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Schedulings[0].Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Schedulings[0].StartTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Schedulings[0].EndTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Schedulings[0].Status)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Schedulings) {
+        <tr>
+            <td>
+                @item.Date.Value.ToString("dd/MM/yyyy")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
