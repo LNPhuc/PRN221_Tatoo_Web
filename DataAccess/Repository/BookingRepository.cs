@@ -30,12 +30,9 @@ public class BookingRepository: GenericRepository<Booking>, IBookingRepository
         var lisbooking = _context.Set<Booking>()
                 .Include(c => c.Studio)
                 .Include(c => c.Schedulings)
-                .Where(c => c.Customer.Id == cusid && c.Status == BookingStatus.Done.ToString())
+                .Where(c => c.Customer.Id == cusid )
                 .ToList();
-        if (lisbooking.IsNullOrEmpty() )
-        {
-            throw new Exception("list booking khong duoc done");
-        }
+        
         return lisbooking;
     }
 }

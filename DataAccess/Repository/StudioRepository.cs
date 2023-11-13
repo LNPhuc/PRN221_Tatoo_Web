@@ -128,7 +128,7 @@ public class StudioRepository: GenericRepository<Studio>, IStudioRepository
 
     public Studio GetStudioByAccountId(Guid accountId)
     {
-        var studio = _context.Set<Studio>().FirstOrDefault(s => s.AccountId == accountId);
+        var studio = _context.Set<Studio>().Include(c => c.Account).FirstOrDefault(s => s.AccountId == accountId);
         return studio;
     }
 }

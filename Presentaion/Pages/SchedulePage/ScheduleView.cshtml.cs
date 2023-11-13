@@ -27,14 +27,14 @@ namespace Presentaion.Pages.SchedulePage
         public IList<Account> Accounts { get; set; } = default;
         [BindProperty]
         public Guid studioID { get; set; }
-        public IActionResult OnGet(Guid id)
+        public IActionResult OnGet()
         {
-            id = Guid.Parse("C3F6CF3C-D089-4D12-BD78-2989B622B737");
-            studioID = id;
-            string userName = HttpContext.Session.GetString("AccountRole");
-            if (userName == null || userName != "STAFF" || studioID == Guid.Empty)
+            Guid userId = Guid.Parse(HttpContext.Session.GetString("AccountID"));
+            var studio = m_studioService.GetStudioByAccountId(userId);
+            studioID = studio.Id;
+            if (userId == null || studio.Account.Role != "STAFF" || studioID == Guid.Empty)
             {
-                //return RedirectToPage("/LoginPage");
+                return RedirectToPage("/LoginPage");
             }
             ShowDataOnTable(studioID);
             return Page();
