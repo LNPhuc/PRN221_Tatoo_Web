@@ -2,6 +2,7 @@
 using BusinessLogic.DTOS;
 using BusinessLogic.DTOS.Account;
 using BusinessLogic.DTOS.Artist;
+using BusinessLogic.DTOS.Artwork;
 using BusinessLogic.DTOS.Studio;
 using DataAccess.DataAccess;
 using DataAccess.DataAccess.Enum;
@@ -64,8 +65,16 @@ public class Mapper : Profile
             .ForMember(c => c.Name, act => act.MapFrom(src => src.Name))
             .ForMember(c => c.StudioId, act => act.MapFrom(src => src.StudioId))
             .ForMember(c => c.Experience, act => act.MapFrom(src => src.Experience));
-		
-		CreateMap<Studio, StudioItem>()
+        CreateMap<CreateArtwork, ArtWork>()
+            .ForMember(c => c.Id, act => act.MapFrom(src => Guid.NewGuid()))
+            .ForMember(c => c.Title, act => act.MapFrom(src => src.Title))
+            .ForMember(c => c.Description, act => act.MapFrom(src => src.Description))
+            .ForMember(c => c.Position, act => act.MapFrom(src => src.Position))
+            .ForMember(c => c.Size, act => act.MapFrom(src => src.Size))
+            .ForMember(c => c.Time, act => act.MapFrom(src => src.Time))
+            .ForMember(c => c.ArtistId, act => act.MapFrom(src => src.ArtistId))  ;
+
+        CreateMap<Studio, StudioItem>()
 			.ForMember(c=> c.Id, act =>act.MapFrom(src => src.Id))
 			.ForMember(c => c.Name, act => act.MapFrom(src => src.Name))
 			.ForMember(c => c.Address, act => act.MapFrom(src => src.Address))

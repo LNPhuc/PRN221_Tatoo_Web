@@ -29,7 +29,7 @@ namespace Presentaion.Pages.ArtWork
             ArtWork = _artworkService.getAllartwork();
             return Page();
         }
-
+        
 
     }
 }
