@@ -18,6 +18,7 @@ public class BookingRepository: GenericRepository<Booking>, IBookingRepository
         var artists = _context.Set<Booking>()
                 .Include(c => c.Studio)
                 .Include(c => c.Schedulings)
+                .Where(b => b.CustomerId == cusid)
                 .ToList();
         return artists;
     }

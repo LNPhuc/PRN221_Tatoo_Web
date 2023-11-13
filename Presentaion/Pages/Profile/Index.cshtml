@@ -99,7 +99,7 @@
                                         {
                                         <tr>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.Date)
+                                                @item.Date.Value.ToString("dd/MM/yyyy")
                                             </td>
                                             <td>
                                                     @Html.DisplayFor(modelItem => item.StartTime)

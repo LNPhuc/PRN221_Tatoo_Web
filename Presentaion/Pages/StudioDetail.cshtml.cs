@@ -11,21 +11,26 @@ public class StudioDetail : PageModel
     private readonly IStudioService _studioService;
     private readonly IBookingService _bookingService;
     private readonly IArtworkService _artworkService;
+    private readonly IImageService _imageService;
 
-    public StudioDetail(IStudioService studioService, IBookingService bookingService, IArtworkService artworkService)
+    public StudioDetail(IStudioService studioService, IBookingService bookingService, IArtworkService artworkService, IImageService imageService)
     {
         _studioService = studioService;
         _bookingService = bookingService;
         _artworkService = artworkService;
+        _imageService = imageService;
     }
 
     public Studio studio { get; set; }
     public List<DataAccess.DataAccess.ArtWork> ArtWorks { get; set; }   = default!;
+    public String img { get; set; } = default!;
     [BindProperty] public String Date { get; set; } = default!;
     
     public IActionResult OnGet(Guid id)
     {
         studio = _studioService.GetById(id);
+        img = _imageService.Get(studio.Id);
+        ArtWorks = new List<DataAccess.DataAccess.ArtWork>();
         if (studio.Artists != null)
         {
             foreach (var a in studio.Artists)

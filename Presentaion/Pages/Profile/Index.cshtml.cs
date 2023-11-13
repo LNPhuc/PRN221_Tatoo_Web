@@ -25,7 +25,8 @@ namespace Presentaion.Pages.Profile
             var accId = HttpContext.Session.GetString("AccountID");
             Guid id = new Guid(accId);
             Customer = _customerService.GetCusById(id);
-            foreach (var v in _bookingService.GetAllByCusId(id))
+            Scheduling = new List<Scheduling>();
+            foreach (var v in _bookingService.GetAllByCusId(Customer.Id))
             {
 	            foreach (var s in v.Schedulings)
 	            {
