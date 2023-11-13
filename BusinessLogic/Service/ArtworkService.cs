@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccess.DataAccess;
 
 namespace BusinessLogic.Service
 {
@@ -62,6 +63,11 @@ namespace BusinessLogic.Service
         public List<ArtWork> getAllawByStuId(Guid stuid)
         {
             return _unitOfWork.ArtWork.getAllArtworkByStuId(stuid);
+        }
+
+        public List<ArtWork> List(Guid Art)
+        {
+            return _unitOfWork.ArtWork.List(Art);
         }
     }
 }

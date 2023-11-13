@@ -94,13 +94,12 @@
                                             <th scope="col" class="border-0 text-uppercase font-medium">Trạng thái</th>
                                         </tr>
                                     </thead>
-                                    
-                                   @* <tbody>
+                                    <tbody>
                                         @foreach (var item in Model.Scheduling)
                                         {
                                         <tr>
                                             <td>
-                                                @Html.DisplayFor(modelItem => item.Date)
+                                                @item.Date.Value.ToString("dd/MM/yyyy")
                                             </td>
                                             <td>
                                                     @Html.DisplayFor(modelItem => item.StartTime)
@@ -116,7 +115,7 @@
                                             </td>
                                         </tr>
                                         }
-                                    </tbody>*@
+                                    </tbody>
                                 </table>
                             </div>
                         </div>

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccess.DataAccess;
 
 namespace BusinessLogic.IService
 {
@@ -18,5 +19,6 @@ namespace BusinessLogic.IService
         ArtWork GetArtWorkByID(Guid id);
         ArtWork DeleteArtWork(ArtWork artWork);
         
+        public List<ArtWork> List(Guid Art);
     }
 }

@@ -9,12 +9,12 @@ namespace Presentaion.Pages.Profile
 	{
 		private readonly ICustomerService _customerService;
 		private readonly IAccountService _accountService;
-		private readonly ISchedulingService _schedulingService;
-		public IndexModel(ICustomerService customerService, IAccountService accountService, ISchedulingService schedulingService)
+		private readonly IBookingService _bookingService;
+		public IndexModel(ICustomerService customerService, IAccountService accountService, IBookingService bookingService)
 		{
 			_customerService = customerService;
 			_accountService = accountService;
-			_schedulingService = schedulingService;
+			_bookingService = bookingService;
 		}
 		
 		public Account Account { get; set; } 
@@ -24,7 +24,15 @@ namespace Presentaion.Pages.Profile
 		{
             var accId = HttpContext.Session.GetString("AccountID");
             Guid id = new Guid(accId);
-            Customer = _customerService.GetCusByAccountId(id);
-        }
+            Customer = _customerService.GetCusById(id);
+            Scheduling = new List<Scheduling>();
+            foreach (var v in _bookingService.GetAllByCusId(Customer.Id))
+            {
+	            foreach (var s in v.Schedulings)
+	            {
+		            Scheduling.Add(s);
+	            }
+            }
+		}
 	}
 }
