@@ -12,11 +12,11 @@ public class ArtWorkRepository: GenericRepository<ArtWork>, IArtWorkRepository
     {
         _context = context;
     }
-    public ArtWork CreateArtWork(ArtWork artWork)
+    /*public ArtWork CreateArtWork(ArtWork artWork)
     {
         _context.ArtWorks.Add(artWork);
         return artWork; 
-    }
+    }*/
 
     public ArtWork DeleteArtWork(ArtWork artWork)
     {

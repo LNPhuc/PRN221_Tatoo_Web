@@ -36,8 +36,15 @@ namespace Presentaion.Pages.ArtWorks
             {
                 return Page();
             }
+           /* var userName = HttpContext.Session.GetString("AccountID");
+            Guid usernamid = Guid.Parse(userName);
+            var studio = _studioService.GetStudioByAccountId(usernamid);
+            Artist.StudioId = studio.Id;
+            */
 
-            _artworkService.CreateArtWork(ArtWork); 
+
+            _artworkService.CreateArtWork(ArtWork);
+            
           
 
             return RedirectToPage("./Index");

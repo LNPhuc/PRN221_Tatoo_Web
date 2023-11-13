@@ -26,7 +26,8 @@ namespace BusinessLogic.Service
         }
         public ArtWork CreateArtWork(ArtWork artWork)
         {
-            _unitOfWork.ArtWork.CreateArtWork(artWork);
+            var art = _mapper.Map<ArtWork>(artWork);
+            _unitOfWork.ArtWork.Add(art);
             _unitOfWork.Save();
             return artWork;
         }
