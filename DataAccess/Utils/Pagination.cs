@@ -3,7 +3,6 @@
 public class Pagination<T>
 {
     private int _pageSize = 10;
-    private ICollection<T> _items;
 
     public int TotalItemsCount { get; set; }
 
@@ -22,10 +21,7 @@ public class Pagination<T>
         get
         {
             var count = TotalItemsCount / PageSize;
-            if (TotalItemsCount % PageSize == 0)
-            {
-                return count;
-            }
+            if (TotalItemsCount % PageSize == 0) return count;
 
             return count + 1;
         }
@@ -34,11 +30,7 @@ public class Pagination<T>
     public int PageIndex { get; set; }
 
     /// <summary>
-    /// page number start from 0
+    ///     page number start from 0
     /// </summary>
-    public ICollection<T> Items
-    {
-        get { return _items; }
-        set => _items = value;
-    }
+    public ICollection<T> Items { get; set; }
 }

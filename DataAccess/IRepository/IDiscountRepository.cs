@@ -5,5 +5,4 @@ namespace DataAccess.IRepository;
 
 public interface IDiscountRepository : IGenericRepository<Discount>
 {
-    
 }

@@ -1,75 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using BusinessLogic.IService;
+using DataAccess.DataAccess;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using DataAccess;
-using DataAccess.DataAccess;
-using BusinessLogic.IService;
-using BusinessLogic.Service;
-using System.Data;
 
-namespace Presentaion.Pages.Studios
+namespace Presentaion.Pages.Studios;
+
+public class EditModel : PageModel
 {
-    public class EditModel : PageModel
+    private readonly IStudioService _studioService;
+
+    public EditModel(IStudioService studioService)
     {
-        private readonly IStudioService _studioService;
+        _studioService = studioService;
+    }
 
-        public EditModel(IStudioService studioService)
+    [BindProperty] public Studio Studio { get; set; } = default!;
+
+    public IActionResult OnGet(Guid id)
+    {
+        var accId = HttpContext.Session.GetString("AccountID");
+        if (accId == null) return RedirectToPage("/LoginPage");
+
+        var accountId = Guid.Parse(accId);
+        Studio = _studioService.GetById(id);
+
+
+        if (Studio.AccountId != accountId)
+            return RedirectToPage("/LoginPage");
+        return Page();
+    }
+
+    // To protect from overposting attacks, enable the specific properties you want to bind to.
+    // For more details, see https://aka.ms/RazorPagesCRUD.
+    public IActionResult OnPost()
+    {
+        try
         {
-            _studioService = studioService;
+            _studioService.Update(Studio.Id, Studio);
+        }
+        catch (Exception ex)
+        {
+            TempData["ErrorMessage"] = ex.Message;
         }
 
-        [BindProperty]
-        public Studio Studio { get; set; } = default!;
-
-        public IActionResult OnGet(Guid id)
-        {
-            
-
-            var accId = HttpContext.Session.GetString("AccountID");
-            if (accId == null)
-            {
-                return RedirectToPage("/LoginPage");
-            }
-
-            Guid accountId = Guid.Parse(accId);
-            Studio = _studioService.GetById(id);
-
-
-            if(Studio.AccountId !=  accountId)
-            {
-                return RedirectToPage("/LoginPage");
-
-            }
-            else
-            {
-                return Page();
-            }
-
-            
-        }
-
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
-        public IActionResult OnPost()
-        {
-            
-            try
-            {
-                _studioService.Update(Studio.Id, Studio);
-            }
-            catch (Exception ex)
-            {
-                TempData["ErrorMessage"] = ex.Message;
-            }
-
-            return Page();
-        }
-
-        
+        return Page();
     }
 }

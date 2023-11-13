@@ -10,5 +10,4 @@ public class CreateStudio
     public string? Address { get; set; }
     public string? StudioPhone { get; set; }
     public string? StudioEmail { get; set; }
-    
 }

@@ -1,17 +1,14 @@
-﻿using System.Net.Mime;
-using AutoMapper;
+﻿using AutoMapper;
 using BusinessLogic.DTOS.Account;
 using BusinessLogic.IService;
 using DataAccess.DataAccess;
 using DataAccess.DataAccess.Enum;
-using DataAccess.IRepository;
 using DataAccess.IRepository.UnitOfWork;
 
 namespace BusinessLogic.Service;
 
 public class AccountService : IAccountService
 {
-    
     private readonly IMapper _mapper;
     private readonly IUnitOfWork _unitOfWork;
 
@@ -22,11 +19,15 @@ public class AccountService : IAccountService
         _mapper = mapper;
     }
 
-	public Account GetById(Guid id)
-	{
-		return _unitOfWork.Account.GetById(id);
-	}
-    public IEnumerable<Account> GetAll() => _unitOfWork.Account.GetAll().ToList();
+    public Account GetById(Guid id)
+    {
+        return _unitOfWork.Account.GetById(id);
+    }
+
+    public IEnumerable<Account> GetAll()
+    {
+        return _unitOfWork.Account.GetAll().ToList();
+    }
 
     public async Task CreateStudioAccount(CreateStudio account)
     {
@@ -36,7 +37,7 @@ public class AccountService : IAccountService
         _unitOfWork.Studio.Add(company);
         _unitOfWork.Save();
     }
-    
+
     public async Task CreateCustomerAccount(CreateCustomer account)
     {
         var c = _mapper.Map<Customer>(account);
@@ -46,31 +47,22 @@ public class AccountService : IAccountService
 
     public async Task<Account> Login(string Email, string Pass)
     {
-        var account =  await _unitOfWork.Account.GetAccount(Email, Pass);
-        if (account != null)
-        {
-            return account;
-        }
+        var account = await _unitOfWork.Account.GetAccount(Email, Pass);
+        if (account != null) return account;
         return null;
     }
 
     public async Task<Account> CheckEmail(string email)
     {
         var account = await _unitOfWork.Account.GetEmail(email);
-        if (account != null)
-        {
-            return account;
-        }
+        if (account != null) return account;
         return null;
     }
 
     public async Task<Account> CheckStatus(string status)
     {
         var account = await _unitOfWork.Account.GetStatus(status);
-        if (account != null)
-        {
-            return account;
-        }
+        if (account != null) return account;
         return null;
     }
 
@@ -83,6 +75,7 @@ public class AccountService : IAccountService
         _unitOfWork.Account.SaveChanges();
         return update;
     }
+
     public Account ActivateAccount(Guid id)
     {
         var acc = _unitOfWork.Account.GetById(id);
@@ -92,5 +85,4 @@ public class AccountService : IAccountService
         _unitOfWork.Account.SaveChanges();
         return update;
     }
-
 }

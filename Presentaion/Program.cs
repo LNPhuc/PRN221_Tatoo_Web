@@ -1,6 +1,4 @@
 using BusinessLogic.Configuration;
-using DataAccess;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +8,7 @@ var configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.Development.json")
     .Build();
 
-string connString = builder.Configuration.GetConnectionString("DatabaseConnection");
+var connString = builder.Configuration.GetConnectionString("DatabaseConnection");
 builder.Services.AddService(connString);
 builder.Services.AddRazorPages();
 
@@ -22,10 +20,7 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true;
 });
 
-builder.Services.AddRazorPages().AddRazorPagesOptions(options =>
-{
-    options.Conventions.AddPageRoute("/Index", "/");
-});
+builder.Services.AddRazorPages().AddRazorPagesOptions(options => { options.Conventions.AddPageRoute("/Index", "/"); });
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

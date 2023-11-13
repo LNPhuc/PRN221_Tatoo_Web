@@ -1,10 +1,6 @@
-﻿using System.Net.Mime;
-using DataAccess.DataAccess;
-
-namespace BusinessLogic.IService;
+﻿namespace BusinessLogic.IService;
 
 public interface IImageService
 {
-    public String Get(Guid id);
-
+    public string Get(Guid id);
 }

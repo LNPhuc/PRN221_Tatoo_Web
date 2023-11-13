@@ -22,7 +22,7 @@ public class UnitOfWorkRepository : IUnitOfWork
         VipMember = new VipMemberRepository(_context);
         Schedule = new SchedulingRepository(_context);
     }
-    
+
     public IAccountRepository Account { get; }
     public IArtistRepository Artist { get; }
     public IArtWorkRepository ArtWork { get; }

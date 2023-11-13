@@ -1,5 +1,5 @@
 ﻿@page
-@model Presentaion.Pages.ArtWorks.ArtworkManagerModel
+@model ArtworkManagerModel
 
 @{
     ViewData["Title"] = "ArtworkManager";
@@ -13,30 +13,31 @@
 </p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ArtWork[0].Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ArtWork[0].Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ArtWork[0].Position)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ArtWork[0].Size)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ArtWork[0].Time)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ArtWork[0].Artist)
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ArtWork[0].Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArtWork[0].Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArtWork[0].Position)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArtWork[0].Size)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArtWork[0].Time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ArtWork[0].Artist)
+        </th>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.ArtWork) {
+    @foreach (var item in Model.ArtWork)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
@@ -62,6 +63,6 @@
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>

@@ -1,65 +1,52 @@
 using BusinessLogic.IService;
-using BusinessLogic.Service;
 using DataAccess.DataAccess;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Presentaion.Pages.Profile
+namespace Presentaion.Pages.Profile;
+
+public class EditModel : PageModel
 {
-    public class EditModel : PageModel
+    private readonly ICustomerService _customerService;
+
+    public EditModel(ICustomerService customerService)
     {
-        private readonly ICustomerService _customerService;
+        _customerService = customerService;
+    }
 
-        public EditModel (ICustomerService customerService)
+    [BindProperty] public Customer Customer { get; set; }
+
+    public IActionResult OnGet(Guid id)
+    {
+        var accId = HttpContext.Session.GetString("AccountID");
+        if (accId == null) return RedirectToPage("/LoginPage");
+        var accountId = Guid.Parse(accId);
+        Customer = _customerService.GetCusByAccountId(id);
+
+
+        if (Customer.AccountId != accountId)
         {
-            _customerService = customerService;
+            return RedirectToPage("/LoginPage");
         }
-        [BindProperty]
-        public Customer Customer { get; set; } = default;
-        public IActionResult OnGet(Guid id)
+
+        Customer = _customerService.GetCusByAccountId(accountId);
+        return Page();
+    }
+
+    public IActionResult OnPost()
+    {
+        try
         {
-            var accId = HttpContext.Session.GetString("AccountID");
-            if (accId == null)
-            {
-                return RedirectToPage("/LoginPage");
-            }
-            Guid accountId = Guid.Parse(accId);
-            Customer = _customerService.GetCusByAccountId(id);
-
-
-
-            if (Customer.AccountId != accountId)
-            {
-                return RedirectToPage("/LoginPage");
-
-            }
-            else
-            {
-                Customer = _customerService.GetCusByAccountId(accountId);
-                return Page();
-            }
-
-
+            Customer = _customerService.UdpateCustomer(Customer.Id, Customer);
+            if (Customer == null) throw new Exception();
+            return Redirect("/Profile/Index");
         }
-        public IActionResult OnPost()
+        catch (Exception ex)
         {
-            
-            try
-            {
-                Customer = _customerService.UdpateCustomer(Customer.Id, Customer);
-                if (Customer == null)
-                {
-                    throw new Exception();
-                }
-                return Redirect("/Profile/Index");
-            }
-            catch (Exception ex)
-            {
-				ViewData["notification"] = ex.Message.ToString();
-				TempData["ErrorMessage"] = ex.Message;
-            }
-
-            return Page();
+            ViewData["notification"] = ex.Message;
+            TempData["ErrorMessage"] = ex.Message;
         }
+
+        return Page();
     }
 }

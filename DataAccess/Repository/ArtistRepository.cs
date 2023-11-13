@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repository;
 
-public class ArtistRepository: GenericRepository<Artist>, IArtistRepository
+public class ArtistRepository : GenericRepository<Artist>, IArtistRepository
 {
     private readonly TatooWebContext _context;
 
@@ -20,20 +20,20 @@ public class ArtistRepository: GenericRepository<Artist>, IArtistRepository
         return artist;
     }
 
-	public List<Artist> GetArtistByStudioId(Guid id)
-	{
-		var artists = _context.Set<Artist>()
-				.Include(c => c.Studio)
-				.Where(s => s.StudioId == id)
-				.ToList();
-		return artists;
-	}
+    public List<Artist> GetArtistByStudioId(Guid id)
+    {
+        var artists = _context.Set<Artist>()
+            .Include(c => c.Studio)
+            .Where(s => s.StudioId == id)
+            .ToList();
+        return artists;
+    }
 
-	public List<Artist> SearchArtist(string name)
+    public List<Artist> SearchArtist(string name)
     {
         if (name == null)
         {
-            var artists = _context.Set<Artist>().Include(c=>c.Studio).ToList();
+            var artists = _context.Set<Artist>().Include(c => c.Studio).ToList();
             return artists;
         }
         else
@@ -48,7 +48,7 @@ public class ArtistRepository: GenericRepository<Artist>, IArtistRepository
 
     public Artist UpdateArtist(Artist artist)
     {
-            _context.Set<Artist>().Update(artist);
-            return artist;
+        _context.Set<Artist>().Update(artist);
+        return artist;
     }
 }

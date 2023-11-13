@@ -1,5 +1,4 @@
 ﻿using BusinessLogic.IService;
-using DataAccess.DataAccess;
 using DataAccess.IRepository;
 
 namespace BusinessLogic.Service;
@@ -12,7 +11,8 @@ public class ImageService : IImageService
     {
         _imageRepository = imageRepository;
     }
-    public String Get(Guid id)
+
+    public string Get(Guid id)
     {
         return _imageRepository.url(id.ToString());
     }

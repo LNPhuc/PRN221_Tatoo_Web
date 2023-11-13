@@ -8,12 +8,16 @@ namespace DataAccess.Repository;
 public class SchedulingRepository : GenericRepository<Scheduling>, ISchedulingRepository
 {
     private readonly TatooWebContext _context;
+
     public SchedulingRepository(TatooWebContext context) : base(context)
     {
         _context = context;
     }
 
-    public IEnumerable<Scheduling> GetAll() => _context.Schedulings.Include(c => c.Booking).ToList();
+    public IEnumerable<Scheduling> GetAll()
+    {
+        return _context.Schedulings.Include(c => c.Booking).ToList();
+    }
 
     public Scheduling Create(Scheduling scheduling)
     {
@@ -26,7 +30,6 @@ public class SchedulingRepository : GenericRepository<Scheduling>, ISchedulingRe
         scheduling.Status = "Cancel";
         Update(scheduling);
         return scheduling;
-
     }
 
     public Scheduling GetById(Guid id)
@@ -44,14 +47,17 @@ public class SchedulingRepository : GenericRepository<Scheduling>, ISchedulingRe
         _context.Set<Scheduling>().Update(scheduling);
         return scheduling;
     }
+
     public Customer GetCustomerByID(Guid id)
     {
         return _context.Set<Customer>().FirstOrDefault(c => c.Id == id);
     }
+
     public Account GetAccountByID(Guid id)
     {
         return _context.Set<Account>().FirstOrDefault(a => a.Id == id);
     }
+
     public Booking GetBookingByID(Guid id)
     {
         return _context.Set<Booking>().FirstOrDefault(b => b.Id == id);
@@ -61,12 +67,19 @@ public class SchedulingRepository : GenericRepository<Scheduling>, ISchedulingRe
     {
         _context.Set<Booking>().Update(booking);
     }
+
     public List<Booking> GetBookingByStudio(Guid id)
     {
         return _context.Bookings.Where(b => b.StudioId == id).ToList();
     }
+
     public List<Scheduling> GetSchedulingByStudio(Guid id)
     {
         return _context.Schedulings.Include(s => s.Booking).Where(b => b.Booking.StudioId == id).ToList();
+    }
+
+    public List<Scheduling> GetByBooking(Guid id)
+    {
+        return _context.Schedulings.Include(b => b.Booking).Where(s => s.BookingId == id).ToList();
     }
 }

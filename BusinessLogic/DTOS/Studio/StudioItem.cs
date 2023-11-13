@@ -2,11 +2,10 @@
 
 public class StudioItem
 {
-    
     public Guid Id { get; set; }
-    public String Name { get; set; }
-    public String Phone { get; set; }
+    public string Name { get; set; }
+    public string Phone { get; set; }
     public int Artist { get; set; }
-    public String Image { get; set; }
-    public String Address { get; set; }
+    public string Image { get; set; }
+    public string Address { get; set; }
 }

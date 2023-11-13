@@ -6,7 +6,7 @@ namespace BusinessLogic.IService;
 
 public interface IStudioService
 {
-    Pagination<Studio> Search(string name, int pageIndex, int  pageSize);
+    Pagination<Studio> Search(string name, int pageIndex, int pageSize);
     Studio GetById(Guid id);
     Studio Update(Guid id, Studio studio);
     Studio Delete(Guid id);

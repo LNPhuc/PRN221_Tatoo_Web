@@ -1,12 +1,10 @@
 ﻿using BusinessLogic.IService;
+using BusinessLogic.Mapping;
 using BusinessLogic.Service;
 using DataAccess;
-using BusinessLogic.Mapping;
 using DataAccess.IRepository;
-using DataAccess.IRepository.Generic;
 using DataAccess.IRepository.UnitOfWork;
 using DataAccess.Repository;
-using DataAccess.Repository.Generic;
 using DataAccess.Repository.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,13 +15,12 @@ public static class DenpendencyInjection
 {
     public static IServiceCollection AddService(this IServiceCollection services, string? connString)
     {
-        
         services.AddDbContext<TatooWebContext>(options => { options.UseSqlServer(connString); });
-        
+
         // SIGN UP UNIT OF WORK FOR REPO AND GENERIC
         //services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
         services.AddTransient<IUnitOfWork, UnitOfWorkRepository>();
-        
+
         // SIGN UP REPO
         services.AddTransient<IAccountRepository, AccountRepository>();
         services.AddTransient<IArtistRepository, ArtistRepository>();
@@ -36,7 +33,6 @@ public static class DenpendencyInjection
         services.AddTransient<IVipMemberRepository, VipMemberRepository>();
         services.AddTransient<IBookingRepository, BookingRepository>();
         services.AddTransient<ICustomerRepository, CustomerRepository>();
-
 
 
         // SIGN UP SERVICE

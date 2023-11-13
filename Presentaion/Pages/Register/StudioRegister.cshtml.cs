@@ -1,6 +1,5 @@
 ﻿using BusinessLogic.DTOS.Account;
 using BusinessLogic.IService;
-using DataAccess;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -29,24 +28,21 @@ public class StudioRegister : PageModel
         try
         {
             if (await _accountService.CheckEmail(CreateStudio.StudioEmail) != null)
-            {
                 throw new Exception("Email đã được sử dụng. Vui lòng nhập lại!");
-            }
 
             if (CreateStudio.DateOfBirth >= DateTime.Now)
             {
                 throw new Exception("Ngày sinh không hợp lệ. Vui lòng nhập lại!");
             }
-            else
-            {
-                _accountService.CreateStudioAccount(CreateStudio);
-                return RedirectToPage("/LoginPage");
-            }        
-		}
-		catch (Exception ex)
-		{
-			ViewData["notification"] = ex.Message.ToString();
-		}
+
+            _accountService.CreateStudioAccount(CreateStudio);
+            return RedirectToPage("/LoginPage");
+        }
+        catch (Exception ex)
+        {
+            ViewData["notification"] = ex.Message;
+        }
+
         return Page();
-	}
+    }
 }

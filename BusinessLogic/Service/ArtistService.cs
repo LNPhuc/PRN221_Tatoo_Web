@@ -30,12 +30,12 @@ public class ArtistService : IArtistService
         return _unitOfWork.Artist.GetArtistById(id);
     }
 
-	public List<Artist> GetArtistByStudioId(Guid id)
-	{
+    public List<Artist> GetArtistByStudioId(Guid id)
+    {
         return _unitOfWork.Artist.GetArtistByStudioId(id);
-	}
+    }
 
-	public List<Artist> SearchArtist(string name)
+    public List<Artist> SearchArtist(string name)
     {
         return _unitOfWork.Artist.SearchArtist(name);
     }
@@ -46,9 +46,7 @@ public class ArtistService : IArtistService
 
         if (art.Name == artist.Name &&
             art.Experience == artist.Experience)
-        {
             throw new Exception("Nothing change!");
-        }
         art.Name = artist.Name;
         art.Experience = artist.Experience;
         var update = _unitOfWork.Artist.UpdateArtist(art);

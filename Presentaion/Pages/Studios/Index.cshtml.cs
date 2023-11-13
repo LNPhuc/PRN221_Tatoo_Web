@@ -1,42 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using BusinessLogic.IService;
+using DataAccess.DataAccess;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using DataAccess;
-using DataAccess.DataAccess;
-using BusinessLogic.IService;
-using BusinessLogic.Service;
 
-namespace Presentaion.Pages.Studios
+namespace Presentaion.Pages.Studios;
+
+public class IndexModel : PageModel
 {
-    public class IndexModel : PageModel
+    private readonly IStudioService _studioService;
+
+    public IndexModel(IStudioService studioService)
     {
-        
-        [BindProperty(SupportsGet = true)]
-        public string SearchQuery { get; set; }
-        private readonly IStudioService _studioService;
-        [BindProperty(SupportsGet = true)] public int PageIndex { get; set; } = 1;
-        public int TotalPages { get; set; }
-        public int PageSize { get; set; } = 10;
-        [BindProperty] public string? NewId { get; set; }
-        public IndexModel(IStudioService studioService)
-        {
-            _studioService = studioService;
-        }
+        _studioService = studioService;
+    }
 
-        public List<Studio> Studio { get;set; } = default!;
+    [BindProperty(SupportsGet = true)] public string SearchQuery { get; set; }
 
-        public IActionResult OnGet()
-        {
+    [BindProperty(SupportsGet = true)] public int PageIndex { get; set; } = 1;
+    public int TotalPages { get; set; }
+    public int PageSize { get; set; } = 10;
+    [BindProperty] public string? NewId { get; set; }
 
-			var stu = _studioService.Search(SearchQuery, PageIndex - 1, PageSize);
-            TotalPages = stu.TotalPagesCount;
-            Studio = stu.Items.ToList();
-            return Page();
-        }
+    public List<Studio> Studio { get; set; } = default!;
 
+    public IActionResult OnGet()
+    {
+        var stu = _studioService.Search(SearchQuery, PageIndex - 1, PageSize);
+        TotalPages = stu.TotalPagesCount;
+        Studio = stu.Items.ToList();
+        return Page();
     }
 }

@@ -1,5 +1,5 @@
 ﻿@page
-@model Presentaion.Pages.Artists.ArtistDetailsModel
+@model ArtistDetailsModel
 
 @{
     ViewData["Title"] = "ArtistDetails";
@@ -10,7 +10,7 @@
 
 <div>
     <h4>Artist</h4>
-    <hr />
+    <hr/>
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.Artist.Name)
@@ -33,15 +33,15 @@
     </dl>
 </div>
 <div>
-    
+
     <a asp-page="./ArtistIndex">Back to List</a>
-    @if (@HttpContext.Session.GetString("AccountRole") == "CUSTOMER")
+    @if (HttpContext.Session.GetString("AccountRole") == "CUSTOMER")
     {
         <a asp-page="./ArtistIndex">Back to List</a>
     }
-    else if (@HttpContext.Session.GetString("AccountRole") == "STAFF")
+    else if (HttpContext.Session.GetString("AccountRole") == "STAFF")
     {
-        <a asp-page="./ArtistEdit" asp-route-id="@Model.Artist.Id">Edit</a> 
+        <a asp-page="./ArtistEdit" asp-route-id="@Model.Artist.Id">Edit</a>
         <a asp-page="./ArtistManager">Back to List</a>
     }
 </div>

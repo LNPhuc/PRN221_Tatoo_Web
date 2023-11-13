@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace DataAccess.DataAccess.Enum;
+﻿namespace DataAccess.DataAccess.Enum;
 
 public enum Status
 {

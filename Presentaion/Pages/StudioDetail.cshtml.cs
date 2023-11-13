@@ -1,5 +1,4 @@
-﻿using Azure;
-using BusinessLogic.IService;
+﻿using BusinessLogic.IService;
 using DataAccess.DataAccess;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -8,12 +7,13 @@ namespace Presentaion.Pages;
 
 public class StudioDetail : PageModel
 {
-    private readonly IStudioService _studioService;
-    private readonly IBookingService _bookingService;
     private readonly IArtworkService _artworkService;
+    private readonly IBookingService _bookingService;
     private readonly IImageService _imageService;
+    private readonly IStudioService _studioService;
 
-    public StudioDetail(IStudioService studioService, IBookingService bookingService, IArtworkService artworkService, IImageService imageService)
+    public StudioDetail(IStudioService studioService, IBookingService bookingService, IArtworkService artworkService,
+        IImageService imageService)
     {
         _studioService = studioService;
         _bookingService = bookingService;
@@ -22,26 +22,22 @@ public class StudioDetail : PageModel
     }
 
     public Studio studio { get; set; }
-    public List<DataAccess.DataAccess.ArtWork> ArtWorks { get; set; }   = default!;
-    public String img { get; set; } = default!;
-    [BindProperty] public String Date { get; set; } = default!;
-    
+    public List<DataAccess.DataAccess.ArtWork> ArtWorks { get; set; } = default!;
+    public string img { get; set; } = default!;
+    [BindProperty] public string Date { get; set; } = default!;
+
     public IActionResult OnGet(Guid id)
     {
         studio = _studioService.GetById(id);
         img = _imageService.Get(studio.Id);
         ArtWorks = new List<DataAccess.DataAccess.ArtWork>();
         if (studio.Artists != null)
-        {
             foreach (var a in studio.Artists)
             {
                 var w = _artworkService.List(a.Id);
-                foreach (var image in w)
-                {
-                    ArtWorks.Add(image);
-                }
-            }  
-        }
+                foreach (var image in w) ArtWorks.Add(image);
+            }
+
         return Page();
     }
 
@@ -50,27 +46,24 @@ public class StudioDetail : PageModel
         try
         {
             var userName = HttpContext.Session.GetString("AccountID");
-            DateTime.TryParse(Date, out DateTime dateValue);
-            DateTime bookingDate = dateValue;
-            if (userName == null)
-            {
-                return RedirectToPage("LoginPage");
-            }
-            else if(bookingDate <= DateTime.Now)
+            DateTime.TryParse(Date, out var dateValue);
+            var bookingDate = dateValue;
+            if (userName == null) return RedirectToPage("LoginPage");
+
+            if (bookingDate <= DateTime.Now)
             {
                 throw new Exception("Ngày không hợp lệ. Vui lòng nhập lại!");
             }
-            else
-            {
-                Guid userid = Guid.Parse(userName);
-                await _bookingService.CreateBooking(userid, bookingDate, id);
-                return RedirectToPage("HomePage");
-            }          
+
+            var userid = Guid.Parse(userName);
+            await _bookingService.CreateBooking(userid, bookingDate, id);
+            return RedirectToPage("HomePage");
         }
         catch (Exception ex)
         {
-            ViewData["notification"] = ex.Message.ToString();
+            ViewData["notification"] = ex.Message;
         }
+
         return OnGet(id);
     }
 }

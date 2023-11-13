@@ -1,42 +1,35 @@
 using BusinessLogic.IService;
-using BusinessLogic.Service;
 using DataAccess.DataAccess;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace Presentaion.Pages.Admin
+namespace Presentaion.Pages.Admin;
+
+public class DisableAccountModel : PageModel
 {
-    public class DisableAccountModel : PageModel
+    private readonly IAccountService _accountService;
+
+    public DisableAccountModel(IAccountService accountService)
     {
-        private readonly IAccountService _accountService;
-        public DisableAccountModel(IAccountService accountService)
-        {
-            _accountService = accountService;
-        }
+        _accountService = accountService;
+    }
 
-        [BindProperty]
-        public Account Account { get; set; } = default!;
-        public IActionResult OnGet(Guid id)
-        {
+    [BindProperty] public Account Account { get; set; } = default!;
 
-            var acc = _accountService.GetById(id);
+    public IActionResult OnGet(Guid id)
+    {
+        var acc = _accountService.GetById(id);
 
-            if (acc == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                Account = acc;
-            }
-            return Page();
-        }
-        public IActionResult OnPost()
-        {
+        if (acc == null)
+            return NotFound();
+        Account = acc;
+        return Page();
+    }
 
-            _accountService.DisableAccount(Account.Id);
+    public IActionResult OnPost()
+    {
+        _accountService.DisableAccount(Account.Id);
 
-            return RedirectToPage("./Admin");
-        }
+        return RedirectToPage("./Admin");
     }
 }

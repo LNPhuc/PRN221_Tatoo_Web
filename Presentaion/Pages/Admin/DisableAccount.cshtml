@@ -1,5 +1,5 @@
 ﻿@page
-@model Presentaion.Pages.Admin.DisableAccountModel
+@model DisableAccountModel
 @{
     Layout = "_LayoutStudioPage";
 }
@@ -54,7 +54,7 @@
 
     <form method="post">
         <input type="hidden" asp-for="Account.Id"/>
-        <input type="submit" value="Disable" class="btn btn-danger" /> |
+        <input type="submit" value="Disable" class="btn btn-danger"/> |
         <a asp-page="./Admin">Back to List</a>
     </form>
 </div>

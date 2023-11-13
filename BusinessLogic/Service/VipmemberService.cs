@@ -8,6 +8,7 @@ namespace BusinessLogic.Service;
 public class VipmemberService : IVipmemberService
 {
     private readonly IUnitOfWork _unitOfWork;
+
     public VipmemberService(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
@@ -15,7 +16,7 @@ public class VipmemberService : IVipmemberService
 
     public bool IsVip(Guid cusid, Guid studioId)
     {
-        bool checkvip = _unitOfWork.VipMember.IsVip(cusid, studioId);
+        var checkvip = _unitOfWork.VipMember.IsVip(cusid, studioId);
         return checkvip;
     }
 
@@ -28,8 +29,8 @@ public class VipmemberService : IVipmemberService
             _unitOfWork.Save();
             return add;
         }
-        return null;
 
+        return null;
     }
 
     public Pagination<VipMember> ToPagination(string name, int pageIndex, int pageSize, Guid stuid)

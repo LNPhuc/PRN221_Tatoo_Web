@@ -3,16 +3,16 @@ using DataAccess.IRepository;
 using DataAccess.Repository.Generic;
 using DataAccessObject.Utils;
 using Microsoft.EntityFrameworkCore;
-using System.Linq.Expressions;
 
 namespace DataAccess.Repository;
 
-public class StudioRepository: GenericRepository<Studio>, IStudioRepository
+public class StudioRepository : GenericRepository<Studio>, IStudioRepository
 {
     private readonly TatooWebContext _context;
+
     public StudioRepository(TatooWebContext context) : base(context)
     {
-        _context = context;     
+        _context = context;
     }
 
     public Studio Create(Studio studio)
@@ -36,61 +36,41 @@ public class StudioRepository: GenericRepository<Studio>, IStudioRepository
     {
         var studio1 = _context.Set<Studio>().Entry(stu1);
         var studio2 = _context.Set<Studio>().Entry(stu2);
-        if (studio1 == studio2)
-        {
-            return false;
-        }
+        if (studio1 == studio2) return false;
         return true;
     }
 
     public bool IsEmailExist(string email)
     {
         var check = _context.Set<Studio>().FirstOrDefault(c => c.StudioEmail == email);
-        if(check == null)
-        {
+        if (check == null)
             return false;
-        }
-        else
-        {
-            return true;
-        }
+        return true;
     }
 
     public bool IsNameExist(string name)
     {
         var check = _context.Set<Studio>().FirstOrDefault(c => c.Name == name);
         if (check == null)
-        {
             return false;
-        }
-        else
-        {
-            return true;
-        }
+        return true;
     }
 
     public bool IsPhoneExist(string phone)
     {
         var check = _context.Set<Studio>().FirstOrDefault(c => c.StudioPhone == phone);
         if (check == null)
-        {
             return false;
-        }
-        else
-        {
-            return true;
-        }
+        return true;
     }
 
     public void SaveChanges()
     {
-        
         _context.SaveChanges();
     }
 
     public List<Studio> Search(string name)
     {
-        
         if (name == null)
         {
             var studios = _context.Set<Studio>().Include(art => art.Artists).ToList();
@@ -113,8 +93,6 @@ public class StudioRepository: GenericRepository<Studio>, IStudioRepository
 
     public Pagination<Studio> ToPagination(IEnumerable<Studio> list, int pageIndex = 0, int pageSize = 10)
     {
-        
-
         var result = new Pagination<Studio>
         {
             PageIndex = pageIndex,

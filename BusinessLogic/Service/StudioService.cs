@@ -2,17 +2,16 @@
 using BusinessLogic.DTOS.Studio;
 using BusinessLogic.IService;
 using DataAccess.DataAccess;
-using DataAccess.IRepository;
 using DataAccess.IRepository.UnitOfWork;
-using DataAccess.Repository;
 using DataAccessObject.Utils;
 
 namespace BusinessLogic.Service;
 
 public class StudioService : IStudioService
 {
-    private readonly IUnitOfWork _unitOfWork;
     private readonly IMapper _mapper;
+    private readonly IUnitOfWork _unitOfWork;
+
     public StudioService(IUnitOfWork unitOfWork, IMapper mapper)
     {
         _unitOfWork = unitOfWork;
@@ -23,10 +22,7 @@ public class StudioService : IStudioService
     {
         var stu = _unitOfWork.Studio.GetById(studio.Id);
         var check = _unitOfWork.Studio.IsEmailExist(stu.StudioEmail);
-        if(check == false)
-        {
-            return null;
-        }
+        if (check == false) return null;
         var cre = _unitOfWork.Studio.Create(stu);
         _unitOfWork.Studio.SaveChanges();
         return cre;
@@ -51,15 +47,16 @@ public class StudioService : IStudioService
         return _unitOfWork.Studio.GetStudioByAccountId(id);
     }
 
-    public List<StudioItem> GetAllItem(String name)
+    public List<StudioItem> GetAllItem(string name)
     {
         var studios = _unitOfWork.Studio.Search(name);
         var item = _mapper.Map<List<StudioItem>>(studios);
         foreach (var i in item)
         {
-            String id = i.Id.ToString();
+            var id = i.Id.ToString();
             i.Image = _unitOfWork.Image.url(id);
         }
+
         return item;
     }
 
@@ -72,15 +69,13 @@ public class StudioService : IStudioService
     public Studio Update(Guid id, Studio studio)
     {
         var stu = _unitOfWork.Studio.GetById(id);
-        
-        if(stu.StudioEmail == studio.StudioEmail && 
-            stu.StudioPhone == studio.StudioPhone && 
+
+        if (stu.StudioEmail == studio.StudioEmail &&
+            stu.StudioPhone == studio.StudioPhone &&
             stu.Name == studio.Name &&
             stu.Address == studio.Address &&
-            stu.Status == studio.Status) 
-        {
+            stu.Status == studio.Status)
             throw new Exception("Nothing change!");
-        }
 
 
         /*else
@@ -92,33 +87,27 @@ public class StudioService : IStudioService
         }*/
 
 
-        if(stu.StudioEmail != studio.StudioEmail){
+        if (stu.StudioEmail != studio.StudioEmail)
+        {
             stu.StudioEmail = studio.StudioEmail;
             var checkEmail = _unitOfWork.Studio.IsEmailExist(stu.StudioEmail);
-            if (checkEmail == true)
-            {
-                throw new Exception("Email used!");
-            }
+            if (checkEmail) throw new Exception("Email used!");
         }
-        if(stu.StudioPhone != studio.StudioPhone)
+
+        if (stu.StudioPhone != studio.StudioPhone)
         {
             stu.StudioPhone = studio.StudioPhone;
             var checkPhone = _unitOfWork.Studio.IsPhoneExist(stu.StudioPhone);
-            if (checkPhone == true)
-            {
-                throw new Exception("Number phone used!");
-            }
+            if (checkPhone) throw new Exception("Number phone used!");
         }
-        
-        if(stu.Name != studio.Name)
+
+        if (stu.Name != studio.Name)
         {
             stu.Name = studio.Name;
             var checkName = _unitOfWork.Studio.IsNameExist(stu.Name);
-            if (checkName == true)
-            {
-                throw new Exception("Name studio used!");
-            }
+            if (checkName) throw new Exception("Name studio used!");
         }
+
         stu.Address = studio.Address;
         stu.Status = studio.Status;
 
@@ -126,7 +115,5 @@ public class StudioService : IStudioService
         _unitOfWork.Studio.SaveChanges();
         throw new Exception("Update completed!");
         return update;
-
-
     }
 }

@@ -1,5 +1,5 @@
 ﻿@page
-@model Presentaion.Pages.Admin.ActivateAccountModel
+@model ActivateAccountModel
 @{
     Layout = "_LayoutStudioPage";
 }
@@ -53,8 +53,8 @@
     </dl>
 
     <form method="post">
-        <input type="hidden" asp-for="Account.Id" />
-        <input type="submit" value="Activate" class="btn btn-danger" /> |
+        <input type="hidden" asp-for="Account.Id"/>
+        <input type="submit" value="Activate" class="btn btn-danger"/> |
         <a asp-page="./Admin">Back to List</a>
     </form>
 </div>

@@ -4,5 +4,4 @@ namespace BusinessLogic.Service;
 
 public class DiscountService : IDiscountService
 {
-    
 }

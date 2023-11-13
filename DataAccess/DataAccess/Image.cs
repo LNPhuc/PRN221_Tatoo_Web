@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace DataAccess.DataAccess;
 
-namespace DataAccess.DataAccess
+public class Image
 {
-    public partial class Image
+    public Image(Guid id, string? source, string? entityId)
     {
-        public Image(Guid id, string? source, string? entityId)
-        {
-            Id = id;
-            Source = source;
-            EntityId = entityId;
-        }
-
-        public Guid Id { get; set; }
-        public string? Source { get; set; }
-        public string? EntityId { get; set; }
+        Id = id;
+        Source = source;
+        EntityId = entityId;
     }
+
+    public Guid Id { get; set; }
+    public string? Source { get; set; }
+    public string? EntityId { get; set; }
 }

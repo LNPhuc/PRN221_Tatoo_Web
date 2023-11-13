@@ -1,5 +1,5 @@
 ﻿@page
-@model Presentaion.Pages.AdminModel
+@model AdminModel
 @{
     ViewData["Title"] = "Admin";
     Layout = "_LayoutStudioPage";
@@ -12,77 +12,77 @@
     </div>
     <button type="submit" class="btn btn-primary">Search Artist</button>
 </form>*@
-        @{
-    String role = HttpContext.Session.GetString("AccountRole");
+@{
+    var role = HttpContext.Session.GetString("AccountRole");
 }
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Accounts[0].UserName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Accounts[0].Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Accounts[0].Phone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Accounts[0].DateOfBirth)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Accounts[0].CreateDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Accounts[0].Role)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Accounts[0].Status)
-            </th>
-            <th>
-                <p> Action</p>
-            </th>
-        </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Accounts[0].UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Accounts[0].Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Accounts[0].Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Accounts[0].DateOfBirth)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Accounts[0].CreateDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Accounts[0].Role)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Accounts[0].Status)
+        </th>
+        <th>
+            <p> Action</p>
+        </th>
+    </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Accounts)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Phone)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateOfBirth)
-                </td>
-                 <td>
-                    @Html.DisplayFor(modelItem => item.CreateDate)
-                </td>
-                 <td>
-                    @Html.DisplayFor(modelItem => item.Role)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)  
-                </td>
-                <td>
-                    @{
-                        String check = item.Status;
-                        if (check == "ACTIVE" )
-                        {
-                            <a asp-page="./DisableAccount" asp-route-id="@item.Id">Disable</a>
-                        }
-                        else if (check == "INACTIVE")
-                        {
-                            <a asp-page="./ActivateAccount" asp-route-id="@item.Id">Activate</a> 
-                        }
+    @foreach (var item in Model.Accounts)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfBirth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreateDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @{
+                    var check = item.Status;
+                    if (check == "ACTIVE")
+                    {
+                        <a asp-page="./DisableAccount" asp-route-id="@item.Id">Disable</a>
                     }
-                </td>
-            </tr>
-        }
+                    else if (check == "INACTIVE")
+                    {
+                        <a asp-page="./ActivateAccount" asp-route-id="@item.Id">Activate</a>
+                    }
+                }
+            </td>
+        </tr>
+    }
     </tbody>
 </table>

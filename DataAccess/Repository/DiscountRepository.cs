@@ -4,7 +4,7 @@ using DataAccess.Repository.Generic;
 
 namespace DataAccess.Repository;
 
-public class DiscountRepository: GenericRepository<Discount>, IDiscountRepository
+public class DiscountRepository : GenericRepository<Discount>, IDiscountRepository
 {
     public DiscountRepository(TatooWebContext context) : base(context)
     {

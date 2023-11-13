@@ -1,5 +1,5 @@
 ﻿@page
-@model Presentaion.Pages.Studios.IndexModel
+@model IndexModel
 
 @{
     ViewData["Title"] = "Index";
@@ -15,34 +15,35 @@
 <form method="get">
     <div class="form-group">
         <label for="Query">Search name:</label>
-        <input type="text" asp-for="SearchQuery" class="form-control" />
+        <input type="text" asp-for="SearchQuery" class="form-control"/>
     </div>
     <button type="submit" class="btn btn-primary">Tìm</button>
 </form>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Studio[0].Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Studio[0].Address)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Studio[0].StudioPhone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Studio[0].StudioEmail)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Studio[0].Status)
-            </th>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Studio[0].Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Studio[0].Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Studio[0].StudioPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Studio[0].StudioEmail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Studio[0].Status)
+        </th>
 
-            <th></th>
-        </tr>
+        <th></th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Studio) {
+    @foreach (var item in Model.Studio)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
@@ -59,27 +60,26 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
-            
+
             <td>
-                    @{
-                        String check = HttpContext.Session.GetString("AccountRole");
-                        if(check== "ADMIN")
-                        {
-                            <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> 
-                            <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-                           
-                        }
-                        else if (item.Status != "INACTIVE")
-                        {
-                            <a asp-page="../StudioDetail" asp-route-id="@item.Id">Details Studio</a>
-                        }
+                @{
+                    var check = HttpContext.Session.GetString("AccountRole");
+                    if (check == "ADMIN")
+                    {
+                        <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
+                        <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
                     }
-                
-                
-                
+                    else if (item.Status != "INACTIVE")
+                    {
+                        <a asp-page="../StudioDetail" asp-route-id="@item.Id">Details Studio</a>
+                    }
+                }
+
+
+
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>
 <div>
@@ -92,4 +92,3 @@
         }
     </ul>
 </div>
-

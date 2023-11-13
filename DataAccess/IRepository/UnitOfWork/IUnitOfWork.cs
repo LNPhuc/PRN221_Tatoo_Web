@@ -10,9 +10,9 @@ public interface IUnitOfWork
     IDiscountRepository Discount { get; }
     IEquipmentRepository Equipment { get; }
     IImageRepository Image { get; }
-    IStudioRepository Studio  { get; }
-    IVipMemberRepository VipMember  { get; }
+    IStudioRepository Studio { get; }
+    IVipMemberRepository VipMember { get; }
     ISchedulingRepository Schedule { get; }
-    
+
     void Save();
 }

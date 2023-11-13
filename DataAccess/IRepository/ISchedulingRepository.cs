@@ -18,4 +18,6 @@ public interface ISchedulingRepository : IGenericRepository<Scheduling>
     List<Booking> GetBookingByStudio(Guid id);
 
     List<Scheduling> GetSchedulingByStudio(Guid id);
+    
+    List<Scheduling> GetByBooking(Guid id);
 }

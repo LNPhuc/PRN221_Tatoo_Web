@@ -2,85 +2,76 @@
 @model Presentaion.Pages.ArtWork.IndexModel
 
 @{
-	ViewData["Title"] = "Index";
+    ViewData["Title"] = "Index";
 
-	Layout = "_LayoutStudioPage";
+    Layout = "_LayoutStudioPage";
 }
 
 <h1>Index</h1>
 
+<header id="header">
+    <!-- Header Part -->
+    <!-- this is dummy heading for W3-Validation approval you can remove it if you want -->
+    <h2 class="w3-validation">For W3 Validation</h2>
+    <!-- this is dummy heading for W3-Validation approval you can remove it if you want -->
+
+    <div class="">
+        <div class="container">
+            <!-- start-top-nav -->
+
+            <section id="gallery-two-image-section">
+                <!-- Gallery Two Section -->
+
+                <h2 class="w3-validation">For W3 Validation</h2>
 
 
-</table>
-	<header id="header">
-		<!-- Header Part -->
-		<!-- this is dummy heading for W3-Validation approval you can remove it if you want -->
-		<h2 class="w3-validation">For W3 Validation</h2>
-		<!-- this is dummy heading for W3-Validation approval you can remove it if you want -->
-
-		<div class="">
-			<div class="container">
-				<!-- start-top-nav -->
-
-				<section id="gallery-two-image-section">
-					<!-- Gallery Two Section -->
-
-					<h2 class="w3-validation">For W3 Validation</h2>
-
-
-					<div class="container-fluidgallery wow fadeInDown" data-wow-delay="0.0s" id="gallery">
-						<div class="row">
-							<div class="gallery-title">
-								<a href="#" class="button-one gallery_btn button-type-one button-box">Gallery</a>
-							</div>
-						@*<div>
+                <div class="container-fluidgallery wow fadeInDown" data-wow-delay="0.0s" id="gallery">
+                    <div class="row">
+                        <div class="gallery-title">
+                            <a href="#" class="button-one gallery_btn button-type-one button-box">Gallery</a>
+                        </div>
+                        @*<div>
 								<form method="post">
 								<input type="text" asp-for="ArtWorkName" />
 								<button type="submit">search</button>
 								</form>
 							</div>*@
-							<div class="gallery-two-row-one">
-								<ul class="gallery-grid-one gallery-grid-box">
-								@foreach(var item in Model.ArtWork)
-								{
-									<li>
-										<div class="b-link-stripe b-animate-go thickbox">
-											<!-- Gallery image no : 1 -->
-											<img src="@item.Description"
-												 class="gallery-two-image img-responsive" alt="" />
-											<div class="b-wrapper">
-												<div class="b-animate b-from-left b-delay03 ">
-													<a href="@item.Description"
-													   rel="prettyPhoto[pp_gal]">
-														<button class="zooming md-trigger">
-															<img src="/images/zoom.png" alt="" />
-															<a asp-page="./Details" asp-route-id="@item.Id">Details</a>
-														</button>
-													</a>
-													
-												</div>
-											</div>
-										</div>
-									</li>
-								}
-								
+                        <div class="gallery-two-row-one">
+                            <ul class="gallery-grid-one gallery-grid-box">
+                                @foreach (var item in Model.ArtWork)
+                                {
+                                    <li>
+                                        <div class="b-link-stripe b-animate-go thickbox">
+                                            <!-- Gallery image no : 1 -->
+                                            <img src="@item.Description"
+                                                 class="gallery-two-image img-responsive" alt=""/>
+                                            <div class="b-wrapper">
+                                                <div class="b-animate b-from-left b-delay03 ">
+                                                    <a href="@item.Description"
+                                                       rel="prettyPhoto[pp_gal]">
+                                                        <button class="zooming md-trigger">
+                                                            <img src="/images/zoom.png" alt=""/>
+                                                            <a asp-page="./Details" asp-route-id="@item.Id">Details</a>
+                                                        </button>
+                                                    </a>
 
-									
-
-								</ul>
-								<div class="clearfix"></div>
-							</div>
-						</div>
-						
-					</div>	
-						
-				</section>
-			</div>
-		</div>
-	</header>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
 
 
 
 
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
 
+                </div>
 
+            </section>
+        </div>
+    </div>
+</header>
