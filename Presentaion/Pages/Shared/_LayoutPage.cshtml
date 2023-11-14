@@ -2,32 +2,32 @@
 <html>
 <head>
 
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-	<!-- Title -->
-	<title>InkTatto</title>
+    <!-- Title -->
+    <title>InkTatto</title>
 
-	<!-- Bootstrap & Font-Awesome CSS -->
-	<link rel="stylesheet" href="/css/bootstrap.min.css" type='text/css'>
-	<link rel="stylesheet" href="css/font-awesome.min.css" type='text/css'>
+    <!-- Bootstrap & Font-Awesome CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
 
-	<!-- Custom CSS -->
-	<link rel="stylesheet" href="/css/style.css" type='text/css'>
-	<link rel="stylesheet" href="/css/prettyPhoto.css" type='text/css'>
-	<link rel="stylesheet" href="/css/responsive.css" type='text/css'>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/prettyPhoto.css" type="text/css">
+    <link rel="stylesheet" href="/css/responsive.css" type="text/css">
 
-	<!-- Animation CSS -->
-	<link href="css/animate.css" rel="stylesheet" type="text/css" media="all">
+    <!-- Animation CSS -->
+    <link href="css/animate.css" rel="stylesheet" type="text/css" media="all">
 
-	<!-- Google Webfont -->
-	<link href='http://fonts.googleapis.com/css?family=Noticia+Text:400,700' rel="stylesheet" type='text/css'>
+    <!-- Google Webfont -->
+    <link href="http://fonts.googleapis.com/css?family=Noticia+Text:400,700" rel="stylesheet" type="text/css">
 
-	<!-- js files & script -->
-	<script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
-	<script type="text/javascript" src="/js/hover_pack.js"></script>
-	<script type="text/javascript">
+    <!-- js files & script -->
+    <script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="/js/hover_pack.js"></script>
+    <script type="text/javascript">
 		jQuery(document).ready(function ($) {
 			$(".scroll").click(function (event) {
 				event.preventDefault();
@@ -35,16 +35,16 @@
 			});
 		});
 	</script>
-	<script type="text/javascript" src="/js/move-top.js"></script>
-	<script type="text/javascript" src="/js/easing.js"></script>
-	<script type="text/javascript" src="/js/modernizr.js"></script>
-	<script type="text/javascript" src="/js/retina.js"></script>
-	<script type="text/javascript" src="/js/jquery.prettyPhoto.js"></script>
-	<script type="text/javascript" src="/js/wow.min.js"></script>
-	<script>
+    <script type="text/javascript" src="/js/move-top.js"></script>
+    <script type="text/javascript" src="/js/easing.js"></script>
+    <script type="text/javascript" src="/js/modernizr.js"></script>
+    <script type="text/javascript" src="/js/retina.js"></script>
+    <script type="text/javascript" src="/js/jquery.prettyPhoto.js"></script>
+    <script type="text/javascript" src="/js/wow.min.js"></script>
+    <script>
 		new WOW().init();
 	</script>
-	<style>
+    <style>
 		.header {
 			background: url(../images/banner.jpg)no-repeat center top;
 			background-size: 100% 100%;
@@ -60,74 +60,125 @@
 </head>
 <body>
 
-	<header id="header1">
-		<!-- Header Part -->
-		<!-- this is dummy heading for W3-Validation approval you can remove it if you want -->
-		<h2 class="w3-validation">For W3 Validation</h2>
-		<!-- this is dummy heading for W3-Validation approval you can remove it if you want -->
+<header id="header1">
+    <!-- Header Part -->
+    <!-- this is dummy heading for W3-Validation approval you can remove it if you want -->
+    <h2 class="w3-validation">For W3 Validation</h2>
+    <!-- this is dummy heading for W3-Validation approval you can remove it if you want -->
 
-		<div class="header" style="">
-			<div class="container">
-				<!-- start-top-nav -->
-				<div class="top-nav">
-					<div class="top-header">
-						<div class="responsive-logo">
-							<a href="index.html"><img src="/images/logo.png" alt="" /></a>
-						</div>
-					</div>
-					<nav class="nav">
-						<a id="menu-toggle" class="anchor-link" href="#"><img src="/images/nav.png" alt="" /></a>
-						<ul class="nav-list" id="menu">
+    <div class="header" style="">
+        <div class="container">
+            <!-- start-top-nav -->
+            <div class="top-nav">
+                <div class="top-header">
+                    <div class="responsive-logo">
+                        <a href="index.html">
+                            <img src="/images/logo.png" alt=""/>
+                        </a>
+                    </div>
+                </div>
+                <nav class="nav">
+                    <a id="menu-toggle" class="anchor-link" href="#">
+                        <img src="/images/nav.png" alt=""/>
+                    </a>
+                    <ul class="nav-list" id="menu">
 
 
-							@if (Context.Session.GetString("AccountRole") == "STAFF")
-							{
+                        @if (Context.Session.GetString("AccountRole") == "STAFF")
+                        {
+                            <li>
+                                <p>
+                                    <a asp-page="../SchedulePage/ScheduleView">Dashboard</a>
+                                </p>
+                            </li>
+                            <li>
+                                <a asp-page="../ArtWorks/ArtworkManager">Art Work</a>
+                            </li>
+                            <li>
+                                <a asp-page="../Artists/ArtistManager">Artists</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <p>
+                                    <a asp-page="HomePage">Home</a>
+                                </p>
+                            </li>
+                            <li>
+                                <a asp-page="../ArtWorks/Index">Art Work</a>
+                            </li>
+                            <li>
+                                <a asp-page="../Artists/ArtistIndex">Artist</a>
+                            </li>
+                        }
 
-								<li><p><a asp-page="../SchedulePage/ScheduleView">Dashboard</a></p></li>
-								<li><a asp-page="../ArtWorks/ArtworkManager">Art Work</a></li>
-								<li><a asp-page="../Artists/ArtistManager">Artists</a></li>
-							}
-							else
-							{
-								<li><p><a asp-page="HomePage">Home</a></p></li>
-								<li><a asp-page="../ArtWorks/Index">Art Work</a></li>
-								<li><a asp-page="../Artists/ArtistIndex">Artist</a></li>
-							}
-
-							<!-- logo -->
-							<li class="logo"><a href="index.html"><img src="/images/logo.png" alt="" /></a></li>
-							<!-- logo -->
-							@if (Context.Session.GetString("AccountName") != null)
-							{
-								@if (Context.Session.GetString("AccountRole") == "CUSTOMER")
-								{
-									<li><a href="ShowStudio">Studio</a></li>
-									<li><a href="#find" class="scroll">Find Us</a></li>
-									<li><a asp-page="./Profile/Index">@Context.Session.GetString("AccountName")</a></li>
-								}
-								else if (Context.Session.GetString("AccountRole") == "STAFF")
-								{
-									<li><a asp-page="../Equipments/EquipmentIndex">Equipments</a></li>
-									<li><a asp-page="../VipMembers/VipMemberIndex">Vip Members</a></li>
-									<li><a asp-page="../Studios/Details">@Context.Session.GetString("AccountName")</a></li>
-								}
-								else
-								{
-									<li><a href="ShowStudio">Studio</a></li>
-									<li><a href="#find" class="scroll">Find Us</a></li>
-									<li><a asp-page="./Admin/Admin">@Context.Session.GetString("AccountName")</a></li>
-								}
-								<li><a asp-page="HomePage" asp-page-handler="logout">Logout</a></li>
-							}
-							else
-							{
-								<li><a href="ShowStudio">Studio</a></li>
-								<li><a href="#find" class="scroll">Find Us</a></li>
-								<li><p><a asp-page="LoginPage">Log In</a></p></li>
-							}
-						</ul>
-					</nav>
-					<script type="text/javascript">
+                        <!-- logo -->
+                        <li class="logo">
+                            <a href="index.html">
+                                <img src="/images/logo.png" alt=""/>
+                            </a>
+                        </li>
+                        <!-- logo -->
+                        @if (Context.Session.GetString("AccountName") != null)
+                        {
+                            @if (Context.Session.GetString("AccountRole") == "CUSTOMER")
+                            {
+                                <li>
+                                    <a href="ShowStudio">Studio</a>
+                                </li>
+                                <li>
+                                    <a href="#find" class="scroll">Find Us</a>
+                                </li>
+                                <li>
+                                    <a asp-page="./Profile/Index">@Context.Session.GetString("AccountName")</a>
+                                </li>
+                            }
+                            else if (Context.Session.GetString("AccountRole") == "STAFF")
+                            {
+                                <li>
+                                    <a asp-page="../Equipments/EquipmentIndex">Equipments</a>
+                                </li>
+                                <li>
+                                    <a asp-page="../VipMembers/VipMemberIndex">Vip Members</a>
+                                </li>
+                                <li>
+                                    <a asp-page="../Studios/Details">@Context.Session.GetString("AccountName")</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a href="ShowStudio">Studio</a>
+                                </li>
+                                <li>
+                                    <a href="#find" class="scroll">Find Us</a>
+                                </li>
+                                <li>
+                                    <a asp-page="./Admin/Admin">@Context.Session.GetString("AccountName")</a>
+                                </li>
+                            }
+                            <li>
+                                <a asp-page="HomePage" asp-page-handler="logout">Logout</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a href="ShowStudio">Studio</a>
+                            </li>
+                            <li>
+                                <a href="#find" class="scroll">Find Us</a>
+                            </li>
+                            <li>
+                                <p>
+                                    <a asp-page="LoginPage">Log In</a>
+                                </p>
+                            </li>
+                        }
+                    </ul>
+                </nav>
+                <script type="text/javascript">
 						$(document).ready(function () {
 
 							$('#menu-toggle').click(function () {
@@ -137,50 +188,61 @@
 
 						});
 					</script>
-				</div>
-				<!-- End-top-nav -->
-			</div>
-		</div>
-	</header>
+            </div>
+            <!-- End-top-nav -->
+        </div>
+    </div>
+</header>
 
-	<div>@RenderBody()</div>
+<div>@RenderBody()</div>
 
-	<section id="footer-section">
-		<!-- Footer Section -->
-		<!-- this is dummy heading for W3-Validation approval you can remove it if you want -->
-		<h2 class="w3-validation">For W3 Validation</h2>
-		<!-- this is dummy heading for W3-Validation approval you can remove it if you want -->
+<section id="footer-section">
+    <!-- Footer Section -->
+    <!-- this is dummy heading for W3-Validation approval you can remove it if you want -->
+    <h2 class="w3-validation">For W3 Validation</h2>
+    <!-- this is dummy heading for W3-Validation approval you can remove it if you want -->
 
-		<div class="container">
-			<div class="row">
-				<nav class="footer-nav">
-					<ul class="nav-list wow fadeInDown" id="footer-menu">
-						<li><a href="#">Home</a></li>
-						<li><a href="#about" class="scroll">About</a></li>
+    <div class="container">
+        <div class="row">
+            <nav class="footer-nav">
+                <ul class="nav-list wow fadeInDown" id="footer-menu">
+                    <li>
+                        <a href="#">Home</a>
+                    </li>
+                    <li>
+                        <a href="#about" class="scroll">About</a>
+                    </li>
 
-						<!-- logo -->
-						<li class="logo"><a href="index.html"><img src="images/logo.png" alt="" /></a></li>
-						<!-- logo -->
-						<li><a href="#gallery" class="scroll">Art Work</a></li>
-						<li><a href="#find" class="scroll">Find Us</a></li>
+                    <!-- logo -->
+                    <li class="logo">
+                        <a href="index.html">
+                            <img src="images/logo.png" alt=""/>
+                        </a>
+                    </li>
+                    <!-- logo -->
+                    <li>
+                        <a href="#gallery" class="scroll">Art Work</a>
+                    </li>
+                    <li>
+                        <a href="#find" class="scroll">Find Us</a>
+                    </li>
 
-					</ul>
-				</nav>
-				<p class="copyright wow fadeInUp">&copy; 2015 InkTattoo. All Right Reserved. Developed by The <a href="http://theuncreativelab.com">Uncreative Lab</a> and <a href="http://www.themezy.com">Themezy.com</a>.</p>
-			</div>
-		</div>
-	</section>
+                </ul>
+            </nav>
+            <p class="copyright wow fadeInUp">&copy; 2015 InkTattoo. All Right Reserved. Developed by The <a href="http://theuncreativelab.com">Uncreative Lab</a> and <a href="http://www.themezy.com">Themezy.com</a>.</p>
+        </div>
+    </div>
+</section>
 
 
-	<script type="text/javascript" charset="utf-8">
+<script type="text/javascript" charset="utf-8">
 		$(document).ready(function () {
 			$("a[rel^='prettyPhoto']").prettyPhoto();
 		});
 	</script>
 
 
-
-	<script type="text/javascript">
+<script type="text/javascript">
 		$(document).ready(function () {
 			/*
 			var defaults = {
@@ -196,6 +258,8 @@
 		});
 	</script>
 
-	<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+<a href="#" id="toTop" style="display: block;">
+    <span id="toTopHover" style="opacity: 1;"> </span>
+</a>
 </body>
 </html>

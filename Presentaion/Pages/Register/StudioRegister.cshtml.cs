@@ -31,9 +31,7 @@ public class StudioRegister : PageModel
                 throw new Exception("Email đã được sử dụng. Vui lòng nhập lại!");
 
             if (CreateStudio.DateOfBirth >= DateTime.Now)
-            {
                 throw new Exception("Ngày sinh không hợp lệ. Vui lòng nhập lại!");
-            }
 
             _accountService.CreateStudioAccount(CreateStudio);
             return RedirectToPage("/LoginPage");

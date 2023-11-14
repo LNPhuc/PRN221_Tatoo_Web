@@ -49,10 +49,7 @@ public class StudioDetail : PageModel
             DateTime.TryParse(Date, out var dateValue);
             var bookingDate = dateValue;
             if (userName == null) return RedirectToPage("LoginPage");
-            if (bookingDate <= DateTime.Now)
-            {
-                throw new Exception("Ngày không hợp lệ. Vui lòng nhập lại!");
-            }
+            if (bookingDate <= DateTime.Now) throw new Exception("Ngày không hợp lệ. Vui lòng nhập lại!");
 
             var userid = Guid.Parse(userName);
             await _bookingService.CreateBooking(userid, bookingDate, id);

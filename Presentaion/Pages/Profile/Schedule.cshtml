@@ -9,23 +9,24 @@
 <h1>Schedule</h1>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Schedulings[0].Date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Schedulings[0].StartTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Schedulings[0].EndTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Schedulings[0].Status)
-            </th>
-        </tr>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Schedulings[0].Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Schedulings[0].StartTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Schedulings[0].EndTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Schedulings[0].Status)
+        </th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Schedulings) {
+    @foreach (var item in Model.Schedulings)
+    {
         <tr>
             <td>
                 @item.Date.Value.ToString("dd/MM/yyyy")
@@ -40,6 +41,6 @@
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
         </tr>
-}
+    }
     </tbody>
 </table>

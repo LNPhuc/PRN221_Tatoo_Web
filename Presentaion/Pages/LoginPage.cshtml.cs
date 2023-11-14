@@ -38,10 +38,7 @@ public class LoginPage : PageModel
                 return Page();
             }
 
-            if (account.Role == "ADMIN")
-            {
-                return RedirectToPage("./Admin/Admin");
-            }
+            if (account.Role == "ADMIN") return RedirectToPage("./Admin/Admin");
 
             HttpContext.Session.SetString("AccountID", account.Id.ToString());
             HttpContext.Session.SetString("AccountName", account.UserName);

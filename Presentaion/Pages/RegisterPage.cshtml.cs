@@ -30,9 +30,7 @@ public class RegisterPage : PageModel
                 throw new Exception("Email đã được sử dụng. Vui lòng nhập lại!");
 
             if (CreateCustomer.DateOfBirth >= DateTime.Now)
-            {
                 throw new Exception("Ngày sinh không hợp lệ. Vui lòng nhập lại!");
-            }
 
             _accountService.CreateCustomerAccount(CreateCustomer);
             return RedirectToPage("./LoginPage");

@@ -9,11 +9,12 @@ namespace Presentaion.Pages.SchedulePage;
 
 public class ScheduleUpdateModel : PageModel
 {
-    private readonly ISchedulingService _schedulingService;
     private readonly IArtistService _artistService;
     private readonly IBookingService _bookingService;
+    private readonly ISchedulingService _schedulingService;
 
-    public ScheduleUpdateModel(ISchedulingService schedulingService, IArtistService artistService,IBookingService bookingService)
+    public ScheduleUpdateModel(ISchedulingService schedulingService, IArtistService artistService,
+        IBookingService bookingService)
     {
         _artistService = artistService;
         _schedulingService = schedulingService;
@@ -61,7 +62,7 @@ public class ScheduleUpdateModel : PageModel
             ModelState.AddModelError(string.Empty, "EndTime is Empty! Please Select the Time");
             return Page();
         }
-        
+
         schedule.Date = schedule.Date;
         schedule.StartTime = TimeSpan.ParseExact(startTime, @"hh\:mm", CultureInfo.InvariantCulture);
         schedule.EndTime = TimeSpan.ParseExact(endTime, @"hh\:mm", CultureInfo.InvariantCulture);
@@ -70,11 +71,10 @@ public class ScheduleUpdateModel : PageModel
             ModelState.AddModelError(string.Empty, "Please Sclect End Time Again !");
             return Page();
         }
+
         schedule.Status = "ONPROCESS";
         if (schedule.Booking.ArtistId == null)
-        {
             schedule.Booking.ArtistId = Guid.Parse(Request.Form["ArtistId"].ToString());
-        }
         _schedulingService.Update(schedule);
         _schedulingService.SaveChanges();
         return RedirectToPage("./ScheduleView");

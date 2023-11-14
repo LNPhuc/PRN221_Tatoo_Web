@@ -1,10 +1,8 @@
 using System.Globalization;
-using System.Runtime.InteropServices.JavaScript;
 using BusinessLogic.IService;
 using DataAccess.DataAccess;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Presentaion.Pages.SchedulePage;
 

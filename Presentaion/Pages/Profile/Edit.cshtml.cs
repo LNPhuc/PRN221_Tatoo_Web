@@ -24,10 +24,7 @@ public class EditModel : PageModel
         Customer = _customerService.GetCusByAccountId(id);
 
 
-        if (Customer.AccountId != accountId)
-        {
-            return RedirectToPage("/LoginPage");
-        }
+        if (Customer.AccountId != accountId) return RedirectToPage("/LoginPage");
 
         Customer = _customerService.GetCusByAccountId(accountId);
         return Page();

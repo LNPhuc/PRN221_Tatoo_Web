@@ -41,13 +41,13 @@
                                             <input asp-for="schedule.Date" type="date" class="form-control"/>
                                             <span asp-validation-for="schedule.Date" class="text-danger"></span>
                                         </div>
-                                            @if (Model.schedule.Booking.ArtistId == null)
-                                            {
-                                                <div class="form-group">
-                                                    <label asp-for="schedule.Booking.Artist" class="control-label"></label>
-                                                    <select name="ArtistId" asp-for="ArtistId" type="date" class="form-control" asp-items="ViewBag.ArtistName"></select>
-                                                </div>
-                                            }
+                                        @if (Model.schedule.Booking.ArtistId == null)
+                                        {
+                                            <div class="form-group">
+                                                <label asp-for="schedule.Booking.Artist" class="control-label"></label>
+                                                <select name="ArtistId" asp-for="ArtistId" type="date" class="form-control" asp-items="ViewBag.ArtistName"></select>
+                                            </div>
+                                        }
                                         <div class="form-group">
                                             <label asp-for="schedule.StartTime" class="control-label"></label>
                                             <select name="StartTime">

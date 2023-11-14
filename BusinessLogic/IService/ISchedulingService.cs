@@ -15,7 +15,7 @@ public interface ISchedulingService
     Booking GetBookingByID(Guid id);
     Artist GetArtistById(Guid id);
     void UpdateBooking(Booking booking);
-    
+
     List<Booking> GetBookingByStudio(Guid id);
 
     List<Scheduling> GetSchedulingByStudio(Guid id);

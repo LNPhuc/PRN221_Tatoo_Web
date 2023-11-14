@@ -167,7 +167,8 @@ end navbar -->
                                     <tr>
                                         <td>@Model.Customers[i].FirstName</td>
                                         <td>@Model.Accounts[i].Phone</td>
-                                        <td>@if (Model.Bookings[i].Artist != null)
+                                        <td>
+                                            @if (Model.Bookings[i].Artist != null)
                                             {
                                                 @Model.Bookings[i].Artist.Name
                                             }

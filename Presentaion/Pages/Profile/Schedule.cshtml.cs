@@ -1,8 +1,6 @@
 using BusinessLogic.IService;
-using DataAccess;
 using DataAccess.DataAccess;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
 
 namespace Presentaion.Pages.Profile;
 

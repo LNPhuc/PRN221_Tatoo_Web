@@ -1,48 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using BusinessLogic.IService;
+using DataAccess.DataAccess;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.EntityFrameworkCore;
-using DataAccess;
-using DataAccess.DataAccess;
-using BusinessLogic.IService;
-using BusinessLogic.Service;
 
-namespace Presentaion.Pages.Equipments
+namespace Presentaion.Pages.Equipments;
+
+public class EquipmentIndexModel : PageModel
 {
-    public class EquipmentIndexModel : PageModel
+    private readonly IEquipmentService _equipmentservice;
+    private readonly IStudioService _studioService;
+
+    public EquipmentIndexModel(IEquipmentService equipmentservice, IStudioService studioService)
     {
-        [BindProperty(SupportsGet = true)]
-        public string SearchQuery { get; set; }
-        private readonly IEquipmentService _equipmentservice;
-        private readonly IStudioService _studioService;
+        _equipmentservice = equipmentservice;
+        _studioService = studioService;
+    }
 
-        public EquipmentIndexModel(IEquipmentService equipmentservice, IStudioService studioService)
+    [BindProperty(SupportsGet = true)] public string SearchQuery { get; set; }
+
+    [BindProperty] public string? NewId { get; set; }
+    public List<Equipment> Equipment { get; set; }
+
+    public IActionResult OnGet()
+    {
+        try
         {
-            _equipmentservice = equipmentservice;
-            _studioService = studioService;
+            var accid = HttpContext.Session.GetString("AccountID");
+            var id = Guid.Parse(accid);
+            var stu = _studioService.GetStudioByAccountId(id);
+            Equipment = _equipmentservice.Search(SearchQuery, stu.Id);
+            return Page();
         }
-
-        [BindProperty] public string? NewId { get; set; }
-        public List<Equipment> Equipment { get;set; }
-
-        public IActionResult OnGet()
+        catch (Exception ex)
         {
-            try
-            {
-                var accid = HttpContext.Session.GetString("AccountID");
-                Guid id = Guid.Parse(accid);
-                var stu = _studioService.GetStudioByAccountId(id);
-                Equipment = _equipmentservice.Search(SearchQuery, stu.Id);
-                return Page();
-            }
-            catch (Exception ex)
-            {
-                return RedirectToPage("/LoginPage");
-            }
-            
+            return RedirectToPage("/LoginPage");
         }
     }
 }
