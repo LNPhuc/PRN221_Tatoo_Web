@@ -51,7 +51,7 @@ namespace Presentaion.Pages.SchedulePage
             m_schedulingService.SaveChanges();
 
             ShowDataOnTable(studioid);
-            return Page();
+            return OnGet();
         }
         public IActionResult OnGetBookingDone(Guid id, Guid studioid)
         {
@@ -61,7 +61,7 @@ namespace Presentaion.Pages.SchedulePage
             m_schedulingService.UpdateBooking(curBooking);
             m_schedulingService.SaveChanges();
             ShowDataOnTable(studioid);
-            return Page();
+            return OnGet();
         }
         public IActionResult OnGetCancel(Guid id, Guid studioid)
         {
@@ -73,7 +73,7 @@ namespace Presentaion.Pages.SchedulePage
             ShowDataOnTable(studioid);
 
 
-            return Page();
+            return OnGet();
         }
         public IActionResult OnGetDone(Guid id, Guid studioid)
         {
