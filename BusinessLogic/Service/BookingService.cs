@@ -18,6 +18,11 @@ public class BookingService : IBookingService
         _unitOfWork = unitOfWork;
     }
 
+    public Guid StudioId(Guid id)
+    {
+        return _unitOfWork.Booking.studioId(id);
+    }
+
     public async Task<bool> CreateBooking(Guid id, DateTime date, Guid studioID)
     {
         var customer = _unitOfWork.Customer.getByAccount(id);

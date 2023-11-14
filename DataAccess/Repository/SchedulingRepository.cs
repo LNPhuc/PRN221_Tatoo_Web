@@ -34,7 +34,7 @@ public class SchedulingRepository : GenericRepository<Scheduling>, ISchedulingRe
 
     public Scheduling GetById(Guid id)
     {
-        return _context.Set<Scheduling>().FirstOrDefault(c => c.Id == id);
+        return _context.Set<Scheduling>().Include(b => b.Booking).FirstOrDefault(c => c.Id == id);
     }
 
     public void SaveChanges()
@@ -70,7 +70,7 @@ public class SchedulingRepository : GenericRepository<Scheduling>, ISchedulingRe
 
     public List<Booking> GetBookingByStudio(Guid id)
     {
-        return _context.Bookings.Where(b => b.StudioId == id).ToList();
+        return _context.Bookings.Include(a => a.Artist).Where(b => b.StudioId == id).ToList();
     }
 
     public List<Scheduling> GetSchedulingByStudio(Guid id)

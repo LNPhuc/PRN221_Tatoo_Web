@@ -1,8 +1,10 @@
 using System.Globalization;
+using System.Runtime.InteropServices.JavaScript;
 using BusinessLogic.IService;
 using DataAccess.DataAccess;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Presentaion.Pages.SchedulePage;
 
@@ -10,19 +12,20 @@ public class ScheduleCreateModel : PageModel
 {
     private readonly ISchedulingService _schedulingService;
 
+
     public ScheduleCreateModel(ISchedulingService schedulingService)
     {
         _schedulingService = schedulingService;
     }
 
     [BindProperty] public Scheduling schedule { get; set; } = default!;
+    [BindProperty] public string Date { get; set; } = default!;
 
     [BindProperty] public Guid bookingID { get; set; }
 
     public IActionResult OnGet(Guid id)
     {
         if (id == Guid.Empty) return RedirectToPage("./ScheduleView");
-
         bookingID = id;
         return Page();
     }
@@ -33,12 +36,13 @@ public class ScheduleCreateModel : PageModel
 
         var startTime = Request.Form["StartTime"].ToString();
         var endTime = Request.Form["EndTime"].ToString();
-        if (schedule.Date < DateTime.Now || string.IsNullOrEmpty(schedule.Date.ToString()))
+        DateTime.TryParse(Date, out var dateValue);
+        if (dateValue < DateTime.Now)
         {
-            if (schedule.Date < DateTime.Now)
+            if (dateValue < DateTime.Now)
                 ModelState.AddModelError(string.Empty,
                     $"Date is invalid! Please Select the Date After {DateTime.Now} ");
-            else if (string.IsNullOrEmpty(schedule.Date.ToString()))
+            else if (string.IsNullOrEmpty(dateValue.ToString()))
                 ModelState.AddModelError(string.Empty, "Date is Empty! Please Select the Date");
             return Page();
         }
@@ -57,6 +61,7 @@ public class ScheduleCreateModel : PageModel
 
         var id = Guid.NewGuid();
         schedule.Id = id;
+        schedule.Date = dateValue;
         schedule.BookingId = bookingid;
         schedule.StartTime = TimeSpan.ParseExact(startTime, @"hh\:mm", CultureInfo.InvariantCulture);
         schedule.EndTime = TimeSpan.ParseExact(endTime, @"hh\:mm", CultureInfo.InvariantCulture);

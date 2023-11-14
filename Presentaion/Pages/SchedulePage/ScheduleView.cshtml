@@ -154,7 +154,7 @@ end navbar -->
                                 <tr>
                                     <th>Customer Name</th>
                                     <th>Phone</th>
-                                    <th>Description</th>
+                                    <th>Artist</th>
                                     <th>Status</th>
                                     <th></th>
                                     <th></th>
@@ -167,23 +167,12 @@ end navbar -->
                                     <tr>
                                         <td>@Model.Customers[i].FirstName</td>
                                         <td>@Model.Accounts[i].Phone</td>
-                                        <td>@Model.Bookings[i].Description</td>
-                                        @if (Model.Bookings[i].Status == "DONE")
-                                        {
-                                            <td style="color: green">DONE</td>
-                                        }
-                                        else if (Model.Bookings[i].Status == "ONPROCESS")
-                                        {
-                                            <td style="color: orangered">ONPROCESS</td>
-                                        }
-                                        else if (Model.Bookings[i].Status == "CANCEL")
-                                        {
-                                            <td style="color: red">Cancel</td>
-                                        }
-                                        else
-                                        {
-                                            <td style="color: red"></td>
-                                        }
+                                        <td>@if (Model.Bookings[i].Artist != null)
+                                            {
+                                                @Model.Bookings[i].Artist.Name
+                                            }
+                                        </td>
+                                        <td style="color: orangered">@Model.Bookings[i].Status</td>
                                         @if (Model.Bookings[i].Status != "CANCEL" && Model.Bookings[i].Status != "DONE" && Model.Bookings[i].Status != "NULL")
                                         {
                                             <td style="text-align:center">
@@ -238,7 +227,7 @@ end navbar -->
                                 {
                                     <tr>
                                         <td>@item.BookingId</td>
-                                        <td>@item.Date</td>
+                                        <td>@item.Date.Value.ToString("dd/MM/yyyy")</td>
                                         <td>@item.StartTime</td>
                                         <td>@item.EndTime</td>
                                         @if (item.Status == "DONE")

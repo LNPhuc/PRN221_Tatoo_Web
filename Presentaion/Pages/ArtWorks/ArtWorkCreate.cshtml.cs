@@ -28,7 +28,7 @@ public class ArtWorkCreateModel : PageModel
 
 
     public IActionResult OnGet()
-    {
+    { 
         var userName = HttpContext.Session.GetString("AccountID");
         var usernamid = Guid.Parse(userName);
         var studio = _studioService.GetStudioByAccountId(usernamid);

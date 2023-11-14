@@ -115,15 +115,14 @@
                                             }
                                             else
                                             {
-                                                @Html.DisplayFor(modelItem => item.Artist)
-                                                ;
+                                                @Html.DisplayFor(modelItem => item.Artist.Name)
                                             }
                                         </td>
                                         <td>
                                             @Html.DisplayFor(modelItem => item.Status)
                                         </td>
                                         <td>
-                                            @if (item.Artist == null)
+                                            @if (item.Price == null)
                                             {
                                                 <a>Empty</a>
                                             }
@@ -134,8 +133,7 @@
 
                                         </td>
                                         <td>
-                                            <a asp-page="./Schedule" asp-route-id="@item.Id">Details</a> |
-                                            <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                                            <a asp-page="./Schedule" asp-route-id="@item.Id">Details</a>
                                         </td>
                                     </tr>
                                 }

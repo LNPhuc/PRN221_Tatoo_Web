@@ -24,11 +24,17 @@ public class BookingRepository : GenericRepository<Booking>, IBookingRepository
         return booking;
     }
 
+    public Guid studioId(Guid id)
+    {
+        return (Guid)_context.Bookings.FirstOrDefault(b => b.Id == id).StudioId;
+    }
+
     public IEnumerable<Booking> GetAllByCusId(Guid cusid)
     {
         var lisbooking = _context.Set<Booking>()
             .Include(c => c.Studio)
             .Include(c => c.Schedulings)
+            .Include(c => c.Artist)
             .Where(c => c.Customer.Id == cusid)
             .ToList();
 
