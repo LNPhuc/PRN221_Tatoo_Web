@@ -14,10 +14,12 @@ public interface ISchedulingRepository : IGenericRepository<Scheduling>
     Customer GetCustomerByID(Guid id);
     Account GetAccountByID(Guid id);
     Booking GetBookingByID(Guid id);
+    Artist GetArtistById(Guid id);
     void UpdateBooking(Booking booking);
     List<Booking> GetBookingByStudio(Guid id);
 
     List<Scheduling> GetSchedulingByStudio(Guid id);
+    List<Artist> GetAllArtishByStudio(Guid id);
     
     List<Scheduling> GetByBooking(Guid id);
 }

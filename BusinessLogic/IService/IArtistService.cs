@@ -9,5 +9,6 @@ public interface IArtistService
     Artist GetArtistById(Guid id);
     Artist UdpateArtist(Guid id, Artist artist);
     Artist CreateArtist(CreateArtist artist);
+    void DeleteArtist(Guid id);
     List<Artist> GetArtistByStudioId(Guid id);
 }

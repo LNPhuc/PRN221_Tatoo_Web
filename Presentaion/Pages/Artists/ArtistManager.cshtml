@@ -1,5 +1,5 @@
 ﻿@page
-@model ArtistManagerModel
+@model Presentaion.Pages.Artists.ArtistManagerModel
 @{
     ViewData["Title"] = "ArtistIndex";
     Layout = "_LayoutStudioPage";
@@ -8,51 +8,51 @@
 <form method="get">
     <div class="form-group">
         <label for="Query">Search name:</label>
-        <input type="text" asp-for="SearchQuery" class="form-control"/>
+        <input type="text" asp-for="SearchQuery" class="form-control" />
     </div>
     <button type="submit" class="btn btn-primary">Tìm</button>
 </form>
 <a href="./ArtistCreate" class="btn btn-primary">Create New Artist</a>
 <table class="table">
     <thead>
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Artists[0].Id)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Artists[0].Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Artists[0].Studio)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Artists[0].Experience)
-        </th>
-        <th></th>
-    </tr>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Artists[0].Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Artists[0].Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Artists[0].Studio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Artists[0].Experience)
+            </th>          
+            <th></th>
+        </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model.Artists)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Studio.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Experience)
-            </td>
-            <td>
-                <a asp-page="./ArtistEdit" asp-route-id="@item.Id">Edit</a>
-                <a asp-page="./ArtistDetails" asp-route-id="@item.Id">Details</a>
-                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-    }
+        @foreach (var item in Model.Artists)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Studio.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Experience)
+                </td>               
+                <td>
+                    <a asp-page="./ArtistEdit" asp-route-id="@item.Id">Edit</a> 
+                    <a asp-page="./ArtistDetails" asp-route-id="@item.Id">Details</a> 
+                    <a asp-page="./ArtistDelete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
